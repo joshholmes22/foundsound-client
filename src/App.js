@@ -1,5 +1,5 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
   return (
@@ -23,3 +23,13 @@ function App() {
 }
 
 export default App;
+
+<BrowserRouter>
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/login" element={<Login />} />
+    <Route path="/signup" element={<Signup />} />
+    <Route path="/events" element={<Events />} />
+    <Route path="/artists" element={<Artists />} />
+  </Routes>
+</BrowserRouter>;
