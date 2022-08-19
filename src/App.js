@@ -24,7 +24,10 @@ function App() {
 
 export default App;
 
-<BrowserRouter>
+/* ROUTES STARTING CODE */
+
+{
+  /* <BrowserRouter>
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/login" element={<Login />} />
@@ -32,4 +35,5 @@ export default App;
     <Route path="/events" element={<Events />} />
     <Route path="/artists" element={<Artists />} />
   </Routes>
-</BrowserRouter>;
+</BrowserRouter>; */
+}
