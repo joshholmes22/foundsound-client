@@ -2,9 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -12,7 +10,6 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
 import FormHelperText from "@mui/material/FormHelperText";
 import Grid from "@mui/material/Grid";
@@ -202,12 +199,12 @@ const SignupForm = ({ isMobile }) => {
       </Grid>
       <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
         <Button variant="contained" type="submit">
-          Login
+          Sign Up
         </Button>
       </Grid>
       <Grid item xs={12}>
         <Typography variant="caption" component="div" align="center">
-          Don't have an account? <Link href="/sign-up">Sign up</Link>
+          Already have an account? <Link href="/login">Login</Link>
         </Typography>
       </Grid>
       <Grid item xs={12}>
