@@ -1,4 +1,5 @@
 import AccountTypeCard from "../components/AccountTypeCard";
+import SignupForm from "../components/SignupForm";
 
 const Signup = () => {
   return (
@@ -26,6 +27,9 @@ const Signup = () => {
             altText={"Backstage"}
             overlayText={"Event Organiser"}
           />
+        </div>
+        <div className="signupForm">
+          <SignupForm />
         </div>
       </div>
     </div>
