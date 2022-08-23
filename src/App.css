@@ -1,38 +1,52 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.pageContainer {
+  background-image: url("https://images.unsplash.com/photo-1459749411175-04bf5292ceea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+  opacity:1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position:fixed;
+  width:100%;
+  height:100%;
+  bottom:0px;
+  left:0px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginPageContainer {
+  background-image: url("https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+  opacity:1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position:fixed;
+  width:100%;
+  height:100%;
+  bottom:0px;
+  left:0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signupContainer {
+  width: 60%;
+  height: 95%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(221, 216, 184, 0.2);
+  border-radius: 15px;
 }
 
-.App-link {
-  color: #61dafb;
+.accountCardContainer {
+  display: flex;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.signupForm {
+  display: flex;
+  justify-content: center;
 }
