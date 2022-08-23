@@ -14,7 +14,7 @@ import Link from "@mui/material/Link";
 import FormHelperText from "@mui/material/FormHelperText";
 import Grid from "@mui/material/Grid";
 
-const SignupForm = ({ isMobile }) => {
+const SignupForm = () => {
   const {
     register,
     formState: { errors },
