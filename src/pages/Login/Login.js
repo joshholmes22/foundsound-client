@@ -1,9 +1,11 @@
-import AccountTypeCard from "../components/AccountTypeCard";
-import SignupForm from "../components/SignupForm";
+import AccountTypeCard from "../../components/AccountTypeCard/AccountTypeCard";
+import LoginForm from "../../components/LoginForm";
 
-const Signup = () => {
+import "./Login.css";
+
+const Login = () => {
   return (
-    <div className="pageContainer">
+    <div className="loginPageContainer">
       <div className="signupContainer">
         <div className="accountCardContainer">
           <AccountTypeCard
@@ -29,11 +31,11 @@ const Signup = () => {
           />
         </div>
         <div className="signupForm">
-          <SignupForm />
+          <LoginForm />
         </div>
       </div>
     </div>
   );
 };
 
-export default Signup;
+export default Login;

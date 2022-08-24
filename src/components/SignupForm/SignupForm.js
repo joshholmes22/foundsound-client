@@ -14,6 +14,8 @@ import Link from "@mui/material/Link";
 import FormHelperText from "@mui/material/FormHelperText";
 import Grid from "@mui/material/Grid";
 
+import "./SignupForm.css";
+
 const SignupForm = () => {
   const {
     register,

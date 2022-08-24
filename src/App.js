@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./containers/Home";
-import Login from "./containers/Login";
-import Signup from "./containers/Signup";
-import Events from "./containers/Events";
-import Artists from "./containers/Artists";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Events from "./pages/Events";
+import Artists from "./pages/Artists";
 
 import "./App.css";
 

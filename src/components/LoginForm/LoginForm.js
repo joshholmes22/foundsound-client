@@ -11,8 +11,9 @@ import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Link from "@mui/material/Link";
-import FormHelperText from "@mui/material/FormHelperText";
 import Grid from "@mui/material/Grid";
+
+import "./LoginForm.css";
 
 const SignupForm = () => {
   const {
