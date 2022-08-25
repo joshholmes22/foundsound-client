@@ -17,7 +17,7 @@ import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 
 import "./SignupForm.css";
 
-const SignupForm = () => {
+const SignupForm = ({ accountType }) => {
   const theme = createTheme({
     palette: {
       primary: {
@@ -70,7 +70,9 @@ const SignupForm = () => {
         message: "Passwords do not match.",
       });
     }
-    console.log(formData);
+
+    const userDetails = Object.assign(formData, { userType: accountType });
+    console.log(userDetails);
   };
 
   const toggleShowPassword = () => {
