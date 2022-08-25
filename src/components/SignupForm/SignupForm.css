@@ -1,4 +1,9 @@
 .signupForm {
     display: flex;
     justify-content: center;
+    font-weight: bold !important;
+  }
+
+  .input {
+    color: aqua;
   }
