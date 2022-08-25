@@ -5,13 +5,16 @@ import { useState } from "react";
 import "./Signup.css";
 
 const Signup = () => {
-  const [accountType, setAccountType] = useState("AudienceMember");
+  const [accountType, setAccountType] = useState("audienceMember");
 
   return (
     <div className="signupPageContainer">
       <div className="signupContainer">
         <div className="accountCardContainer">
-          <AccountTypeContainer setAccountType={setAccountType} />
+          <AccountTypeContainer
+            setAccountType={setAccountType}
+            accountType={accountType}
+          />
         </div>
         <div className="signupForm">
           <SignupForm accountType={accountType} />

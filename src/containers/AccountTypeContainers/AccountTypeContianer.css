@@ -1,3 +1,7 @@
 .typeContianer {
     display: flex;
 }
+
+.selectActive{
+    border: 1px red solid;
+}
