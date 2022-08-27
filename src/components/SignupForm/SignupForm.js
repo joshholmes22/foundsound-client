@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -20,9 +20,18 @@ import { useMutation, useLazyQuery } from "@apollo/client";
 
 import "./SignupForm.css";
 import { SIGNUP } from "../../graphql/mutations";
+import { useNavigate } from "react-router-dom";
 
 const SignupForm = ({ accountType }) => {
   const [signup, { data, loading, error }] = useMutation(SIGNUP);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (data?.signup?.success) {
+      navigate("/login", { replace: true });
+    }
+  }, [data, navigate]);
+
   const theme = createTheme({
     palette: {
       primary: {
