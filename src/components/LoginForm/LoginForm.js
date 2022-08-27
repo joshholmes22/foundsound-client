@@ -15,13 +15,12 @@ import Grid from "@mui/material/Grid";
 
 import "./LoginForm.css";
 
-const SignupForm = () => {
+const LoginForm = ({ accountType }) => {
   const {
     register,
     formState: { errors },
     handleSubmit,
     setError,
-    getValues,
   } = useForm({
     mode: "onBlur",
   });
@@ -34,7 +33,8 @@ const SignupForm = () => {
         message: "Passwords do not match.",
       });
     }
-    console.log(formData);
+    const userDetails = Object.assign(formData, { userType: accountType });
+    console.log(userDetails);
   };
 
   const toggleShowPassword = () => {
@@ -119,4 +119,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default LoginForm;
