@@ -14,10 +14,15 @@ import Link from "@mui/material/Link";
 import FormHelperText from "@mui/material/FormHelperText";
 import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+import LoadingButton from "@mui/lab/LoadingButton";
+
+import { useMutation, useLazyQuery } from "@apollo/client";
 
 import "./SignupForm.css";
+import { SIGNUP } from "../../graphql/mutations";
 
 const SignupForm = ({ accountType }) => {
+  const [signup, { data, loading, error }] = useMutation(SIGNUP);
   const theme = createTheme({
     palette: {
       primary: {
@@ -59,10 +64,22 @@ const SignupForm = ({ accountType }) => {
         type: "manual",
         message: "Passwords do not match.",
       });
-    }
+    } else {
+      const signupInput = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+        imageUrl: formData.imageUrl,
+        socialMedia: formData.phoneNumber,
+        userType: accountType,
+      };
 
-    const userDetails = Object.assign(formData, { userType: accountType });
-    console.log(userDetails);
+      console.log(signupInput);
+      signup({
+        variables: { signupInput },
+      });
+    }
   };
 
   const toggleShowPassword = () => {
@@ -230,9 +247,9 @@ const SignupForm = ({ accountType }) => {
           </FormControl>
         </Grid>
         <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-          <Button variant="contained" type="submit">
+          <LoadingButton variant="contained" type="submit" loading={loading}>
             Sign Up
-          </Button>
+          </LoadingButton>
         </Grid>
         <Grid item xs={12}>
           <Typography variant="caption" component="div" align="center">
@@ -240,14 +257,16 @@ const SignupForm = ({ accountType }) => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography
-            variant="caption"
-            component="div"
-            sx={{ color: "red", fontWeight: "bold" }}
-            align="center"
-          >
-            Failed to login. Please try again.
-          </Typography>
+          {error && (
+            <Typography
+              variant="caption"
+              component="div"
+              sx={{ color: "red", fontWeight: "bold" }}
+              align="center"
+            >
+              Failed to login. Please try again.
+            </Typography>
+          )}
         </Grid>
       </Grid>
     </ThemeProvider>
