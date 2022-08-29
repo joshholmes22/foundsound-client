@@ -7,3 +7,21 @@ export const SIGNUP = gql`
     }
   }
 `;
+
+export const LOGIN = gql`
+  mutation Mutation($loginInput: LoginInput!) {
+    login(loginInput: $loginInput) {
+      success
+      token
+      user {
+        id
+        firstName
+        lastName
+        email
+        socialMedia
+        imageUrl
+        userType
+      }
+    }
+  }
+`;

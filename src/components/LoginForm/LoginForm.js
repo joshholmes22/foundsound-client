@@ -14,8 +14,12 @@ import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 
 import "./LoginForm.css";
+import Login from "../../pages/Login";
+import { useMutation } from "@apollo/client";
+import { LOGIN } from "../../graphql/mutations";
 
 const LoginForm = ({ accountType }) => {
+  const [login, { data, loading, error }] = useMutation(LOGIN);
   const {
     register,
     formState: { errors },
@@ -27,12 +31,16 @@ const LoginForm = ({ accountType }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = (formData) => {
-    if (formData.password !== formData.confirmPassword) {
-      setError("confirmPassword", {
-        type: "manual",
-        message: "Passwords do not match.",
-      });
-    }
+    login({
+      variables: {
+        loginInput: {
+          email: formData.email,
+          password: formData.password,
+          userType: accountType,
+        },
+      },
+    });
+
     const userDetails = Object.assign(formData, { userType: accountType });
     console.log(userDetails);
   };
