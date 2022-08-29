@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -13,6 +12,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 import "./LoginForm.css";
 import { useMutation } from "@apollo/client";
@@ -118,9 +118,9 @@ const LoginForm = ({ accountType }) => {
         </FormControl>
       </Grid>
       <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-        <Button variant="contained" type="submit">
+        <LoadingButton variant="contained" type="submit">
           Login
-        </Button>
+        </LoadingButton>
       </Grid>
       <Grid item xs={12}>
         <Typography variant="caption" component="div" align="center">
@@ -128,14 +128,16 @@ const LoginForm = ({ accountType }) => {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography
-          variant="caption"
-          component="div"
-          sx={{ color: "red" }}
-          align="center"
-        >
-          Failed to login. Please try again.
-        </Typography>
+        {error && (
+          <Typography
+            variant="caption"
+            component="div"
+            sx={{ color: "red" }}
+            align="center"
+          >
+            Failed to login. Please try again.
+          </Typography>
+        )}
       </Grid>
     </Grid>
   );
