@@ -19,8 +19,8 @@ import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../graphql/mutations";
 import { useAuth } from "../../context/AppProvider";
 
-const LoginForm = ({ accountType }) => {
-  const [login, { data, loading, error }] = useMutation(LOGIN);
+const LoginForm = () => {
+  const [login, { data, error }] = useMutation(LOGIN);
   const navigate = useNavigate();
   const { setIsLoggedIn, setUser } = useAuth();
 
@@ -28,7 +28,6 @@ const LoginForm = ({ accountType }) => {
     register,
     formState: { errors },
     handleSubmit,
-    setError,
   } = useForm({
     mode: "onBlur",
   });

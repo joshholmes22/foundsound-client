@@ -9,12 +9,12 @@ const Login = () => {
   return (
     <div className="loginPageContainer">
       <div className="signupContainer">
-        <div className="accountCardContainer">
+        {/* <div className="accountCardContainer">
           <AccountTypeContainer
             setAccountType={setAccountType}
             accountType={accountType}
           />
-        </div>
+        </div> */}
         <div className="signupForm">
           <LoginForm accountType={accountType} />
         </div>

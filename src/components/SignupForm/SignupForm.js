@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -13,10 +12,10 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Link from "@mui/material/Link";
 import FormHelperText from "@mui/material/FormHelperText";
 import Grid from "@mui/material/Grid";
-import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LoadingButton from "@mui/lab/LoadingButton";
 
-import { useMutation, useLazyQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 
 import "./SignupForm.css";
 import { SIGNUP } from "../../graphql/mutations";
