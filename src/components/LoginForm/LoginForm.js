@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -14,12 +15,15 @@ import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 
 import "./LoginForm.css";
-import Login from "../../pages/Login";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../graphql/mutations";
+import { useAuth } from "../../context/AppProvider";
 
 const LoginForm = ({ accountType }) => {
   const [login, { data, loading, error }] = useMutation(LOGIN);
+  const navigate = useNavigate();
+  const { setIsLoggedIn, setUser } = useAuth();
+
   const {
     register,
     formState: { errors },
@@ -36,14 +40,24 @@ const LoginForm = ({ accountType }) => {
         loginInput: {
           email: formData.email,
           password: formData.password,
-          userType: accountType,
         },
       },
     });
-
-    const userDetails = Object.assign(formData, { userType: accountType });
-    console.log(userDetails);
   };
+
+  useEffect(() => {
+    if (data?.login?.success) {
+      const { token, user } = data.login;
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+
+      setUser(user);
+      setIsLoggedIn(true);
+
+      navigate("/dashboard", { replace: true });
+    }
+  }, [data, navigate, setUser, setIsLoggedIn]);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
