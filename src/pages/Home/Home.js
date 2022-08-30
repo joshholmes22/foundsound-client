@@ -1,5 +1,7 @@
 import Link from "@mui/material/Link";
 
+import "./Home.css";
+
 const Home = () => {
   return (
     <div>
