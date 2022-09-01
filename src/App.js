@@ -1,4 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "@mui/material/styles";
 import {
   ApolloClient,
   InMemoryCache,
@@ -7,6 +8,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
+import theme from "./utils/themes";
 import AppRoutes from "./AppRoutes";
 import { AppProvider } from "./context/AppProvider";
 import "./App.css";
@@ -37,7 +39,9 @@ function App() {
     <ApolloProvider client={client}>
       <BrowserRouter>
         <AppProvider>
-          <AppRoutes />
+          <ThemeProvider theme={theme}>
+            <AppRoutes />
+          </ThemeProvider>
         </AppProvider>
       </BrowserRouter>
     </ApolloProvider>
