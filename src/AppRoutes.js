@@ -6,10 +6,11 @@ import Signup from "./pages/Signup";
 import Events from "./pages/Events";
 import Artists from "./pages/Artists";
 import Dashboard from "./pages/Dashboard";
+import EditProfile from "./pages/EditProfile";
 import { useAuth } from "./context/AppProvider";
 
 const AppRoutes = () => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
 
   return (
     <Routes>
@@ -27,6 +28,7 @@ const AppRoutes = () => {
         <>
           <Route path="/*" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<EditProfile />} />
         </>
       )}
     </Routes>
