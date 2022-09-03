@@ -8,6 +8,8 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import Button from "@mui/material/Button";
 
+import ProfileModal from "../../components/ProfileModal";
+
 const EditProfile = () => {
   const { user } = useAuth();
 
@@ -45,7 +47,7 @@ const EditProfile = () => {
             <Typography variant="body2" color="text.secondary">
               Venues:
             </Typography>
-            <Button variant="contained">Add Venue</Button>
+            <ProfileModal />
           </CardContent>
         </CardActionArea>
       </Card>
