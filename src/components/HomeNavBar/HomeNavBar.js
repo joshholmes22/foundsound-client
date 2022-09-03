@@ -36,8 +36,16 @@ const HomeNavBar = () => {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar
+          disableGutters
+          // sx={{
+          //   display: "flex",
+          //   justifyContent: "flex-end",
+          //   alignContent: "flex-end",
+          // }}
+        >
           {/* UNCOMMENT BELOW FOR THE LOGO TO APPEAR */}
+
           {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
           {/* <Typography
             variant="h6"
@@ -73,12 +81,12 @@ const HomeNavBar = () => {
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: "bottom",
-                horizontal: "left",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
                 vertical: "top",
-                horizontal: "left",
+                horizontal: "right",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
@@ -93,6 +101,7 @@ const HomeNavBar = () => {
               ))}
             </Menu>
           </Box>
+          {/* THIS IS THE LOGO WHEN IN MOBILE VIEWPORT */}
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -117,7 +126,11 @@ const HomeNavBar = () => {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                }}
               >
                 {page}
               </Button>
