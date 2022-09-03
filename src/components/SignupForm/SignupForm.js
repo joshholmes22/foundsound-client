@@ -20,6 +20,7 @@ import { useMutation } from "@apollo/client";
 import "./SignupForm.css";
 import { SIGNUP } from "../../graphql/mutations";
 import { useNavigate } from "react-router-dom";
+import { ImageUploader } from "../ImageUploader";
 
 const SignupForm = ({ accountType }) => {
   const [signup, { data, loading, error }] = useMutation(SIGNUP);
@@ -42,6 +43,8 @@ const SignupForm = ({ accountType }) => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmedPassword, setShowConfirmedPassword] = useState(false);
+  const [imageUrl, setImageUrl] = useState();
+  const [fileName, setFileName] = useState();
 
   const onSubmit = (formData) => {
     if (formData.password !== formData.confirmPassword) {
@@ -74,6 +77,8 @@ const SignupForm = ({ accountType }) => {
   const toggleShowConfirmedPassword = () => {
     setShowConfirmedPassword(!showConfirmedPassword);
   };
+
+  console.log(imageUrl, fileName);
 
   return (
     <Grid
@@ -227,6 +232,14 @@ const SignupForm = ({ accountType }) => {
             </FormHelperText>
           )}
         </FormControl>
+      </Grid>
+      <Grid item xs={6}>
+        <ImageUploader
+          imageUrl={imageUrl}
+          setImageUrl={setImageUrl}
+          setFileName={setFileName}
+          username="bobsmith"
+        />
       </Grid>
       <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
         <LoadingButton variant="contained" type="submit" loading={loading}>
