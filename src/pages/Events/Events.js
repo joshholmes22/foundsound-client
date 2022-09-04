@@ -7,6 +7,8 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import Chip from "@mui/material/Chip";
+import Autocomplete from "@mui/material/Autocomplete";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
@@ -28,6 +30,14 @@ const Events = () => {
     formState: { errors },
   } = useForm();
 
+  const commonTags = [
+    { name: "Out Door" },
+    { name: "In Door" },
+    { name: "Disability Facilities" },
+    { name: "Toilets" },
+    { name: "Food & Beverage" },
+  ];
+
   const handleDelete = (i) => {
     setTags(tags.filter((tag, index) => index !== i));
   };
@@ -46,17 +56,10 @@ const Events = () => {
     setTags(newTags);
   };
 
-  const handleTagClick = (index) => {
-    console.log("The tag at index " + index + " was clicked");
-  };
-
   const onSubmit = (data) => {
     console.log(data);
-    // target all the values in the form use the setInput
-    // create an object with the form data
   };
 
-  // create a function to return a tag once the tag name has been entered
   // validate form
   return (
     <ThemeProvider theme={theme}>
@@ -128,24 +131,46 @@ const Events = () => {
                   </Grid>
                   <Grid>
                     <TextField
-                      id="tag"
-                      label="Tag Name"
+                      id="imageUrl"
+                      label="ImageUrl"
                       variant="outlined"
                       fullWidth
-                      {...register("tag")}
+                      {...register("imageUrl")}
                     />
                   </Grid>
-                  <ReactTags
-                    id="renderTags"
-                    tags={tags}
-                    handleDelete={handleDelete}
-                    handleAddition={handleAddition}
-                    handleDrag={handleDrag}
-                    handleTagClick={handleTagClick}
-                    inputFieldPosition="bottom"
-                    autocomplete
-                    {...register("renderTags")}
-                  />
+                  {/* <Grid item xs={12}>
+                    <ReactTags
+                      sx={{ m: "50px" }}
+                      inline
+                      id="renderTags"
+                      fullWidth
+                      label="Tag Name"
+                      variant="outlined"
+                      tags={tags}
+                      handleDelete={handleDelete}
+                      handleAddition={handleAddition}
+                      handleDrag={handleDrag}
+                      {...register("renderTags")}
+                    />
+                  </Grid> */}
+                  <Grid>
+                    <Autocomplete
+                      multiple
+                      id="renderTags"
+                      options={commonTags}
+                      getOptionLabel={(option) => option.name}
+                      defaultValue={[commonTags[1]]}
+                      filterSelectedOptions
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Tags"
+                          placeholder="Select Tags"
+                        />
+                      )}
+                      {...register("renderTags")}
+                    />
+                  </Grid>
                 </Stack>
               </LocalizationProvider>
 
