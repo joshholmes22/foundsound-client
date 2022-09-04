@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -11,25 +12,52 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { ThemeProvider } from "@mui/material/styles";
+import { WithContext as ReactTags } from "react-tag-input";
 
 import theme from "../../utils/themes";
 import "./Events.css";
 
 const Events = () => {
-  const [value, setValue] = React.useState(new Date());
-  const [input, setInput] = React.useState("");
+  const [value, setValue] = useState(new Date());
+  const [input, setInput] = useState("");
+  const [tags, setTags] = useState([]);
 
-  const handleChange = (newValue) => {
-    setValue(newValue);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleDelete = (i) => {
+    setTags(tags.filter((tag, index) => index !== i));
   };
 
-  const onClick = (event) => {
-    console.log(clicked);
+  const handleAddition = (tag) => {
+    setTags([...tags, tag]);
+  };
+
+  const handleDrag = (tag, currPos, newPos) => {
+    const newTags = tags.slice();
+
+    newTags.splice(currPos, 1);
+    newTags.splice(newPos, 0, tag);
+
+    // re-render
+    setTags(newTags);
+  };
+
+  const handleTagClick = (index) => {
+    console.log("The tag at index " + index + " was clicked");
+  };
+
+  const onSubmit = (data) => {
+    console.log(data);
     // target all the values in the form use the setInput
     // create an object with the form data
   };
 
   // create a function to return a tag once the tag name has been entered
+  // validate form
   return (
     <ThemeProvider theme={theme}>
       <Typography variant="h4" gutterBottom align="center" sx={{ m: "30px" }}>
@@ -48,48 +76,53 @@ const Events = () => {
             alignItems: "center",
           }}
           autoComplete="off"
+          onSubmit={handleSubmit(onSubmit)}
           component="form"
         >
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <TextField
-                required
-                id="EventName"
+                id="eventName"
                 name="EventName"
                 label="Event Name"
                 fullWidth
+                {...register("eventName", { required: true })}
                 autoComplete="given-name"
               />
             </Grid>
+            {errors.eventName && <p> Please provide an event name</p>}
             <Grid item xs={12}>
               <TextField
-                required
                 id="description"
                 label="Description"
                 fullWidth
+                {...register("description", { required: true })}
                 placeholder="Description"
                 multiline
               />
             </Grid>
+            {errors.description && <p> Please provide an event description</p>}
             <Grid item xs={12}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Stack spacing={3}>
                   <Grid>
                     <DesktopDatePicker
                       required
+                      id="date"
                       label="Date of Event*"
                       inputFormat="MM/dd/yyyy"
                       value={value}
-                      onChange={handleChange}
+                      {...register("date")}
                       renderInput={(params) => <TextField {...params} />}
                     />
                   </Grid>
                   <Grid>
                     <TimePicker
                       required
+                      id="time"
                       label="Time of Event*"
                       value={value}
-                      onChange={handleChange}
+                      {...register("time")}
                       renderInput={(params) => <TextField {...params} />}
                     />
                   </Grid>
@@ -99,14 +132,24 @@ const Events = () => {
                       label="Tag Name"
                       variant="outlined"
                       fullWidth
-                      onChange={handleChange}
+                      {...register("tag")}
                     />
                   </Grid>
+                  <ReactTags
+                    id="renderTags"
+                    tags={tags}
+                    handleDelete={handleDelete}
+                    handleAddition={handleAddition}
+                    handleDrag={handleDrag}
+                    handleTagClick={handleTagClick}
+                    inputFieldPosition="bottom"
+                    autocomplete
+                    {...register("renderTags")}
+                  />
                 </Stack>
               </LocalizationProvider>
 
               <Button
-                onClick={onClick}
                 type="submit"
                 fullWidth
                 variant="contained"
