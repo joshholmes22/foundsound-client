@@ -15,7 +15,7 @@ import "./Events.css";
 
 const Events = () => {
   // const [value, setValue] = React.useState("Controlled");
-  const [value, setValue] = React.useState(new Date("2014-08-18T21:11:54"));
+  const [value, setValue] = React.useState(new Date());
 
   const handleChange = (newValue) => {
     setValue(newValue);
@@ -57,23 +57,32 @@ const Events = () => {
               multiline
             />
           </Grid>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <Stack spacing={3}>
-              <DesktopDatePicker
-                label="Date desktop"
-                inputFormat="MM/dd/yyyy"
-                value={value}
-                onChange={handleChange}
-                renderInput={(params) => <TextField {...params} />}
-              />
-              <TimePicker
-                label="Time"
-                value={value}
-                onChange={handleChange}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </Stack>
-          </LocalizationProvider>
+          <Grid item xs={12}>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <Stack spacing={3}>
+                <Grid>
+                  <DesktopDatePicker
+                    xs={{ m: "20px" }}
+                    required
+                    label="Date of Event*"
+                    inputFormat="MM/dd/yyyy"
+                    value={value}
+                    onChange={handleChange}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </Grid>
+                <Grid>
+                  <TimePicker
+                    required
+                    label="Time of Event*"
+                    value={value}
+                    onChange={handleChange}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </Grid>
+              </Stack>
+            </LocalizationProvider>
+          </Grid>
         </Grid>
       </Container>
     </ThemeProvider>
