@@ -16,7 +16,7 @@ export const ImageUploader = ({ imageUrl, setImageUrl, setFileName }) => {
   const [images, setImages] = useState([]);
 
   const config = {
-    // dirName: "media",
+    dirName: "users/profileImages",
     bucketName: process.env.REACT_APP_BUCKET_NAME,
     region: process.env.REACT_APP_REGION,
     accessKeyId: process.env.REACT_APP_ACCESS_KEY,
@@ -24,12 +24,14 @@ export const ImageUploader = ({ imageUrl, setImageUrl, setFileName }) => {
   };
 
   const onChange = (imageList) => {
+    console.log(config);
     setImages(imageList);
   };
 
   const onUpload = async () => {
     try {
       const file = images[0].file;
+      console.log(file);
       const s3Data = await uploadFile(file, config);
 
       if (s3Data?.location) {

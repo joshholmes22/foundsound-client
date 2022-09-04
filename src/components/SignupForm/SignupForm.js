@@ -78,7 +78,7 @@ const SignupForm = ({ accountType }) => {
     setShowConfirmedPassword(!showConfirmedPassword);
   };
 
-  console.log(imageUrl, fileName);
+  // console.log(imageUrl, fileName);
 
   return (
     <Grid
