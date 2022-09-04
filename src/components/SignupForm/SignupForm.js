@@ -12,7 +12,6 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Link from "@mui/material/Link";
 import FormHelperText from "@mui/material/FormHelperText";
 import Grid from "@mui/material/Grid";
-import { createTheme } from "@mui/material/styles";
 import LoadingButton from "@mui/lab/LoadingButton";
 
 import { useMutation } from "@apollo/client";
@@ -58,7 +57,7 @@ const SignupForm = ({ accountType }) => {
         lastName: formData.lastName,
         email: formData.email,
         password: formData.password,
-        imageUrl: formData.imageUrl,
+        imageUrl: imageUrl,
         socialMedia: formData.phoneNumber,
         userType: accountType,
       };
@@ -78,7 +77,7 @@ const SignupForm = ({ accountType }) => {
     setShowConfirmedPassword(!showConfirmedPassword);
   };
 
-  // console.log(imageUrl, fileName);
+  console.log(imageUrl, fileName);
 
   return (
     <Grid
@@ -238,7 +237,7 @@ const SignupForm = ({ accountType }) => {
           imageUrl={imageUrl}
           setImageUrl={setImageUrl}
           setFileName={setFileName}
-          username="bobsmith"
+          dirName="users/profileImages"
         />
       </Grid>
       <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>

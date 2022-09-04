@@ -9,14 +9,20 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import uuid from "react-uuid";
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
-export const ImageUploader = ({ imageUrl, setImageUrl, setFileName }) => {
+export const ImageUploader = ({
+  imageUrl,
+  setImageUrl,
+  setFileName,
+  dirName,
+}) => {
   const [images, setImages] = useState([]);
 
   const config = {
-    dirName: "users/profileImages",
+    dirName: dirName,
     bucketName: process.env.REACT_APP_BUCKET_NAME,
     region: process.env.REACT_APP_REGION,
     accessKeyId: process.env.REACT_APP_ACCESS_KEY,
@@ -24,17 +30,17 @@ export const ImageUploader = ({ imageUrl, setImageUrl, setFileName }) => {
   };
 
   const onChange = (imageList) => {
-    console.log(config);
     setImages(imageList);
   };
 
   const onUpload = async () => {
     try {
-      const file = images[0].file;
-      console.log(file);
+      let file = images[0].file;
+
       const s3Data = await uploadFile(file, config);
 
       if (s3Data?.location) {
+        console.log(s3Data);
         setImageUrl(s3Data.location);
         setImages([]);
         setFileName(s3Data.key);
