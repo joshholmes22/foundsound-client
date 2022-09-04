@@ -16,24 +16,27 @@ import theme from "../../utils/themes";
 import "./Events.css";
 
 const Events = () => {
-  // const [value, setValue] = React.useState("Controlled");
   const [value, setValue] = React.useState(new Date());
+  const [input, setInput] = React.useState("");
 
   const handleChange = (newValue) => {
     setValue(newValue);
   };
 
-  const onChange = (event) => {
-    setValue(event.target.value);
+  const onClick = (event) => {
+    console.log(clicked);
+    // target all the values in the form use the setInput
+    // create an object with the form data
   };
 
+  // create a function to return a tag once the tag name has been entered
   return (
     <ThemeProvider theme={theme}>
-      <Typography variant="h4" gutterBottom align="center" sx={{ m: "20px" }}>
+      <Typography variant="h4" gutterBottom align="center" sx={{ m: "30px" }}>
         Create An Event
       </Typography>
       <Container component="main" maxWidth="xs">
-        <Typography variant="h6" gutterBottom align="center" sx={{ m: "20px" }}>
+        <Typography variant="h6" gutterBottom align="center" sx={{ m: "30px" }}>
           Add Event Information
         </Typography>
 
@@ -44,6 +47,8 @@ const Events = () => {
             flexDirection: "column",
             alignItems: "center",
           }}
+          autoComplete="off"
+          component="form"
         >
           <Grid container spacing={3}>
             <Grid item xs={12}>
@@ -54,16 +59,15 @@ const Events = () => {
                 label="Event Name"
                 fullWidth
                 autoComplete="given-name"
-                variant="standard"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 required
-                id="EventDescription"
-                label="Event Description"
+                id="description"
+                label="Description"
                 fullWidth
-                placeholder="Enter Event Description"
+                placeholder="Description"
                 multiline
               />
             </Grid>
@@ -72,7 +76,6 @@ const Events = () => {
                 <Stack spacing={3}>
                   <Grid>
                     <DesktopDatePicker
-                      xs={{ m: "20px" }}
                       required
                       label="Date of Event*"
                       inputFormat="MM/dd/yyyy"
@@ -90,9 +93,20 @@ const Events = () => {
                       renderInput={(params) => <TextField {...params} />}
                     />
                   </Grid>
+                  <Grid>
+                    <TextField
+                      id="tag"
+                      label="Tag Name"
+                      variant="outlined"
+                      fullWidth
+                      onChange={handleChange}
+                    />
+                  </Grid>
                 </Stack>
               </LocalizationProvider>
+
               <Button
+                onClick={onClick}
                 type="submit"
                 fullWidth
                 variant="contained"
