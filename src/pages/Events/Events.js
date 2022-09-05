@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
-import Autocomplete from "@mui/material/Autocomplete";
+import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
@@ -24,6 +24,12 @@ const Events = () => {
   const [value, setValue] = useState(new Date());
   const [input, setInput] = useState("");
   const [tags, setTags] = useState([]);
+
+  const filter = createFilterOptions();
+
+  useEffect(() => {
+    console.log(tags);
+  }, [tags]);
 
   const {
     register,
@@ -170,6 +176,23 @@ const Events = () => {
                     <Autocomplete
                       multiple
                       filterSelectedOptions
+                      filterOptions={(options, params) => {
+                        const filtered = filter(options, params);
+
+                        const { inputValue } = params;
+                        // Suggest the creation of a new value
+                        const isExisting = options.some(
+                          (option) => inputValue === option.name
+                        );
+                        if (inputValue !== "" && !isExisting) {
+                          filtered.push({
+                            inputValue,
+                            name: `Add "${inputValue}"`,
+                          });
+                        }
+
+                        return filtered;
+                      }}
                       renderInput={(params) => (
                         <TextField
                           {...params}
@@ -184,8 +207,21 @@ const Events = () => {
                       isOptionEqualToValue={(option, value) =>
                         option.name == value.name
                       }
-                      setTags
-                      {...register("tags")}
+                      freeSolo
+                      onChange={(event, newValue) => {
+                        if (typeof newValue === "string") {
+                          setTags({
+                            name: newValue,
+                          });
+                        } else if (newValue && newValue.inputValue) {
+                          // Create a new value from the user input
+                          setTags({
+                            name: newValue.inputValue,
+                          });
+                        } else {
+                          setTags(newValue);
+                        }
+                      }}
                     />
                   </Grid>
                 </Stack>
