@@ -53,7 +53,7 @@ const Events = () => {
     newTags.splice(newPos, 0, tag);
 
     // re-render
-    setTags(newTags);
+    setTags();
   };
 
   const onSubmit = (data) => {
@@ -184,6 +184,7 @@ const Events = () => {
                       isOptionEqualToValue={(option, value) =>
                         option.name == value.name
                       }
+                      setTags
                       {...register("tags")}
                     />
                   </Grid>
