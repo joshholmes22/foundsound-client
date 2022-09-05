@@ -22,14 +22,7 @@ import "./Events.css";
 
 const Events = () => {
   const [value, setValue] = useState(new Date());
-  const [input, setInput] = useState("");
   const [tags, setTags] = useState([]);
-
-  const filter = createFilterOptions();
-
-  useEffect(() => {
-    console.log(tags);
-  }, [tags]);
 
   const {
     register,
@@ -44,29 +37,16 @@ const Events = () => {
     { name: "Food & Beverage" },
   ];
 
-  const handleDelete = (i) => {
-    setTags(tags.filter((tag, index) => index !== i));
-  };
-
-  const handleAddition = (tag) => {
-    setTags([...tags, tag]);
-  };
-
-  const handleDrag = (tag, currPos, newPos) => {
-    const newTags = tags.slice();
-
-    newTags.splice(currPos, 1);
-    newTags.splice(newPos, 0, tag);
-
-    // re-render
-    setTags();
-  };
-
   const onSubmit = (data) => {
-    console.log(data);
+    console.log({ ...data, tags });
   };
 
-  // validate form
+  const filter = createFilterOptions();
+
+  useEffect(() => {
+    console.log(tags);
+  }, [commonTags]);
+
   return (
     <ThemeProvider theme={theme}>
       <Typography variant="h4" gutterBottom align="center" sx={{ m: "30px" }}>
@@ -157,21 +137,6 @@ const Events = () => {
                       }
                     />
                   </Grid>
-                  {/* <Grid item xs={12}>
-                    <ReactTags
-                      sx={{ m: "50px" }}
-                      inline
-                      id="renderTags"
-                      fullWidth
-                      label="Tag Name"
-                      variant="outlined"
-                      tags={tags}
-                      handleDelete={handleDelete}
-                      handleAddition={handleAddition}
-                      handleDrag={handleDrag}
-                      {...register("renderTags")}
-                    />
-                  </Grid> */}
                   <Grid>
                     <Autocomplete
                       multiple
@@ -187,7 +152,7 @@ const Events = () => {
                         if (inputValue !== "" && !isExisting) {
                           filtered.push({
                             inputValue,
-                            name: `Add "${inputValue}"`,
+                            name: `${inputValue}`,
                           });
                         }
 
@@ -201,6 +166,7 @@ const Events = () => {
                         />
                       )}
                       id="tags"
+                      {...register("tags")}
                       options={commonTags}
                       getOptionLabel={(option) => option.name}
                       defaultValue={[commonTags[1]]}
