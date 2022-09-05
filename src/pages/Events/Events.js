@@ -14,6 +14,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { ThemeProvider } from "@mui/material/styles";
+import FormHelperText from "@mui/material/FormHelperText";
 import { WithContext as ReactTags } from "react-tag-input";
 
 import theme from "../../utils/themes";
@@ -32,7 +33,6 @@ const Events = () => {
 
   const commonTags = [
     { name: "Out Door" },
-    { name: "In Door" },
     { name: "Disability Facilities" },
     { name: "Toilets" },
     { name: "Food & Beverage" },
@@ -90,6 +90,9 @@ const Events = () => {
                 label="Event Name"
                 fullWidth
                 {...register("eventName", { required: true })}
+                helperText={
+                  !!errors.firstName ? "Please provide an event name!!." : ""
+                }
                 autoComplete="given-name"
               />
             </Grid>
@@ -156,10 +159,6 @@ const Events = () => {
                   <Grid>
                     <Autocomplete
                       multiple
-                      id="renderTags"
-                      options={commonTags}
-                      getOptionLabel={(option) => option.name}
-                      defaultValue={[commonTags[1]]}
                       filterSelectedOptions
                       renderInput={(params) => (
                         <TextField
@@ -168,7 +167,14 @@ const Events = () => {
                           placeholder="Select Tags"
                         />
                       )}
-                      {...register("renderTags")}
+                      id="tags"
+                      options={commonTags}
+                      getOptionLabel={(option) => option.name}
+                      defaultValue={[commonTags[1]]}
+                      isOptionEqualToValue={(option, value) =>
+                        option.name == value.name
+                      }
+                      {...register("tags")}
                     />
                   </Grid>
                 </Stack>
