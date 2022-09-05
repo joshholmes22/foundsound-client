@@ -35,10 +35,13 @@ export const ImageUploader = ({
 
   const onUpload = async () => {
     try {
-      let file = images[0].file;
+      const uniqueId = uuid();
+      const file = images[0].file;
+      const newFile = new File([file], `${uniqueId}`);
 
-      const s3Data = await uploadFile(file, config);
+      console.log(uniqueId);
 
+      const s3Data = await uploadFile(newFile, config);
       if (s3Data?.location) {
         console.log(s3Data);
         setImageUrl(s3Data.location);
