@@ -7,15 +7,12 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import Chip from "@mui/material/Chip";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { ThemeProvider } from "@mui/material/styles";
-import FormHelperText from "@mui/material/FormHelperText";
-import { WithContext as ReactTags } from "react-tag-input";
 
 import theme from "../../utils/themes";
 import "./Events.css";
