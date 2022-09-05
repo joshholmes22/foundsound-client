@@ -1,7 +1,4 @@
-.page-title {
-  text-align: center;
-}
-
-.event-container {
-  border-radius: 2px;
+:root {
+  --light-blue: #75b8c8;
+  --red: #cc0000;
 }

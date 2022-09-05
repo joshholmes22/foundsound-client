@@ -91,23 +91,28 @@ const Events = () => {
                 fullWidth
                 {...register("eventName", { required: true })}
                 helperText={
-                  !!errors.firstName ? "Please provide an event name!!." : ""
+                  !!errors.eventName ? "Please provide an event name." : ""
                 }
                 autoComplete="given-name"
               />
             </Grid>
-            {errors.eventName && <p> Please provide an event name</p>}
+
             <Grid item xs={12}>
               <TextField
                 id="description"
                 label="Description"
                 fullWidth
                 {...register("description", { required: true })}
+                helperText={
+                  !!errors.eventName
+                    ? "Please provide an event description."
+                    : ""
+                }
                 placeholder="Description"
                 multiline
               />
             </Grid>
-            {errors.description && <p> Please provide an event description</p>}
+
             <Grid item xs={12}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Stack spacing={3}>
@@ -139,6 +144,11 @@ const Events = () => {
                       variant="outlined"
                       fullWidth
                       {...register("imageUrl")}
+                      helperText={
+                        !!errors.eventName
+                          ? "Please upload an image for the event."
+                          : ""
+                      }
                     />
                   </Grid>
                   {/* <Grid item xs={12}>
