@@ -34,7 +34,7 @@ const HomeNavBar = () => {
   // };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: "#0A0A0A" }}>
       <Container maxWidth="xl">
         <Toolbar
           disableGutters
@@ -113,7 +113,7 @@ const HomeNavBar = () => {
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
-              fontWeight: 700,
+              fontWeight: 800,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
