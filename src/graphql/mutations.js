@@ -20,6 +20,7 @@ export const LOGIN = gql`
         email
         socialMedia
         imageUrl
+        imageFileName
         userType
       }
     }
