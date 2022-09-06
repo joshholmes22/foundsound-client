@@ -190,7 +190,7 @@ const EventForm = () => {
                     imageUrl={imageUrl}
                     setImageUrl={setImageUrl}
                     setFileName={setFileName}
-                    dirName="`{}`/`{}`"
+                    dirName="`{user}`/`{eventImage}`"
                     helperText={
                       !!errors.eventName
                         ? "Please upload an image for the event."
