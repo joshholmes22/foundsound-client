@@ -15,10 +15,13 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { ThemeProvider } from "@mui/material/styles";
 
 import theme from "../../utils/themes";
+import { ImageUploader } from "../ImageUploader";
 
 const EventForm = () => {
   const [value, setValue] = useState(new Date());
   const [tags, setTags] = useState([]);
+  const [fileName, setFileName] = useState();
+  const [imageUrl, setImageUrl] = useState();
 
   const {
     register,
@@ -119,20 +122,7 @@ const EventForm = () => {
                       renderInput={(params) => <TextField {...params} />}
                     />
                   </Grid>
-                  <Grid>
-                    <TextField
-                      id="imageUrl"
-                      label="ImageUrl"
-                      variant="outlined"
-                      fullWidth
-                      {...register("imageUrl")}
-                      helperText={
-                        !!errors.eventName
-                          ? "Please upload an image for the event."
-                          : ""
-                      }
-                    />
-                  </Grid>
+
                   <Grid>
                     <Autocomplete
                       multiple
@@ -188,6 +178,25 @@ const EventForm = () => {
                   </Grid>
                 </Stack>
               </LocalizationProvider>
+
+              <Grid container spacing={3}>
+                <Grid item xs={12} marginTop={3}>
+                  <ImageUploader
+                    id="imageUrl"
+                    {...register("imageUrl")}
+                    fullWidth
+                    imageUrl={imageUrl}
+                    setImageUrl={setImageUrl}
+                    setFileName={setFileName}
+                    dirName="`{}`/`{}`"
+                    helperText={
+                      !!errors.eventName
+                        ? "Please upload an image for the event."
+                        : ""
+                    }
+                  />
+                </Grid>
+              </Grid>
 
               <Button
                 type="submit"
