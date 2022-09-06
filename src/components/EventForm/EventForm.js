@@ -37,14 +37,12 @@ const EventForm = () => {
   ];
 
   const onSubmit = (data) => {
-    console.log({ ...data, tags });
+    console.log({ ...data, tags, imageUrl });
   };
 
   const filter = createFilterOptions();
 
-  useEffect(() => {
-    console.log(tags);
-  }, [commonTags]);
+  useEffect(() => {}, [commonTags]);
 
   return (
     <ThemeProvider theme={theme}>
