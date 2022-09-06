@@ -98,17 +98,44 @@ const EventForm = () => {
               />
             </Grid>
 
+            {/* address look up goes here */}
+
+            <Grid item xs={12}>
+              <TextField
+                id="VenueAddress"
+                name="VenueAddress"
+                label="Venue Address"
+                fullWidth
+                {...register("VenueAddress", { required: true })}
+                helperText={
+                  !!errors.VenueAddress ? "Please provide a venue address." : ""
+                }
+                autoComplete="given-name"
+              />
+            </Grid>
+
             <Grid item xs={12}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Stack spacing={3}>
                   <Grid>
                     <DesktopDatePicker
                       required
-                      id="date"
-                      label="Date of Event*"
+                      id="startDate"
+                      label="Start Date of Event*"
                       inputFormat="MM/dd/yyyy"
                       value={value}
-                      {...register("date")}
+                      {...register("startDate")}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </Grid>
+                  <Grid>
+                    <DesktopDatePicker
+                      required
+                      id="endDate"
+                      label="End Date of Event*"
+                      inputFormat="MM/dd/yyyy"
+                      value={value}
+                      {...register("endDate")}
                       renderInput={(params) => <TextField {...params} />}
                     />
                   </Grid>
