@@ -26,6 +26,7 @@ const SignupForm = ({ accountType }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(data);
     if (data?.signup?.success) {
       navigate("/login", { replace: true });
     }
@@ -58,7 +59,8 @@ const SignupForm = ({ accountType }) => {
         email: formData.email,
         password: formData.password,
         imageUrl: imageUrl,
-        socialMedia: formData.phoneNumber,
+        imageFileName: fileName,
+        socialMedia: formData.socialLink,
         userType: accountType,
       };
 
@@ -76,8 +78,6 @@ const SignupForm = ({ accountType }) => {
   const toggleShowConfirmedPassword = () => {
     setShowConfirmedPassword(!showConfirmedPassword);
   };
-
-  console.log(imageUrl, fileName);
 
   return (
     <Grid
@@ -117,31 +117,18 @@ const SignupForm = ({ accountType }) => {
       <Grid item xs={6}>
         <TextField
           required
-          error={!!errors.phoneNumber}
-          label="Phone Number"
+          error={!!errors.socialLink}
+          label="Social Link"
           variant="outlined"
           helperText={
-            !!errors.phoneNumber ? "Please enter your phone number." : ""
+            !!errors.socialLink ? "Please enter your social media link." : ""
           }
-          {...register("phoneNumber", {
+          {...register("socialLink", {
             required: true,
           })}
         />
       </Grid>
       <Grid item xs={6}>
-        <TextField
-          className="input"
-          required
-          error={!!errors.imageUrl}
-          label="Image URL"
-          variant="outlined"
-          helperText={!!errors.imageUrl ? "Please enter your image URL." : ""}
-          {...register("imageUrl", {
-            required: true,
-          })}
-        />
-      </Grid>
-      <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
         <TextField
           required
           error={!!errors.email}
