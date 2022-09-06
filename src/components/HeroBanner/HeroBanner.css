@@ -1,0 +1,8 @@
+.home-title {
+  text-transform: uppercase;
+  color: white;
+  font-size: 18vh;
+  font-weight: 600;
+  text-shadow: 1px 1px 6px rgba(15, 26, 40, 0.731);
+  text-align: center;
+}

@@ -1,5 +1,7 @@
+import "./HeroBanner.css";
+
 const HeroBanner = () => {
-  return <h1>BANNER</h1>;
+  return <h1 className="home-title">foundsound</h1>;
 };
 
 export default HeroBanner;
