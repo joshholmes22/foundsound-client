@@ -1,0 +1,15 @@
+.homePageContainer {
+  background-image: url("../../assets/images/sparkly-concert.png");
+  opacity: 1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  bottom: 0px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
