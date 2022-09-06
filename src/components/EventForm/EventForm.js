@@ -183,7 +183,9 @@ const EventForm = () => {
                 <Grid item xs={12} marginTop={3}>
                   <ImageUploader
                     id="imageUrl"
-                    {...register("imageUrl")}
+                    {...register("imageUrl", {
+                      required: true,
+                    })}
                     fullWidth
                     imageUrl={imageUrl}
                     setImageUrl={setImageUrl}
