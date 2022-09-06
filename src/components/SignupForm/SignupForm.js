@@ -12,7 +12,6 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Link from "@mui/material/Link";
 import FormHelperText from "@mui/material/FormHelperText";
 import Grid from "@mui/material/Grid";
-import { createTheme } from "@mui/material/styles";
 import LoadingButton from "@mui/lab/LoadingButton";
 
 import { useMutation } from "@apollo/client";
@@ -20,6 +19,7 @@ import { useMutation } from "@apollo/client";
 import "./SignupForm.css";
 import { SIGNUP } from "../../graphql/mutations";
 import { useNavigate } from "react-router-dom";
+import { ImageUploader } from "../ImageUploader";
 
 const SignupForm = ({ accountType }) => {
   const [signup, { data, loading, error }] = useMutation(SIGNUP);
@@ -42,6 +42,8 @@ const SignupForm = ({ accountType }) => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmedPassword, setShowConfirmedPassword] = useState(false);
+  const [imageUrl, setImageUrl] = useState();
+  const [fileName, setFileName] = useState();
 
   const onSubmit = (formData) => {
     if (formData.password !== formData.confirmPassword) {
@@ -55,7 +57,7 @@ const SignupForm = ({ accountType }) => {
         lastName: formData.lastName,
         email: formData.email,
         password: formData.password,
-        imageUrl: formData.imageUrl,
+        imageUrl: imageUrl,
         socialMedia: formData.phoneNumber,
         userType: accountType,
       };
@@ -74,6 +76,8 @@ const SignupForm = ({ accountType }) => {
   const toggleShowConfirmedPassword = () => {
     setShowConfirmedPassword(!showConfirmedPassword);
   };
+
+  console.log(imageUrl, fileName);
 
   return (
     <Grid
@@ -227,6 +231,14 @@ const SignupForm = ({ accountType }) => {
             </FormHelperText>
           )}
         </FormControl>
+      </Grid>
+      <Grid item xs={6}>
+        <ImageUploader
+          imageUrl={imageUrl}
+          setImageUrl={setImageUrl}
+          setFileName={setFileName}
+          dirName="users/profileImages"
+        />
       </Grid>
       <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
         <LoadingButton variant="contained" type="submit" loading={loading}>
