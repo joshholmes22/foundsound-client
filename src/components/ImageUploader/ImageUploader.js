@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { uploadFile } from "react-s3";
 import ImageUploading from "react-images-uploading";
 import Card from "@mui/material/Card";
@@ -18,6 +18,7 @@ export const ImageUploader = ({
   setImageUrl,
   setFileName,
   dirName,
+  imageUse,
 }) => {
   const [images, setImages] = useState([]);
 
@@ -71,15 +72,19 @@ export const ImageUploader = ({
 
   const styles = {
     root: {
-      minWidth: 320,
+      width: "50%",
     },
-    media: {
-      height: 241,
+    media: { height: 241 },
+    profileImageMedia: {
+      height: 150,
+      width: 150,
+      borderRadius: 100,
+      textAlign: "center",
     },
     title: {
       textAlign: "center",
-      paddingTop: 8,
-      paddingBottom: 8,
+      paddingTop: 2,
+      paddingBottom: 2,
     },
     cardActions: { display: "flex", justifyContent: "space-evenly" },
   };
@@ -88,13 +93,27 @@ export const ImageUploader = ({
     <ImageUploading value={images} onChange={onChange} dataURLKey="data_url">
       {({ imageList, onImageUpload, onImageRemoveAll }) => (
         <Card sx={styles.root}>
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             {images.length !== 0 && (
               <>
                 <Typography variant="h6" display="block" sx={styles.title}>
                   Preview
                 </Typography>
-                <CardMedia sx={styles.media} image={images[0]["data_url"]} />
+                {imageUse === "profileImage" ? (
+                  <CardMedia
+                    sx={styles.profileImageMedia}
+                    image={images[0]["data_url"]}
+                  />
+                ) : (
+                  <CardMedia sx={styles.media} image={images[0]["data_url"]} />
+                )}
               </>
             )}
             {imageUrl && (

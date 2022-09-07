@@ -230,6 +230,7 @@ const SignupForm = ({ accountType }) => {
           setImageUrl={setImageUrl}
           setFileName={setFileName}
           dirName="users/profileImages"
+          imageUse="profileImage"
         />
       </Grid>
       <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
