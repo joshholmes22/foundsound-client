@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
+import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
@@ -37,7 +38,7 @@ const EventForm = () => {
   ];
 
   const onSubmit = (data) => {
-    console.log({ ...data, tags, imageUrl });
+    console.log({ ...data, tags });
   };
 
   const filter = createFilterOptions();
@@ -49,6 +50,7 @@ const EventForm = () => {
       <Typography variant="h4" gutterBottom align="center" sx={{ m: "30px" }}>
         Create An Event
       </Typography>
+      <Divider />
       <Container component="main" maxWidth="xs">
         <Typography variant="h6" gutterBottom align="center" sx={{ m: "30px" }}>
           Add Event Information
@@ -56,7 +58,7 @@ const EventForm = () => {
 
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 5,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -67,6 +69,15 @@ const EventForm = () => {
         >
           <Grid container spacing={3}>
             <Grid item xs={12}>
+              <Typography
+                component="h2"
+                variant="button"
+                align="left"
+                color="#113476"
+                marginBottom={2}
+              >
+                Event Details
+              </Typography>
               <TextField
                 id="eventName"
                 name="EventName"
@@ -79,7 +90,6 @@ const EventForm = () => {
                 autoComplete="given-name"
               />
             </Grid>
-
             <Grid item xs={12}>
               <TextField
                 id="description"
@@ -96,26 +106,19 @@ const EventForm = () => {
               />
             </Grid>
 
-            {/* address look up goes here */}
-
-            <Grid item xs={12}>
-              <TextField
-                id="VenueAddress"
-                name="VenueAddress"
-                label="Venue Address"
-                fullWidth
-                {...register("VenueAddress", { required: true })}
-                helperText={
-                  !!errors.VenueAddress ? "Please provide a venue address." : ""
-                }
-                autoComplete="given-name"
-              />
-            </Grid>
-
             <Grid item xs={12}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Stack spacing={3}>
                   <Grid>
+                    <Typography
+                      component="h2"
+                      variant="button"
+                      align="left"
+                      color="#113476"
+                      marginBottom={2}
+                    >
+                      Schedule Details
+                    </Typography>
                     <DesktopDatePicker
                       required
                       id="startDate"
@@ -149,6 +152,15 @@ const EventForm = () => {
                   </Grid>
 
                   <Grid>
+                    <Typography
+                      component="h2"
+                      variant="button"
+                      align="left"
+                      color="#113476"
+                      marginBottom={2}
+                    >
+                      Venue Details
+                    </Typography>
                     <Autocomplete
                       multiple
                       filterSelectedOptions
@@ -206,6 +218,15 @@ const EventForm = () => {
 
               <Grid container spacing={3}>
                 <Grid item xs={12} marginTop={3}>
+                  <Typography
+                    component="h2"
+                    variant="button"
+                    align="left"
+                    color="#113476"
+                    marginBottom={2}
+                  >
+                    Additional Information
+                  </Typography>
                   <ImageUploader
                     id="imageUrl"
                     {...register("imageUrl", {
