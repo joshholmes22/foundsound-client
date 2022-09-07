@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 
 const ImageWithBackground = ({ imageUrl }) => {
+  console.log(imageUrl);
   return (
     <Box
       sx={{
