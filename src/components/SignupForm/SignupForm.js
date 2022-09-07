@@ -85,7 +85,8 @@ const SignupForm = ({ accountType }) => {
       component="form"
       sx={{
         p: 3,
-        width: "50%",
+        width: "90%",
+        paddingTop: 8,
       }}
       spacing={4}
       onSubmit={handleSubmit(onSubmit)}
@@ -94,6 +95,7 @@ const SignupForm = ({ accountType }) => {
         <TextField
           required
           error={!!errors.firstName}
+          fullWidth
           label="First name"
           variant="outlined"
           helperText={!!errors.firstName ? "Please enter your first name." : ""}
@@ -106,6 +108,7 @@ const SignupForm = ({ accountType }) => {
         <TextField
           required
           error={!!errors.lastName}
+          fullWidth
           label="Last name"
           variant="outlined"
           helperText={!!errors.lastName ? "Please enter your last name." : ""}
@@ -118,6 +121,7 @@ const SignupForm = ({ accountType }) => {
         <TextField
           required
           error={!!errors.socialLink}
+          fullWidth
           label="Social Link"
           variant="outlined"
           helperText={
@@ -132,6 +136,7 @@ const SignupForm = ({ accountType }) => {
         <TextField
           required
           error={!!errors.email}
+          fullWidth
           label="Email"
           variant="outlined"
           helperText={!!errors.email ? "Please enter a valid email." : ""}
@@ -141,7 +146,7 @@ const SignupForm = ({ accountType }) => {
         />
       </Grid>
       <Grid item xs={6}>
-        <FormControl sx={{ m: 1 }} variant="outlined">
+        <FormControl variant="outlined" fullWidth>
           <InputLabel
             error={!!errors.password}
             htmlFor="outlined-adornment-password"
@@ -180,7 +185,7 @@ const SignupForm = ({ accountType }) => {
         </FormControl>
       </Grid>
       <Grid item xs={6}>
-        <FormControl sx={{ m: 1 }} variant="outlined">
+        <FormControl variant="outlined" fullWidth>
           <InputLabel
             error={!!errors.confirmPassword}
             htmlFor="outlined-adornment-password"
@@ -219,7 +224,7 @@ const SignupForm = ({ accountType }) => {
           )}
         </FormControl>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12}>
         <ImageUploader
           imageUrl={imageUrl}
           setImageUrl={setImageUrl}
