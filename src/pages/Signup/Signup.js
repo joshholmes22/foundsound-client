@@ -6,6 +6,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useState } from "react";
 
 import "./Signup.css";
+import { Typography } from "@mui/material";
 
 const Signup = () => {
   const isMobile = useMediaQuery("(max-width:900px)");
@@ -35,6 +36,13 @@ const Signup = () => {
           )`,
         }}
       >
+        <Typography
+          variant="h3"
+          gutterBottom
+          sx={{ fontSize: "30px", fontWeight: "600" }}
+        >
+          Select an account type to signup
+        </Typography>
         <AccountTypeContainer
           setAccountType={setAccountType}
           accountType={accountType}
