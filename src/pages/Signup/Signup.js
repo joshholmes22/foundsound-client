@@ -39,7 +39,7 @@ const Signup = () => {
         <Typography
           variant="h3"
           gutterBottom
-          sx={{ fontSize: "30px", fontWeight: "600" }}
+          sx={{ fontSize: "30px", fontWeight: "600", marginTop: 2 }}
         >
           Select an account type to signup
         </Typography>

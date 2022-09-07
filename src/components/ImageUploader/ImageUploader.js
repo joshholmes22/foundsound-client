@@ -80,6 +80,7 @@ export const ImageUploader = ({
       width: 150,
       borderRadius: 100,
       textAlign: "center",
+      marginBottom: 2,
     },
     title: {
       textAlign: "center",
@@ -121,49 +122,41 @@ export const ImageUploader = ({
                 <Typography variant="h6" display="block" sx={styles.title}>
                   Uploaded Image
                 </Typography>
-                <CardMedia sx={styles.media} image={imageUrl} />
-                <CardContent>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    {imageUrl}
-                  </Typography>
-                  <Box sx={{ textAlign: "center", mt: 2 }}>
-                    <Button
-                      variant="outlined"
-                      color="error"
-                      onClick={onImageRemove}
-                    >
-                      Remove
-                    </Button>
-                  </Box>
-                </CardContent>
+                {imageUse === "profileImage" ? (
+                  <CardMedia sx={styles.profileImageMedia} image={imageUrl} />
+                ) : (
+                  <CardMedia sx={styles.media} image={imageUrl} />
+                )}
               </>
             )}
           </Box>
-          <CardActions sx={styles.cardActions}>
-            {imageList.length === 0 && (
-              <Button
-                color="primary"
-                onClick={onImageUpload}
-                startIcon={<PhotoCamera />}
-              >
-                Upload Image
-              </Button>
-            )}
-            {imageList.length !== 0 && (
-              <>
+          {!imageUrl && (
+            <CardActions sx={styles.cardActions}>
+              {imageList.length === 0 && (
                 <Button
-                  variant="outlined"
-                  color="error"
-                  onClick={onImageRemoveAll}
+                  color="primary"
+                  onClick={onImageUpload}
+                  startIcon={<PhotoCamera />}
                 >
-                  Delete
+                  Upload Image
                 </Button>
-                <Button variant="outlined" color="success" onClick={onUpload}>
-                  Upload
-                </Button>
-              </>
-            )}
-          </CardActions>
+              )}
+              {imageList.length !== 0 && (
+                <>
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={onImageRemoveAll}
+                  >
+                    Delete
+                  </Button>
+                  <Button variant="outlined" color="success" onClick={onUpload}>
+                    Upload
+                  </Button>
+                </>
+              )}
+            </CardActions>
+          )}
         </Card>
       )}
     </ImageUploading>
