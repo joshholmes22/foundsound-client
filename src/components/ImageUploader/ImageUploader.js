@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { uploadFile } from "react-s3";
 import ImageUploading from "react-images-uploading";
 import Card from "@mui/material/Card";
@@ -18,6 +18,7 @@ export const ImageUploader = ({
   setImageUrl,
   setFileName,
   dirName,
+  imageUse,
 }) => {
   const [images, setImages] = useState([]);
 
@@ -71,15 +72,20 @@ export const ImageUploader = ({
 
   const styles = {
     root: {
-      minWidth: 320,
+      width: "50%",
     },
-    media: {
-      height: 241,
+    media: { height: 241 },
+    profileImageMedia: {
+      height: 150,
+      width: 150,
+      borderRadius: 100,
+      textAlign: "center",
+      marginBottom: 2,
     },
     title: {
       textAlign: "center",
-      paddingTop: 8,
-      paddingBottom: 8,
+      paddingTop: 2,
+      paddingBottom: 2,
     },
     cardActions: { display: "flex", justifyContent: "space-evenly" },
   };
@@ -88,13 +94,27 @@ export const ImageUploader = ({
     <ImageUploading value={images} onChange={onChange} dataURLKey="data_url">
       {({ imageList, onImageUpload, onImageRemoveAll }) => (
         <Card sx={styles.root}>
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             {images.length !== 0 && (
               <>
                 <Typography variant="h6" display="block" sx={styles.title}>
                   Preview
                 </Typography>
-                <CardMedia sx={styles.media} image={images[0]["data_url"]} />
+                {imageUse === "profileImage" ? (
+                  <CardMedia
+                    sx={styles.profileImageMedia}
+                    image={images[0]["data_url"]}
+                  />
+                ) : (
+                  <CardMedia sx={styles.media} image={images[0]["data_url"]} />
+                )}
               </>
             )}
             {imageUrl && (
@@ -102,49 +122,41 @@ export const ImageUploader = ({
                 <Typography variant="h6" display="block" sx={styles.title}>
                   Uploaded Image
                 </Typography>
-                <CardMedia sx={styles.media} image={imageUrl} />
-                <CardContent>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    {imageUrl}
-                  </Typography>
-                  <Box sx={{ textAlign: "center", mt: 2 }}>
-                    <Button
-                      variant="outlined"
-                      color="error"
-                      onClick={onImageRemove}
-                    >
-                      Remove
-                    </Button>
-                  </Box>
-                </CardContent>
+                {imageUse === "profileImage" ? (
+                  <CardMedia sx={styles.profileImageMedia} image={imageUrl} />
+                ) : (
+                  <CardMedia sx={styles.media} image={imageUrl} />
+                )}
               </>
             )}
           </Box>
-          <CardActions sx={styles.cardActions}>
-            {imageList.length === 0 && (
-              <Button
-                color="primary"
-                onClick={onImageUpload}
-                startIcon={<PhotoCamera />}
-              >
-                Upload Image
-              </Button>
-            )}
-            {imageList.length !== 0 && (
-              <>
+          {!imageUrl && (
+            <CardActions sx={styles.cardActions}>
+              {imageList.length === 0 && (
                 <Button
-                  variant="outlined"
-                  color="error"
-                  onClick={onImageRemoveAll}
+                  color="primary"
+                  onClick={onImageUpload}
+                  startIcon={<PhotoCamera />}
                 >
-                  Delete
+                  Upload Image
                 </Button>
-                <Button variant="outlined" color="success" onClick={onUpload}>
-                  Upload
-                </Button>
-              </>
-            )}
-          </CardActions>
+              )}
+              {imageList.length !== 0 && (
+                <>
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={onImageRemoveAll}
+                  >
+                    Delete
+                  </Button>
+                  <Button variant="outlined" color="success" onClick={onUpload}>
+                    Upload
+                  </Button>
+                </>
+              )}
+            </CardActions>
+          )}
         </Card>
       )}
     </ImageUploading>

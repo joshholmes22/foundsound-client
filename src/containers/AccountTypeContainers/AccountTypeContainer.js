@@ -1,5 +1,7 @@
 import "./AccountTypeContianer.css";
 import AccountTypeCard from "../../components/AccountTypeCard/AccountTypeCard";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 
 const AccountTypeContainer = ({ setAccountType, accountType }) => {
   const accountClicked = ({ accountType }) => {
@@ -7,8 +9,9 @@ const AccountTypeContainer = ({ setAccountType, accountType }) => {
   };
 
   return (
-    <div className="typeContianer">
-      <div
+    <Grid container>
+      <Grid
+        xs={4}
         onClick={() => accountClicked({ accountType: "audienceMember" })}
         style={
           accountType === "audienceMember"
@@ -23,8 +26,9 @@ const AccountTypeContainer = ({ setAccountType, accountType }) => {
           altText={"Festival"}
           overlayText={"Audience Member"}
         />
-      </div>
-      <div
+      </Grid>
+      <Grid
+        xs={4}
         onClick={() => accountClicked({ accountType: "artist" })}
         style={
           accountType === "artist"
@@ -39,8 +43,9 @@ const AccountTypeContainer = ({ setAccountType, accountType }) => {
           altText={"Performer"}
           overlayText={"Artist"}
         />
-      </div>
-      <div
+      </Grid>
+      <Grid
+        xs={4}
         onClick={() => accountClicked({ accountType: "eventOrganiser" })}
         style={
           accountType === "eventOrganiser"
@@ -55,8 +60,8 @@ const AccountTypeContainer = ({ setAccountType, accountType }) => {
           altText={"Backstage"}
           overlayText={"Event Organiser"}
         />
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 };
 
