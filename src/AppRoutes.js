@@ -7,6 +7,7 @@ import Events from "./pages/Events";
 import Artists from "./pages/Artists";
 import Dashboard from "./pages/Dashboard";
 import { useAuth } from "./context/AppProvider";
+import Ad from "./pages/Ad";
 
 const AppRoutes = () => {
   const { isLoggedIn } = useAuth();
@@ -20,6 +21,7 @@ const AppRoutes = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/events" element={<Events />} />
           <Route path="/artists" element={<Artists />} />
+          <Route path="/ad" element={<Ad />} />
         </>
       )}
 
