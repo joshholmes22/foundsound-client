@@ -30,11 +30,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { ThemeProvider } from "@mui/material/styles";
+import { useLazyQuery } from "@apollo/client";
 
 import theme from "../../utils/themes";
+import { useAuth } from "../../context/AppProvider";
+
 import { ImageUploader } from "../ImageUploader";
 import { ADDRESS_LOOKUP } from "../../graphql/queries";
-import { useLazyQuery } from "@apollo/client";
 
 const EventForm = () => {
   const [
@@ -47,6 +49,7 @@ const EventForm = () => {
   ] = useLazyQuery(ADDRESS_LOOKUP, {
     fetchPolicy: "network-only",
   });
+  const { user } = useAuth();
 
   const [value, setValue] = useState(new Date());
   const [tags, setTags] = useState([]);
@@ -85,10 +88,12 @@ const EventForm = () => {
         tags,
         imageUrl,
       };
-
       console.log(createEventInput);
     }
   };
+
+  console.log(user);
+  console.log(imageUrl);
 
   const handleAddressLookup = () => {
     addressLookup({
@@ -126,7 +131,13 @@ const EventForm = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Typography variant="h4" gutterBottom align="center" sx={{ m: "30px" }}>
+      <Typography
+        variant="h4"
+        gutterBottom
+        align="center"
+        sx={{ m: "30px" }}
+        font="bold"
+      >
         Create An Event
       </Typography>
       <Divider />
@@ -179,7 +190,11 @@ const EventForm = () => {
                   variant="button"
                   align="left"
                   color="#113476"
-                  marginBottom={2}
+                  marginBottom={1}
+                  sx={{
+                    fontSize: 15,
+                    fontWeight: "large",
+                  }}
                 >
                   Event Details
                 </Typography>
@@ -218,7 +233,11 @@ const EventForm = () => {
                   variant="button"
                   align="left"
                   color="#113476"
-                  marginBottom={2}
+                  marginBottom={1}
+                  sx={{
+                    fontSize: 15,
+                    fontWeight: "large",
+                  }}
                 >
                   Venue Details
                 </Typography>
@@ -322,7 +341,11 @@ const EventForm = () => {
                     variant="button"
                     align="left"
                     color="#113476"
-                    marginBottom={2}
+                    marginBottom={1}
+                    sx={{
+                      fontSize: 15,
+                      fontWeight: "large",
+                    }}
                   >
                     Schedule Details
                   </Typography>
@@ -364,7 +387,11 @@ const EventForm = () => {
                   variant="button"
                   align="left"
                   color="#113476"
-                  marginBottom={2}
+                  marginBottom={1}
+                  sx={{
+                    fontSize: 15,
+                    fontWeight: "large",
+                  }}
                 >
                   Additional Information
                 </Typography>
@@ -374,7 +401,7 @@ const EventForm = () => {
                   imageUrl={imageUrl}
                   setImageUrl={setImageUrl}
                   setFileName={setFileName}
-                  dirName="`{user}`/`{eventImage}`"
+                  dirName={`${user.id}`}
                   helperText={
                     !imageUrl ? "Please upload an image for the event." : ""
                   }
