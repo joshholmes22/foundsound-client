@@ -140,6 +140,7 @@ const HomeNavBar = () => {
                   my: 2,
                   color: "white",
                   display: "block",
+                  fontWeight: 600,
                 }}
               >
                 {item.label}
