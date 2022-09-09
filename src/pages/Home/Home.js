@@ -11,7 +11,6 @@ const Home = () => {
       <HomeNavBar />
       <HeroBanner />
       <Typography>HOME</Typography>
-      <Link href="/signup">Click here to sign up</Link>
     </div>
   );
 };
