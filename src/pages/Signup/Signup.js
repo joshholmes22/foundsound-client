@@ -54,19 +54,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-// return (
-//   <div className="signupPageContainer">
-//     <div className="signupContainer">
-//       <div className="accountCardContainer">
-//         <AccountTypeContainer
-//           setAccountType={setAccountType}
-//           accountType={accountType}
-//         />
-//       </div>
-//       <div className="signupForm">
-//         <SignupForm accountType={accountType} />
-//       </div>
-//     </div>
-//   </div>
-// );
