@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import Link from "@mui/material/Link";
 import HomeNavBar from "../../components/HomeNavBar";
 import HeroBanner from "../../components/HeroBanner";
@@ -10,7 +9,6 @@ const Home = () => {
     <div className="homePageContainer">
       <HomeNavBar />
       <HeroBanner />
-      <Typography>HOME</Typography>
     </div>
   );
 };
