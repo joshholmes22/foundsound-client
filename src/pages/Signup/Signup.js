@@ -47,7 +47,7 @@ const Signup = () => {
           setAccountType={setAccountType}
           accountType={accountType}
         />
-        <SignupForm isMobile={isMobile} />
+        <SignupForm isMobile={isMobile} accountType={accountType} />
       </Grid>
     </Grid>
   );
