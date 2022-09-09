@@ -42,7 +42,7 @@ const HomeNavBar = () => {
   // };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#0A0A0A" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#0A0A0A80" }}>
       <Container maxWidth="xl">
         <Toolbar
           disableGutters
