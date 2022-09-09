@@ -105,14 +105,19 @@ const HomeNavBar = () => {
               }}
             >
               {pages.map((item) => (
-                <MenuItem key={item.label} onClick={handleCloseNavMenu}>
+                <MenuItem
+                  key={item.label}
+                  onClick={() => {
+                    navigate(item.path);
+                  }}
+                >
                   <Typography textAlign="center"></Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           {/* THIS IS THE LOGO WHEN IN MOBILE VIEWPORT */}
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+
           <Typography
             variant="h5"
             noWrap
@@ -122,8 +127,7 @@ const HomeNavBar = () => {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 800,
+              fontWeight: 600,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
