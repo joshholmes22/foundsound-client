@@ -12,6 +12,8 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
 
+import "./HomeNavBar.css";
+
 // const pages = ["Home", "Signup", "Login"];
 const pages = [
   { label: "Home", path: "/home" },
@@ -132,6 +134,7 @@ const HomeNavBar = () => {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((item) => (
               <Button
+                className="nav-btn"
                 key={item.label}
                 onClick={() => {
                   navigate(item.path);
