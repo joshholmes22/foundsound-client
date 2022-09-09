@@ -11,6 +11,7 @@ const AccountTypeContainer = ({ setAccountType, accountType }) => {
   return (
     <Grid container>
       <Grid
+        item
         xs={4}
         onClick={() => accountClicked({ accountType: "audienceMember" })}
         style={
@@ -28,6 +29,7 @@ const AccountTypeContainer = ({ setAccountType, accountType }) => {
         />
       </Grid>
       <Grid
+        item
         xs={4}
         onClick={() => accountClicked({ accountType: "artist" })}
         style={
@@ -45,6 +47,7 @@ const AccountTypeContainer = ({ setAccountType, accountType }) => {
         />
       </Grid>
       <Grid
+        item
         xs={4}
         onClick={() => accountClicked({ accountType: "eventOrganiser" })}
         style={
