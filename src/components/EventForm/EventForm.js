@@ -121,7 +121,7 @@ const EventForm = () => {
       facilities,
       imageUrl,
     };
-
+    console.log(createEventInput);
     createEvent({ variables: { createEventInput } });
   };
 
@@ -317,7 +317,6 @@ const EventForm = () => {
                     const filtered = filter(options, params);
 
                     const { inputValue } = params;
-                    // Suggest the creation of a new value
                     const isExisting = options.some(
                       (option) => inputValue === option.name
                     );
@@ -341,7 +340,7 @@ const EventForm = () => {
                   {...register("tags")}
                   options={commonTags}
                   getOptionLabel={(option) => option.name}
-                  defaultValue={[commonTags[0]]}
+                  defaultValue={[commonTags[1]]}
                   isOptionEqualToValue={(option, value) =>
                     option.name === value.name
                   }
@@ -396,7 +395,6 @@ const EventForm = () => {
                   isOptionEqualToValue={(option, value) => option === value}
                   freeSolo
                   onChange={(event, newValue) => {
-                    console.log(newValue);
                     if (typeof newValue === "string") {
                       setFacilities({
                         name: newValue,
