@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useAuth } from "../../context/AppProvider";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages = ["Home", "My Events", "Artists"];
 const settings = ["Profile", "Logout"];
 
 const AudienceNavBar = () => {
@@ -41,7 +41,6 @@ const AudienceNavBar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -57,7 +56,7 @@ const AudienceNavBar = () => {
               textDecoration: "none",
             }}
           >
-            LOGO
+            FOUND SOUND
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
