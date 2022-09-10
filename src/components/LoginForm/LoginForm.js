@@ -72,8 +72,9 @@ const LoginForm = () => {
       spacing={4}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Grid item xs={6} sx={{ display: "flex", justifyContent: "center" }}>
+      <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
         <TextField
+          fullWidth
           required
           error={!!errors.email}
           label="Email"
@@ -84,8 +85,8 @@ const LoginForm = () => {
           })}
         />
       </Grid>
-      <Grid item xs={6}>
-        <FormControl sx={{ m: 1 }} variant="outlined">
+      <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+        <FormControl variant="outlined" fullWidth>
           <InputLabel
             error={!!errors.password}
             htmlFor="outlined-adornment-password"

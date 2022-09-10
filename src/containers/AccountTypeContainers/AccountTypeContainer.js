@@ -9,14 +9,19 @@ const AccountTypeContainer = ({ setAccountType, accountType }) => {
   };
 
   return (
-    <Grid container>
+    <Grid container sx={{ justifyContent: "space-evenly" }}>
       <Grid
+        item
         xs={4}
         onClick={() => accountClicked({ accountType: "audienceMember" })}
         style={
           accountType === "audienceMember"
-            ? { boxShadow: "-5px 10px 20px 8px", borderRadius: "10px" }
-            : null
+            ? {
+                boxShadow: "-5px 10px 20px 8px",
+                borderRadius: "10px",
+                maxWidth: "250px",
+              }
+            : { maxWidth: "250px" }
         }
       >
         <AccountTypeCard
@@ -28,12 +33,17 @@ const AccountTypeContainer = ({ setAccountType, accountType }) => {
         />
       </Grid>
       <Grid
+        item
         xs={4}
         onClick={() => accountClicked({ accountType: "artist" })}
         style={
           accountType === "artist"
-            ? { boxShadow: "0px 10px 20px 8px", borderRadius: "10px" }
-            : null
+            ? {
+                boxShadow: "-5px 10px 20px 8px",
+                borderRadius: "10px",
+                maxWidth: "250px",
+              }
+            : { maxWidth: "250px" }
         }
       >
         <AccountTypeCard
@@ -45,12 +55,17 @@ const AccountTypeContainer = ({ setAccountType, accountType }) => {
         />
       </Grid>
       <Grid
+        item
         xs={4}
         onClick={() => accountClicked({ accountType: "eventOrganiser" })}
         style={
           accountType === "eventOrganiser"
-            ? { boxShadow: "5px 10px 20px 8px", borderRadius: "10px" }
-            : null
+            ? {
+                boxShadow: "-5px 10px 20px 8px",
+                borderRadius: "10px",
+                maxWidth: "250px",
+              }
+            : { maxWidth: "250px" }
         }
       >
         <AccountTypeCard

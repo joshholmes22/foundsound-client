@@ -47,26 +47,10 @@ const Signup = () => {
           setAccountType={setAccountType}
           accountType={accountType}
         />
-        <SignupForm isMobile={isMobile} />
+        <SignupForm isMobile={isMobile} accountType={accountType} />
       </Grid>
     </Grid>
   );
 };
 
 export default Signup;
-
-// return (
-//   <div className="signupPageContainer">
-//     <div className="signupContainer">
-//       <div className="accountCardContainer">
-//         <AccountTypeContainer
-//           setAccountType={setAccountType}
-//           accountType={accountType}
-//         />
-//       </div>
-//       <div className="signupForm">
-//         <SignupForm accountType={accountType} />
-//       </div>
-//     </div>
-//   </div>
-// );

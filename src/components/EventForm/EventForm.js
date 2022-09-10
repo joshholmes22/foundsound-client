@@ -40,6 +40,8 @@ import theme from "../../utils/themes";
 import { useAuth } from "../../context/AppProvider";
 import { ImageUploader } from "../ImageUploader";
 import { ADDRESS_LOOKUP } from "../../graphql/queries";
+import { CREATE_EVENT } from "../../graphql/mutations";
+import { useMutation } from "@apollo/client";
 
 const EventForm = () => {
   const [
@@ -52,6 +54,9 @@ const EventForm = () => {
   ] = useLazyQuery(ADDRESS_LOOKUP, {
     fetchPolicy: "network-only",
   });
+
+  const [createEvent, { data, loading, error }] = useMutation(CREATE_EVENT);
+
   const { user } = useAuth();
 
   const [value, setValue] = useState(new Date());
@@ -117,7 +122,9 @@ const EventForm = () => {
       capacities,
       facilities,
     };
-    console.log(createEventInput);
+    // console.log(createEventInput);
+
+    createEvent({ variables: createEventInput });
   };
 
   const handleAddressLookup = () => {
