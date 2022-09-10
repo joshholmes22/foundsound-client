@@ -6,10 +6,11 @@ import Signup from "./pages/Signup";
 import Events from "./pages/Events";
 import Artists from "./pages/Artists";
 import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
 import { useAuth } from "./context/AppProvider";
 
 const AppRoutes = () => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
 
   return (
     <Routes>
@@ -18,15 +19,32 @@ const AppRoutes = () => {
           <Route path="/*" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/events" element={<Events />} />
           <Route path="/artists" element={<Artists />} />
         </>
       )}
 
-      {isLoggedIn && (
+      {isLoggedIn && user.userType === "audienceMember" && (
         <>
           <Route path="/*" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<Profile />} />
+        </>
+      )}
+
+      {isLoggedIn && user.userType === "eventOrganiser" && (
+        <>
+          <Route path="/*" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/events" element={<Events />} />
+        </>
+      )}
+
+      {isLoggedIn && user.userType === "artist" && (
+        <>
+          <Route path="/*" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<Profile />} />
         </>
       )}
     </Routes>
