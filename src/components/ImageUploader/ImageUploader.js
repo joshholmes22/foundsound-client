@@ -134,7 +134,7 @@ export const ImageUploader = ({
             <CardActions sx={styles.cardActions}>
               {imageList.length === 0 && (
                 <Button
-                  color="primary"
+                  fullWidth
                   onClick={onImageUpload}
                   startIcon={<PhotoCamera />}
                 >

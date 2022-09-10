@@ -31,10 +31,10 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { ThemeProvider } from "@mui/material/styles";
 import { useLazyQuery } from "@apollo/client";
+import { ErrorOutlineSharp } from "@mui/icons-material";
 
 import theme from "../../utils/themes";
 import { useAuth } from "../../context/AppProvider";
-
 import { ImageUploader } from "../ImageUploader";
 import { ADDRESS_LOOKUP } from "../../graphql/queries";
 
@@ -81,19 +81,22 @@ const EventForm = () => {
         type: "manual",
         message: "Please select an address",
       });
-    } else {
-      const createEventInput = {
-        ...formData,
-        venue: selectedAddressId,
-        tags,
-        imageUrl,
-      };
-      console.log(createEventInput);
     }
-  };
+    if (!imageUrl) {
+      setError("imageUrl", {
+        type: "manual",
+        message: "Please select an image for event",
+      });
+    }
 
-  console.log(user);
-  console.log(imageUrl);
+    const createEventInput = {
+      ...formData,
+      venue: selectedAddressId,
+      tags,
+      imageUrl,
+    };
+    console.log(createEventInput);
+  };
 
   const handleAddressLookup = () => {
     addressLookup({
@@ -248,8 +251,6 @@ const EventForm = () => {
                   <OutlinedInput
                     id="outlined-adornment-password"
                     type="text"
-                    // value={postcode}
-                    // onChange={handleOnChangeAddress}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
@@ -397,14 +398,10 @@ const EventForm = () => {
                 </Typography>
                 <ImageUploader
                   id="imageUrl"
-                  fullWidth
                   imageUrl={imageUrl}
                   setImageUrl={setImageUrl}
                   setFileName={setFileName}
-                  dirName={`${user.id}`}
-                  helperText={
-                    !imageUrl ? "Please upload an image for the event." : ""
-                  }
+                  dirName={`${user}`}
                 />
               </Stack>
             </Grid>
