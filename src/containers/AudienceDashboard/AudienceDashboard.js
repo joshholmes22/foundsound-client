@@ -1,9 +1,13 @@
 import "./AudienceDashboard.css";
 
+import AudienceNavBar from "../../components/AudienceNavBar";
+import AllEvents from "../AllEvents";
+
 const AudienceDashboard = () => {
   return (
     <div>
-      <h1>Audience Dashboard</h1>
+      <AudienceNavBar />
+      <AllEvents />
     </div>
   );
 };
