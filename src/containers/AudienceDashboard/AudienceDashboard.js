@@ -6,7 +6,7 @@ import AllEvents from "../AllEvents";
 const AudienceDashboard = () => {
   return (
     <div>
-      <PrivateNavBar />
+      <PrivateNavBar pages={["Home", "My Events", "Artists"]} />
       <AllEvents />
     </div>
   );

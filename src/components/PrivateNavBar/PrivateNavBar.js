@@ -14,10 +14,9 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useAuth } from "../../context/AppProvider";
 
-const pages = ["Home", "My Events", "Artists"];
 const settings = ["Profile", "Logout"];
 
-const PrivateNavBar = () => {
+const PrivateNavBar = ({ pages }) => {
   const { user } = useAuth();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
