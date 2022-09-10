@@ -26,6 +26,7 @@ const SignupForm = ({ accountType }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(data);
     if (data?.signup?.success) {
       navigate("/login", { replace: true });
     }
@@ -58,7 +59,8 @@ const SignupForm = ({ accountType }) => {
         email: formData.email,
         password: formData.password,
         imageUrl: imageUrl,
-        socialMedia: formData.phoneNumber,
+        imageFileName: fileName,
+        socialMedia: formData.socialLink,
         userType: accountType,
       };
 
@@ -77,15 +79,14 @@ const SignupForm = ({ accountType }) => {
     setShowConfirmedPassword(!showConfirmedPassword);
   };
 
-  console.log(imageUrl, fileName);
-
   return (
     <Grid
       container
       component="form"
       sx={{
         p: 3,
-        width: "50%",
+        width: "90%",
+        paddingTop: 8,
       }}
       spacing={4}
       onSubmit={handleSubmit(onSubmit)}
@@ -94,6 +95,7 @@ const SignupForm = ({ accountType }) => {
         <TextField
           required
           error={!!errors.firstName}
+          fullWidth
           label="First name"
           variant="outlined"
           helperText={!!errors.firstName ? "Please enter your first name." : ""}
@@ -106,6 +108,7 @@ const SignupForm = ({ accountType }) => {
         <TextField
           required
           error={!!errors.lastName}
+          fullWidth
           label="Last name"
           variant="outlined"
           helperText={!!errors.lastName ? "Please enter your last name." : ""}
@@ -117,34 +120,23 @@ const SignupForm = ({ accountType }) => {
       <Grid item xs={6}>
         <TextField
           required
-          error={!!errors.phoneNumber}
-          label="Phone Number"
+          error={!!errors.socialLink}
+          fullWidth
+          label="Social Link"
           variant="outlined"
           helperText={
-            !!errors.phoneNumber ? "Please enter your phone number." : ""
+            !!errors.socialLink ? "Please enter your social media link." : ""
           }
-          {...register("phoneNumber", {
+          {...register("socialLink", {
             required: true,
           })}
         />
       </Grid>
       <Grid item xs={6}>
         <TextField
-          className="input"
-          required
-          error={!!errors.imageUrl}
-          label="Image URL"
-          variant="outlined"
-          helperText={!!errors.imageUrl ? "Please enter your image URL." : ""}
-          {...register("imageUrl", {
-            required: true,
-          })}
-        />
-      </Grid>
-      <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-        <TextField
           required
           error={!!errors.email}
+          fullWidth
           label="Email"
           variant="outlined"
           helperText={!!errors.email ? "Please enter a valid email." : ""}
@@ -154,7 +146,7 @@ const SignupForm = ({ accountType }) => {
         />
       </Grid>
       <Grid item xs={6}>
-        <FormControl sx={{ m: 1 }} variant="outlined">
+        <FormControl variant="outlined" fullWidth>
           <InputLabel
             error={!!errors.password}
             htmlFor="outlined-adornment-password"
@@ -193,7 +185,7 @@ const SignupForm = ({ accountType }) => {
         </FormControl>
       </Grid>
       <Grid item xs={6}>
-        <FormControl sx={{ m: 1 }} variant="outlined">
+        <FormControl variant="outlined" fullWidth>
           <InputLabel
             error={!!errors.confirmPassword}
             htmlFor="outlined-adornment-password"
@@ -232,12 +224,17 @@ const SignupForm = ({ accountType }) => {
           )}
         </FormControl>
       </Grid>
-      <Grid item xs={6}>
+      <Grid
+        item
+        xs={12}
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      >
         <ImageUploader
           imageUrl={imageUrl}
           setImageUrl={setImageUrl}
           setFileName={setFileName}
           dirName="users/profileImages"
+          imageUse="profileImage"
         />
       </Grid>
       <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>

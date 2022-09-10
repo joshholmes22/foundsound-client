@@ -9,10 +9,9 @@ const AccountTypeCard = ({ imageUrl, altText, overlayText }) => {
   return (
     <Card
       sx={{
-        maxWidth: 345,
+        maxWidth: 250,
         margin: "10px",
         backgroundColor: "transparent",
-        width: "300px",
       }}
     >
       <Box sx={{ position: "relative" }}>
@@ -28,13 +27,13 @@ const AccountTypeCard = ({ imageUrl, altText, overlayText }) => {
             position: "absolute",
             bottom: 0,
             left: 0,
-            width: "100%",
+            width: "95%",
             bgcolor: "rgba(0, 0, 0, 0.7)",
             color: "white",
             padding: "10px",
           }}
         >
-          <Typography variant="h5" sx={{ textAlign: "center" }}>
+          <Typography variant="h5" sx={{ textAlign: "center", width: "100%" }}>
             {overlayText}
           </Typography>
         </Box>
