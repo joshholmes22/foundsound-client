@@ -12,7 +12,6 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Link from "@mui/material/Link";
 import FormHelperText from "@mui/material/FormHelperText";
 import Grid from "@mui/material/Grid";
-import { createTheme } from "@mui/material/styles";
 import LoadingButton from "@mui/lab/LoadingButton";
 
 import { useMutation } from "@apollo/client";
@@ -20,12 +19,14 @@ import { useMutation } from "@apollo/client";
 import "./SignupForm.css";
 import { SIGNUP } from "../../graphql/mutations";
 import { useNavigate } from "react-router-dom";
+import { ImageUploader } from "../ImageUploader";
 
 const SignupForm = ({ accountType }) => {
   const [signup, { data, loading, error }] = useMutation(SIGNUP);
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(data);
     if (data?.signup?.success) {
       navigate("/login", { replace: true });
     }
@@ -42,6 +43,8 @@ const SignupForm = ({ accountType }) => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmedPassword, setShowConfirmedPassword] = useState(false);
+  const [imageUrl, setImageUrl] = useState();
+  const [fileName, setFileName] = useState();
 
   const onSubmit = (formData) => {
     if (formData.password !== formData.confirmPassword) {
@@ -55,8 +58,9 @@ const SignupForm = ({ accountType }) => {
         lastName: formData.lastName,
         email: formData.email,
         password: formData.password,
-        imageUrl: formData.imageUrl,
-        socialMedia: formData.phoneNumber,
+        imageUrl: imageUrl,
+        imageFileName: fileName,
+        socialMedia: formData.socialLink,
         userType: accountType,
       };
 
@@ -81,7 +85,8 @@ const SignupForm = ({ accountType }) => {
       component="form"
       sx={{
         p: 3,
-        width: "50%",
+        width: "90%",
+        paddingTop: 8,
       }}
       spacing={4}
       onSubmit={handleSubmit(onSubmit)}
@@ -90,6 +95,7 @@ const SignupForm = ({ accountType }) => {
         <TextField
           required
           error={!!errors.firstName}
+          fullWidth
           label="First name"
           variant="outlined"
           helperText={!!errors.firstName ? "Please enter your first name." : ""}
@@ -102,6 +108,7 @@ const SignupForm = ({ accountType }) => {
         <TextField
           required
           error={!!errors.lastName}
+          fullWidth
           label="Last name"
           variant="outlined"
           helperText={!!errors.lastName ? "Please enter your last name." : ""}
@@ -113,34 +120,23 @@ const SignupForm = ({ accountType }) => {
       <Grid item xs={6}>
         <TextField
           required
-          error={!!errors.phoneNumber}
-          label="Phone Number"
+          error={!!errors.socialLink}
+          fullWidth
+          label="Social Link"
           variant="outlined"
           helperText={
-            !!errors.phoneNumber ? "Please enter your phone number." : ""
+            !!errors.socialLink ? "Please enter your social media link." : ""
           }
-          {...register("phoneNumber", {
+          {...register("socialLink", {
             required: true,
           })}
         />
       </Grid>
       <Grid item xs={6}>
         <TextField
-          className="input"
-          required
-          error={!!errors.imageUrl}
-          label="Image URL"
-          variant="outlined"
-          helperText={!!errors.imageUrl ? "Please enter your image URL." : ""}
-          {...register("imageUrl", {
-            required: true,
-          })}
-        />
-      </Grid>
-      <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-        <TextField
           required
           error={!!errors.email}
+          fullWidth
           label="Email"
           variant="outlined"
           helperText={!!errors.email ? "Please enter a valid email." : ""}
@@ -150,7 +146,7 @@ const SignupForm = ({ accountType }) => {
         />
       </Grid>
       <Grid item xs={6}>
-        <FormControl sx={{ m: 1 }} variant="outlined">
+        <FormControl variant="outlined" fullWidth>
           <InputLabel
             error={!!errors.password}
             htmlFor="outlined-adornment-password"
@@ -189,7 +185,7 @@ const SignupForm = ({ accountType }) => {
         </FormControl>
       </Grid>
       <Grid item xs={6}>
-        <FormControl sx={{ m: 1 }} variant="outlined">
+        <FormControl variant="outlined" fullWidth>
           <InputLabel
             error={!!errors.confirmPassword}
             htmlFor="outlined-adornment-password"
@@ -227,6 +223,19 @@ const SignupForm = ({ accountType }) => {
             </FormHelperText>
           )}
         </FormControl>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      >
+        <ImageUploader
+          imageUrl={imageUrl}
+          setImageUrl={setImageUrl}
+          setFileName={setFileName}
+          dirName="users/profileImages"
+          imageUse="profileImage"
+        />
       </Grid>
       <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
         <LoadingButton variant="contained" type="submit" loading={loading}>

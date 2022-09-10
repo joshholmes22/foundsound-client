@@ -1,6 +1,6 @@
 .signupContainer {
   width: 60%;
-  height: 95%;
+  height: 95vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,6 +9,3 @@
   background-color: rgba(221, 216, 184, 0.6);
   border-radius: 15px;
 }
-
-
-
