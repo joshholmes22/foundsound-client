@@ -16,8 +16,11 @@ import { useAuth } from "../../context/AppProvider";
 import { useNavigate } from "react-router-dom";
 
 const settings = ["Profile", "Logout"];
+const artistPages = ["Home", "Find Events", "Upcoming Events"];
+const audiencePages = ["Home", "My Events", "Artists"];
+const organiserPages = ["Home", "Events", "Ads"];
 
-const PrivateNavBar = ({ pages }) => {
+const PrivateNavBar = () => {
   const { user } = useAuth();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -95,14 +98,26 @@ const PrivateNavBar = ({ pages }) => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              {user.userType === "audienceMember" &&
+                audiencePages.map((page) => (
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                ))}
+              {user.userType === "eventOrganiser" &&
+                organiserPages.map((page) => (
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                ))}
+              {user.userType === "artist" &&
+                artistPages.map((page) => (
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -119,18 +134,39 @@ const PrivateNavBar = ({ pages }) => {
               textDecoration: "none",
             }}
           >
-            LOGO
+            FOUND SOUND
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
+            {user.userType === "audienceMember" &&
+              audiencePages.map((page) => (
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page}
+                </Button>
+              ))}
+            {user.userType === "artist" &&
+              artistPages.map((page) => (
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page}
+                </Button>
+              ))}
+            {user.userType === "eventOrganiser" &&
+              organiserPages.map((page) => (
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page}
+                </Button>
+              ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

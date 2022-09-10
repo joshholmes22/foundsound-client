@@ -6,6 +6,7 @@ import Signup from "./pages/Signup";
 import Events from "./pages/Events";
 import Artists from "./pages/Artists";
 import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
 import { useAuth } from "./context/AppProvider";
 
 const AppRoutes = () => {
@@ -27,6 +28,7 @@ const AppRoutes = () => {
         <>
           <Route path="/*" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<Profile />} />
         </>
       )}
     </Routes>
