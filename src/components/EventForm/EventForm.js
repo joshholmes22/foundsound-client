@@ -52,18 +52,18 @@ const EventForm = () => {
   ];
 
   const facilityOptions = [
-    "hasFood",
-    "isAcessibile",
-    "hasCurfew",
-    "asAlcoholLicense",
-    "hasDressingRooms",
-    "hasSmokingArea",
-    "hasSeating",
-    "isDogFriendly",
-    "hasCloakRoom",
-    "hasShoweringFacilities",
-    "hasToilets",
-    "hygeineRating”",
+    "Food",
+    "Accessible",
+    "Curfew",
+    "Alcohol License",
+    "Dressing Rooms",
+    "Smoking Area",
+    "Seating",
+    "Dog Friendly",
+    "Cloak Room",
+    "Showering Facilities",
+    "Toilets",
+    "hygiene Rating",
   ];
 
   const [
@@ -163,40 +163,6 @@ const EventForm = () => {
     }
   }, [addressLookupData]);
 
-  const BootstrapInput = styled(InputBase)(({ theme }) => ({
-    "label + &": {
-      marginTop: theme.spacing(3),
-    },
-    "& .MuiInputBase-input": {
-      borderRadius: 4,
-      position: "relative",
-      backgroundColor: theme.palette.background.paper,
-      border: "1px solid #ced4da",
-      fontSize: 16,
-      padding: "10px 26px 10px 12px",
-      transition: theme.transitions.create(["border-color", "box-shadow"]),
-      // Use the system font instead of the default Roboto font.
-      fontFamily: [
-        "-apple-system",
-        "BlinkMacSystemFont",
-        '"Segoe UI"',
-        "Roboto",
-        '"Helvetica Neue"',
-        "Arial",
-        "sans-serif",
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-      ].join(","),
-      "&:focus": {
-        borderRadius: 4,
-        borderColor: "#80bdff",
-        boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
-      },
-    },
-  }));
-
-  console.log(facilities);
   return (
     <ThemeProvider theme={theme}>
       <Typography
@@ -395,6 +361,67 @@ const EventForm = () => {
                     }
                   }}
                 />
+                <Autocomplete
+                  multiple
+                  filterSelectedOptions
+                  filterOptions={(options, params) => {
+                    const filtered = filter(options, params);
+
+                    const { inputValue } = params;
+                    const isExisting = options.some(
+                      (option) => inputValue === option.name
+                    );
+                    if (inputValue !== "" && !isExisting) {
+                      filtered.push({
+                        inputValue,
+                        name: `${inputValue}`,
+                      });
+                    }
+
+                    return filtered;
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      value={facilities}
+                      label="Facilities"
+                      placeholder="Select Facilities "
+                    />
+                  )}
+                  id="facilities"
+                  {...register("facilities")}
+                  options={facilityOptions}
+                  getOptionLabel={(option) => option}
+                  defaultValue={[facilityOptions[1]]}
+                  isOptionEqualToValue={(option, value) => option === value}
+                  freeSolo
+                  onChange={(event, newValue) => {
+                    console.log(newValue);
+                    if (typeof newValue === "string") {
+                      setFacilities({
+                        name: newValue,
+                      });
+                    } else if (newValue && newValue.inputValue) {
+                      // Create a new value from the user input
+                      setFacilities({
+                        name: newValue.inputValue,
+                      });
+                    } else {
+                      setFacilities(newValue);
+                    }
+                  }}
+                />
+
+                <FormControl sx={{ m: 1 }} variant="standard">
+                  <TextField
+                    label="Capacity"
+                    id="capacity"
+                    {...register("capacity")}
+                    labelId="demo-customized-select-label"
+                    value={capacity}
+                    onChange={handleChange}
+                  ></TextField>
+                </FormControl>
               </Stack>
             </Grid>
 
@@ -476,69 +503,6 @@ const EventForm = () => {
                   setFileName={setFileName}
                   dirName={`${user}`}
                 />
-                {/* facilities here */}
-                <Autocomplete
-                  multiple
-                  filterSelectedOptions
-                  filterOptions={(options, params) => {
-                    const filtered = filter(options, params);
-
-                    const { inputValue } = params;
-                    // Suggest the creation of a new value
-                    const isExisting = options.some(
-                      (option) => inputValue === option.name
-                    );
-                    if (inputValue !== "" && !isExisting) {
-                      filtered.push({
-                        inputValue,
-                        name: `${inputValue}`,
-                      });
-                    }
-
-                    return filtered;
-                  }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      value={facilities}
-                      label="Facilities"
-                      placeholder="Select Facilities "
-                    />
-                  )}
-                  id="facilities"
-                  {...register("facilities")}
-                  options={facilityOptions}
-                  getOptionLabel={(option) => option}
-                  defaultValue={[facilityOptions[1]]}
-                  isOptionEqualToValue={(option, value) => option === value}
-                  freeSolo
-                  onChange={(event, newValue) => {
-                    console.log(newValue);
-                    if (typeof newValue === "string") {
-                      setFacilities({
-                        name: newValue,
-                      });
-                    } else if (newValue && newValue.inputValue) {
-                      // Create a new value from the user input
-                      setFacilities({
-                        name: newValue.inputValue,
-                      });
-                    } else {
-                      setFacilities(newValue);
-                    }
-                  }}
-                />
-
-                <FormControl sx={{ m: 1 }} variant="standard">
-                  <TextField
-                    id="capacity"
-                    {...register("capacity")}
-                    labelId="demo-customized-select-label"
-                    value={capacity}
-                    onChange={handleChange}
-                    input={<BootstrapInput />}
-                  ></TextField>
-                </FormControl>
               </Stack>
             </Grid>
           </Grid>
