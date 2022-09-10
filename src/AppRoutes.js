@@ -29,6 +29,7 @@ const AppRoutes = () => {
         <>
           <Route path="/*" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/viewEvents" element={<AllEvents />} />
         </>
       )}
     </Routes>
