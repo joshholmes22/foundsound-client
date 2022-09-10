@@ -4,6 +4,8 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 import bannerImg from "../../assets/images/profileTemplate/banner-img.jpg";
 
 const Profile = () => {
@@ -12,13 +14,38 @@ const Profile = () => {
   return (
     <div>
       <PrivateNavBar />
+      <Box
+        sx={{
+          backgroundColor: "rgb(0, 0, 0, 0.8)",
+          zIndex: "2",
+          padding: "15px",
+        }}
+      >
+        <Typography
+          variant="h4"
+          component="div"
+          sx={{
+            color: "#fff",
+            fontWeight: "bold",
+            fontSize: "35px",
+            textAlign: "center",
+          }}
+        >
+          Josh Holmes
+        </Typography>
+      </Box>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Card sx={{ position: "relative" }}>
+        <Card>
           <CardMedia
             component="img"
             image={imageUrl}
             alt="artist banner"
-            sx={{ width: "100vw", height: "45vh", filter: "blur(2px)" }}
+            sx={{
+              width: "100vw",
+              height: "45vh",
+              filter: "blur(2px)",
+              position: "relative",
+            }}
           />
         </Card>
         <Box
