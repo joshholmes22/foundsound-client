@@ -13,9 +13,9 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useEffect, useState } from "react";
-// import AddressForm from "./AddressForm";
-// import PaymentForm from "./PaymentForm";
-// import Review from "./Review";
+import EventAdCard from "../../components/EventAdCard";
+import AdForm from "../../components/AdForm/AdForm";
+import AdCard from "../../components/AdCard/AdCard";
 
 function Copyright() {
   return (
@@ -32,22 +32,22 @@ function Copyright() {
 
 const steps = ["Step 1", " Step 2", "Step 3"];
 
-// function getStepContent(step) {
-//   switch (step) {
-//     case 0:
-//       return <AddressForm />;
-//     case 1:
-//       return <PaymentForm />;
-//     case 2:
-//       return <Review />;
-//     default:
-//       throw new Error("Unknown step");
-//   }
-// }
+const getStepContent = (step) => {
+  switch (step) {
+    case 0:
+      return <EventAdCard />;
+    case 1:
+      return <AdForm />;
+    case 2:
+      return <AdCard />;
+    default:
+      throw new Error("Unknown step");
+  }
+};
 
 const theme = createTheme();
 
-export default function Checkout() {
+const Ad = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
@@ -105,7 +105,7 @@ export default function Checkout() {
               </Stack>
             ) : (
               <Stack>
-                {/* {getStepContent(activeStep)} */}
+                {getStepContent(activeStep)}
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
@@ -129,4 +129,6 @@ export default function Checkout() {
       </Container>
     </ThemeProvider>
   );
-}
+};
+
+export default Ad;
