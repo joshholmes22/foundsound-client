@@ -160,7 +160,7 @@ const PrivateNavBar = ({ pages }) => {
                   <Typography
                     textAlign="center"
                     onClick={() => {
-                      setting === "Logout" ? logout() : console.log("Test");
+                      setting === "Logout" ? logout() : navigate("/profile");
                     }}
                   >
                     {setting}
