@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useAuth } from "../../context/AppProvider";
+import { useNavigate } from "react-router-dom";
 
 const settings = ["Profile", "Logout"];
 
@@ -20,6 +21,7 @@ const PrivateNavBar = ({ pages }) => {
   const { user } = useAuth();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -34,6 +36,12 @@ const PrivateNavBar = ({ pages }) => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+    window.location.reload();
   };
 
   return (
@@ -149,7 +157,14 @@ const PrivateNavBar = ({ pages }) => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography
+                    textAlign="center"
+                    onClick={() => {
+                      setting === "Logout" ? logout() : console.log("Test");
+                    }}
+                  >
+                    {setting}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
