@@ -88,6 +88,7 @@ const ArtistTracks = () => {
               size="small"
               onClick={handleNext}
               disabled={activeStep === maxSteps - 1}
+              sx={{ backgroundColor: "#fff" }}
             >
               Next
               {theme.direction === "rtl" ? (
@@ -102,6 +103,7 @@ const ArtistTracks = () => {
               size="small"
               onClick={handleBack}
               disabled={activeStep === 0}
+              sx={{ backgroundColor: "#fff" }}
             >
               {theme.direction === "rtl" ? (
                 <KeyboardArrowRight />
