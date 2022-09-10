@@ -44,6 +44,28 @@ import { CREATE_EVENT } from "../../graphql/mutations";
 import { useMutation } from "@apollo/client";
 
 const EventForm = () => {
+  const commonTags = [
+    { name: "Out Door" },
+    { name: "Disability Facilities" },
+    { name: "Toilets" },
+    { name: "Food & Beverage" },
+  ];
+
+  const facilityOptions = [
+    "hasFood",
+    "isAcessibile",
+    "hasCurfew",
+    "asAlcoholLicense",
+    "hasDressingRooms",
+    "hasSmokingArea",
+    "hasSeating",
+    "isDogFriendly",
+    "hasCloakRoom",
+    "hasShoweringFacilities",
+    "hasToilets",
+    "hygeineRating”",
+  ];
+
   const [
     addressLookup,
     {
@@ -60,13 +82,14 @@ const EventForm = () => {
   const { user } = useAuth();
 
   const [value, setValue] = useState(new Date());
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState([commonTags[0]]);
   const [fileName, setFileName] = useState();
   const [imageUrl, setImageUrl] = useState();
   const [open, setOpen] = useState(false);
   const [selectedAddressId, setSelectedAddressId] = useState();
   const [selectedAddress, setSelectedAddress] = useState();
-  const [capacities, setCapacities] = useState();
+  const [capacity, setCapacity] = useState();
+  const [facilities, setFacilities] = useState([facilityOptions[0]]);
 
   const {
     register,
@@ -76,29 +99,6 @@ const EventForm = () => {
     clearErrors,
     getValues,
   } = useForm();
-
-  const commonTags = [
-    { name: "Out Door" },
-    { name: "Disability Facilities" },
-    { name: "Toilets" },
-    { name: "Food & Beverage" },
-  ];
-
-  const facilities = [
-    { name: "none" },
-    { name: "hasFood" },
-    { name: "isAcessibile" },
-    { name: "hasCurfew" },
-    { name: "asAlcoholLicense" },
-    { name: "hasDressingRooms" },
-    { name: "hasSmokingArea" },
-    { name: "hasSeating" },
-    { name: "isDogFriendly" },
-    { name: "hasCloakRoom" },
-    { name: "hasShoweringFacilities" },
-    { name: "hasToilets" },
-    { name: "hygeineRating”" },
-  ];
 
   const onSubmit = (formData) => {
     if (!selectedAddressId) {
@@ -118,13 +118,11 @@ const EventForm = () => {
       ...formData,
       address: selectedAddressId,
       tags,
-      imageUrl,
-      capacities,
       facilities,
+      imageUrl,
     };
-    // console.log(createEventInput);
 
-    createEvent({ variables: createEventInput });
+    createEvent({ variables: { createEventInput } });
   };
 
   const handleAddressLookup = () => {
@@ -154,7 +152,7 @@ const EventForm = () => {
   };
 
   const handleChange = (event) => {
-    setCapacities(event.target.value);
+    setCapacity(event.target.value);
   };
 
   const filter = createFilterOptions();
@@ -198,6 +196,7 @@ const EventForm = () => {
     },
   }));
 
+  console.log(facilities);
   return (
     <ThemeProvider theme={theme}>
       <Typography
@@ -376,7 +375,7 @@ const EventForm = () => {
                   {...register("tags")}
                   options={commonTags}
                   getOptionLabel={(option) => option.name}
-                  defaultValue={[commonTags[1]]}
+                  defaultValue={[commonTags[0]]}
                   isOptionEqualToValue={(option, value) =>
                     option.name === value.name
                   }
@@ -477,6 +476,7 @@ const EventForm = () => {
                   setFileName={setFileName}
                   dirName={`${user}`}
                 />
+                {/* facilities here */}
                 <Autocomplete
                   multiple
                   filterSelectedOptions
@@ -500,40 +500,41 @@ const EventForm = () => {
                   renderInput={(params) => (
                     <TextField
                       {...params}
+                      value={facilities}
                       label="Facilities"
                       placeholder="Select Facilities "
                     />
                   )}
-                  id="facilities "
-                  {...register("facilities ")}
-                  options={facilities}
-                  getOptionLabel={(option) => option.name}
-                  defaultValue={[facilities[1]]}
-                  isOptionEqualToValue={(option, value) =>
-                    option.name === value.name
-                  }
+                  id="facilities"
+                  {...register("facilities")}
+                  options={facilityOptions}
+                  getOptionLabel={(option) => option}
+                  defaultValue={[facilityOptions[1]]}
+                  isOptionEqualToValue={(option, value) => option === value}
                   freeSolo
                   onChange={(event, newValue) => {
+                    console.log(newValue);
                     if (typeof newValue === "string") {
-                      setTags({
+                      setFacilities({
                         name: newValue,
                       });
                     } else if (newValue && newValue.inputValue) {
                       // Create a new value from the user input
-                      setTags({
+                      setFacilities({
                         name: newValue.inputValue,
                       });
                     } else {
-                      setTags(newValue);
+                      setFacilities(newValue);
                     }
                   }}
                 />
+
                 <FormControl sx={{ m: 1 }} variant="standard">
                   <TextField
-                    id="capacities"
-                    {...register("capacities")}
+                    id="capacity"
+                    {...register("capacity")}
                     labelId="demo-customized-select-label"
-                    value={capacities}
+                    value={capacity}
                     onChange={handleChange}
                     input={<BootstrapInput />}
                   ></TextField>
