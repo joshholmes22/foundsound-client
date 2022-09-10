@@ -9,7 +9,7 @@ const AccountTypeCard = ({ imageUrl, altText, overlayText }) => {
   return (
     <Card
       sx={{
-        maxWidth: 345,
+        maxWidth: 250,
         margin: "10px",
         backgroundColor: "transparent",
       }}
