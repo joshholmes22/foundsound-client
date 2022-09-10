@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { styled } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Divider from "@mui/material/Divider";
@@ -21,6 +23,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import List from "@mui/material/List";
+import InputBase from "@mui/material/InputBase";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
@@ -58,6 +61,7 @@ const EventForm = () => {
   const [open, setOpen] = useState(false);
   const [selectedAddressId, setSelectedAddressId] = useState();
   const [selectedAddress, setSelectedAddress] = useState();
+  const [capacities, setCapacities] = useState();
 
   const {
     register,
@@ -73,6 +77,22 @@ const EventForm = () => {
     { name: "Disability Facilities" },
     { name: "Toilets" },
     { name: "Food & Beverage" },
+  ];
+
+  const facilities = [
+    { name: "none" },
+    { name: "hasFood" },
+    { name: "isAcessibile" },
+    { name: "hasCurfew" },
+    { name: "asAlcoholLicense" },
+    { name: "hasDressingRooms" },
+    { name: "hasSmokingArea" },
+    { name: "hasSeating" },
+    { name: "isDogFriendly" },
+    { name: "hasCloakRoom" },
+    { name: "hasShoweringFacilities" },
+    { name: "hasToilets" },
+    { name: "hygeineRating”" },
   ];
 
   const onSubmit = (formData) => {
@@ -91,9 +111,11 @@ const EventForm = () => {
 
     const createEventInput = {
       ...formData,
-      venue: selectedAddressId,
+      address: selectedAddressId,
       tags,
       imageUrl,
+      capacities,
+      facilities,
     };
     console.log(createEventInput);
   };
@@ -124,6 +146,10 @@ const EventForm = () => {
     handleCloseModal();
   };
 
+  const handleChange = (event) => {
+    setCapacities(event.target.value);
+  };
+
   const filter = createFilterOptions();
 
   useEffect(() => {
@@ -131,6 +157,39 @@ const EventForm = () => {
       handleOpenModal();
     }
   }, [addressLookupData]);
+
+  const BootstrapInput = styled(InputBase)(({ theme }) => ({
+    "label + &": {
+      marginTop: theme.spacing(3),
+    },
+    "& .MuiInputBase-input": {
+      borderRadius: 4,
+      position: "relative",
+      backgroundColor: theme.palette.background.paper,
+      border: "1px solid #ced4da",
+      fontSize: 16,
+      padding: "10px 26px 10px 12px",
+      transition: theme.transitions.create(["border-color", "box-shadow"]),
+      // Use the system font instead of the default Roboto font.
+      fontFamily: [
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Roboto",
+        '"Helvetica Neue"',
+        "Arial",
+        "sans-serif",
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(","),
+      "&:focus": {
+        borderRadius: 4,
+        borderColor: "#80bdff",
+        boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
+      },
+    },
+  }));
 
   return (
     <ThemeProvider theme={theme}>
@@ -370,10 +429,18 @@ const EventForm = () => {
                   />
                   <TimePicker
                     required
-                    id="time"
-                    label="Time of Event*"
+                    id="startTime"
+                    label="Start Time of Event*"
                     value={value}
-                    {...register("time")}
+                    {...register("startTime")}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                  <TimePicker
+                    required
+                    id="endTime"
+                    label="End Time of Event*"
+                    value={value}
+                    {...register("endTime")}
                     renderInput={(params) => <TextField {...params} />}
                   />
                 </Stack>
@@ -403,6 +470,67 @@ const EventForm = () => {
                   setFileName={setFileName}
                   dirName={`${user}`}
                 />
+                <Autocomplete
+                  multiple
+                  filterSelectedOptions
+                  filterOptions={(options, params) => {
+                    const filtered = filter(options, params);
+
+                    const { inputValue } = params;
+                    // Suggest the creation of a new value
+                    const isExisting = options.some(
+                      (option) => inputValue === option.name
+                    );
+                    if (inputValue !== "" && !isExisting) {
+                      filtered.push({
+                        inputValue,
+                        name: `${inputValue}`,
+                      });
+                    }
+
+                    return filtered;
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Facilities"
+                      placeholder="Select Facilities "
+                    />
+                  )}
+                  id="facilities "
+                  {...register("facilities ")}
+                  options={facilities}
+                  getOptionLabel={(option) => option.name}
+                  defaultValue={[facilities[1]]}
+                  isOptionEqualToValue={(option, value) =>
+                    option.name === value.name
+                  }
+                  freeSolo
+                  onChange={(event, newValue) => {
+                    if (typeof newValue === "string") {
+                      setTags({
+                        name: newValue,
+                      });
+                    } else if (newValue && newValue.inputValue) {
+                      // Create a new value from the user input
+                      setTags({
+                        name: newValue.inputValue,
+                      });
+                    } else {
+                      setTags(newValue);
+                    }
+                  }}
+                />
+                <FormControl sx={{ m: 1 }} variant="standard">
+                  <TextField
+                    id="capacities"
+                    {...register("capacities")}
+                    labelId="demo-customized-select-label"
+                    value={capacities}
+                    onChange={handleChange}
+                    input={<BootstrapInput />}
+                  ></TextField>
+                </FormControl>
               </Stack>
             </Grid>
           </Grid>
