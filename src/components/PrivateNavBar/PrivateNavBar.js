@@ -17,7 +17,7 @@ import { useAuth } from "../../context/AppProvider";
 const pages = ["Home", "My Events", "Artists"];
 const settings = ["Profile", "Logout"];
 
-const AudienceNavBar = () => {
+const PrivateNavBar = () => {
   const { user } = useAuth();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -160,4 +160,4 @@ const AudienceNavBar = () => {
     </AppBar>
   );
 };
-export default AudienceNavBar;
+export default PrivateNavBar;
