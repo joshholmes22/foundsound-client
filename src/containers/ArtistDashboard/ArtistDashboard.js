@@ -1,11 +1,16 @@
-import "./ArtistDashboard.css";
-import PrivateNavBar from "../../components/PrivateNavBar";
+import AllEvents from "../AllEvents";
+import ArtistNavBar from "../../components/ArtistNavBar/ArtistNavBar";
+import { Box } from "@mui/material";
 
 const ArtistDashboard = () => {
   return (
     <div>
-      <PrivateNavBar />
-      <h1>Artist Dashboard</h1>
+      <Box sx={{ display: "flex" }}>
+        <ArtistNavBar />
+        <Box sx={{ marginTop: "50px" }}>
+          <AllEvents />
+        </Box>
+      </Box>
     </div>
   );
 };
