@@ -1,9 +1,10 @@
 import PrivateNavBar from "../../components/PrivateNavBar";
 
 import bannerImg from "../../assets/images/profileTemplate/banner-img.jpg";
-import ArtistTitle from "../../components/ArtistTitle";
-import ArtistBanner from "../../components/ArtistBanner";
-import ArtistTracks from "../../components/ArtistTracks";
+import ArtistTitle from "../../containers/ArtistTitle";
+import ArtistBanner from "../../containers/ArtistBanner";
+import ArtistTracks from "../../containers/ArtistTracks";
+import ArtistEvents from "../../containers/ArtistEvents";
 
 const Profile = () => {
   return (
@@ -12,6 +13,7 @@ const Profile = () => {
       <ArtistTitle title="Josh Holmes" />
       <ArtistBanner bannerImg={bannerImg} />
       <ArtistTracks />
+      <ArtistEvents />
     </div>
   );
 };
