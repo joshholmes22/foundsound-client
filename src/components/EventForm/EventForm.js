@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-import { styled } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Divider from "@mui/material/Divider";
@@ -33,22 +31,24 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { ThemeProvider } from "@mui/material/styles";
 import { useLazyQuery } from "@apollo/client";
+import { LoadingButton } from "@mui/lab";
+import { useNavigate } from "react-router-dom";
 
 import theme from "../../utils/themes";
 import { useAuth } from "../../context/AppProvider";
 import { ImageUploader } from "../ImageUploader";
 import { ADDRESS_LOOKUP } from "../../graphql/queries";
-import { useNavigate } from "react-router-dom";
 import { CREATE_EVENT } from "../../graphql/mutations";
 import { useMutation } from "@apollo/client";
-import { LoadingButton } from "@mui/lab";
 
 const EventForm = () => {
   const commonTags = [
-    { name: "Out Door" },
-    { name: "Disability Facilities" },
-    { name: "Toilets" },
-    { name: "Food & Beverage" },
+    { name: "Fundraiser" },
+    { name: "Wedding" },
+    { name: "Hotel" },
+    { name: "Graduation" },
+    { name: "Funeral" },
+    { name: "Anniversary" },
   ];
 
   const facilityOptions = [
@@ -192,7 +192,15 @@ const EventForm = () => {
         Create An Event
       </Typography>
       <Divider />
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="sm"
+        sx={{
+          backgroundColor: "#F7F7F7",
+          boxShadow: "#A4A3A2",
+          borderRadius: "15px",
+        }}
+      >
         <Dialog open={open} onClose={handleCloseModal}>
           <DialogTitle>Select Address</DialogTitle>
           <DialogContent>
@@ -240,7 +248,7 @@ const EventForm = () => {
                   component="h2"
                   variant="button"
                   align="left"
-                  color="#113476"
+                  color={theme.palette.primary.main}
                   marginBottom={1}
                   sx={{
                     fontSize: 15,
@@ -283,7 +291,7 @@ const EventForm = () => {
                   component="h2"
                   variant="button"
                   align="left"
-                  color="#113476"
+                  color={theme.palette.primary.main}
                   marginBottom={1}
                   sx={{
                     fontSize: 15,
@@ -446,7 +454,7 @@ const EventForm = () => {
                     component="h2"
                     variant="button"
                     align="left"
-                    color="#113476"
+                    color={theme.palette.primary.main}
                     marginBottom={1}
                     sx={{
                       fontSize: 15,
@@ -517,7 +525,7 @@ const EventForm = () => {
                   component="h2"
                   variant="button"
                   align="left"
-                  color="#113476"
+                  color={theme.palette.primary.main}
                   marginBottom={1}
                   sx={{
                     fontSize: 15,

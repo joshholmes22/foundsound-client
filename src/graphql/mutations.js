@@ -61,11 +61,6 @@ export const CREATE_EVENT = gql`
       tags {
         name
       }
-      adverts {
-        event
-        isPaid
-        expires
-      }
     }
   }
 `;
