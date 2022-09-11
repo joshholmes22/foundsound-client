@@ -1,15 +1,18 @@
-import Link from "@mui/material/Link";
+import { ThemeProvider } from "@mui/material/styles";
 import HomeNavBar from "../../components/HomeNavBar";
 import HeroBanner from "../../components/HeroBanner";
 
 import "./Home.css";
+import theme from "../../utils/themes";
 
 const Home = () => {
   return (
-    <div className="homePageContainer">
-      <HomeNavBar />
-      <HeroBanner />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="homePageContainer">
+        <HomeNavBar />
+        <HeroBanner />
+      </div>
+    </ThemeProvider>
   );
 };
 
