@@ -23,7 +23,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import List from "@mui/material/List";
-import InputBase from "@mui/material/InputBase";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
@@ -34,14 +33,15 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { ThemeProvider } from "@mui/material/styles";
 import { useLazyQuery } from "@apollo/client";
-import { ErrorOutlineSharp } from "@mui/icons-material";
 
 import theme from "../../utils/themes";
 import { useAuth } from "../../context/AppProvider";
 import { ImageUploader } from "../ImageUploader";
 import { ADDRESS_LOOKUP } from "../../graphql/queries";
+import { useNavigate } from "react-router-dom";
 import { CREATE_EVENT } from "../../graphql/mutations";
 import { useMutation } from "@apollo/client";
+import { LoadingButton } from "@mui/lab";
 
 const EventForm = () => {
   const commonTags = [
@@ -81,14 +81,24 @@ const EventForm = () => {
 
   const { user } = useAuth();
 
-  const [value, setValue] = useState(new Date());
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (data?.createEvent?.id) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [data, navigate]);
+
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [startTime, setStartTime] = useState(new Date());
+  const [endTime, setEndTime] = useState(new Date());
   const [tags, setTags] = useState([commonTags[0]]);
   const [fileName, setFileName] = useState();
   const [imageUrl, setImageUrl] = useState();
   const [open, setOpen] = useState(false);
   const [selectedAddressId, setSelectedAddressId] = useState();
   const [selectedAddress, setSelectedAddress] = useState();
-  const [capacity, setCapacity] = useState();
   const [facilities, setFacilities] = useState([facilityOptions[0]]);
 
   const {
@@ -117,11 +127,14 @@ const EventForm = () => {
     const createEventInput = {
       ...formData,
       address: selectedAddressId,
+      startDate,
+      endDate,
+      startTime,
+      endTime,
       tags,
       facilities,
       imageUrl,
     };
-    console.log(createEventInput);
     createEvent({ variables: { createEventInput } });
   };
 
@@ -149,10 +162,6 @@ const EventForm = () => {
     setSelectedAddress(fullAddress);
     clearErrors("postcode");
     handleCloseModal();
-  };
-
-  const handleChange = (event) => {
-    setCapacity(event.target.value);
   };
 
   const filter = createFilterOptions();
@@ -415,9 +424,7 @@ const EventForm = () => {
                     label="Capacity"
                     id="capacity"
                     {...register("capacity")}
-                    labelId="demo-customized-select-label"
-                    value={capacity}
-                    onChange={handleChange}
+                    // labelId="demo-customized-select-label"
                   ></TextField>
                 </FormControl>
               </Stack>
@@ -441,37 +448,39 @@ const EventForm = () => {
                     Schedule Details
                   </Typography>
                   <DesktopDatePicker
-                    required
-                    id="startDate"
                     label="Start Date of Event*"
-                    inputFormat="MM/dd/yyyy"
-                    value={value}
-                    {...register("startDate")}
+                    required
+                    value={startDate}
+                    minDate={new Date()}
+                    onChange={(newStartValue) => {
+                      setStartDate(newStartValue);
+                    }}
                     renderInput={(params) => <TextField {...params} />}
                   />
                   <DesktopDatePicker
-                    required
-                    id="endDate"
                     label="End Date of Event*"
-                    inputFormat="MM/dd/yyyy"
-                    value={value}
-                    {...register("endDate")}
+                    required
+                    value={endDate}
+                    minDate={startDate}
+                    onChange={(newEndValue) => {
+                      setEndDate(newEndValue);
+                    }}
                     renderInput={(params) => <TextField {...params} />}
                   />
                   <TimePicker
-                    required
-                    id="startTime"
-                    label="Start Time of Event*"
-                    value={value}
-                    {...register("startTime")}
+                    label="Start Time of Event"
+                    value={startTime}
+                    onChange={(newStartTime) => {
+                      setStartTime(newStartTime);
+                    }}
                     renderInput={(params) => <TextField {...params} />}
                   />
                   <TimePicker
-                    required
-                    id="endTime"
-                    label="End Time of Event*"
-                    value={value}
-                    {...register("endTime")}
+                    label="End Time of Event"
+                    value={endTime}
+                    onChange={(newEndTime) => {
+                      setEndTime(newEndTime);
+                    }}
                     renderInput={(params) => <TextField {...params} />}
                   />
                 </Stack>
@@ -479,8 +488,23 @@ const EventForm = () => {
             </Grid>
 
             {/* additional info */}
-            <Grid item xs={12}>
-              <Stack spacing={3}>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Stack
+                spacing={3}
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 <Typography
                   component="h2"
                   variant="button"
@@ -495,24 +519,25 @@ const EventForm = () => {
                   Additional Information
                 </Typography>
                 <ImageUploader
-                  id="imageUrl"
                   imageUrl={imageUrl}
                   setImageUrl={setImageUrl}
                   setFileName={setFileName}
-                  dirName={`${user}`}
+                  dirName={`users/${user.email}/events`}
+                  imageUse="eventsImage"
                 />
               </Stack>
             </Grid>
           </Grid>
 
-          <Button
+          <LoadingButton
             type="submit"
             fullWidth
             variant="contained"
+            loading={loading}
             sx={{ mt: 3, mb: 2 }}
           >
             Create Event
-          </Button>
+          </LoadingButton>
         </Box>
       </Container>
     </ThemeProvider>

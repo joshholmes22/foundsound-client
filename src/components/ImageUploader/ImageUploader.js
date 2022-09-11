@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { uploadFile } from "react-s3";
 import ImageUploading from "react-images-uploading";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -40,11 +39,8 @@ export const ImageUploader = ({
       const file = images[0].file;
       const newFile = new File([file], `${uniqueId}`);
 
-      console.log(uniqueId);
-
       const s3Data = await uploadFile(newFile, config);
       if (s3Data?.location) {
-        console.log(s3Data);
         setImageUrl(s3Data.location);
         setImages([]);
         setFileName(s3Data.key);
@@ -72,9 +68,14 @@ export const ImageUploader = ({
 
   const styles = {
     root: {
-      width: "50%",
+      width: "100%",
     },
-    media: { height: 241 },
+    media: {
+      height: 240,
+      width: 240,
+      textAlign: "center",
+      marginBottom: 2,
+    },
     profileImageMedia: {
       height: 150,
       width: 150,
