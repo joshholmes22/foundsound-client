@@ -1,23 +1,33 @@
 import { Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+
 import "./HeroBanner.css";
 
 const HeroBanner = () => {
   return (
     <>
-      <Typography
-        className="home-title"
-        m={"60px"}
-        sx={{ color: "#ffffff", fontSize: "10vw", fontWeight: "600" }}
+      <Box
+        sx={{
+          height: "80%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
-        FOUNDSOUND
-      </Typography>
-      <Typography
-        className="home-para"
-        mt={2}
-        sx={{ color: "#ffffff", fontSize: "2vw", fontWeight: "600" }}
-      >
-        Discover underground artists and upcoming events
-      </Typography>
+        <Typography
+          className="home-title"
+          sx={{ color: "#ffffff", fontSize: "10vw", fontWeight: "600" }}
+        >
+          FOUNDSOUND
+        </Typography>
+        <Typography
+          className="home-para"
+          sx={{ color: "#ffffff", fontSize: "2vw", fontWeight: "600" }}
+        >
+          Discover underground artists and upcoming events
+        </Typography>
+      </Box>
     </>
   );
 };
