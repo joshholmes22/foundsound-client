@@ -1,4 +1,5 @@
-import PrivateNavBar from "../../components/PrivateNavBar";
+import { Box } from "@mui/material";
+import ArtistNavBar from "../../components/ArtistNavBar/ArtistNavBar";
 
 import bannerImg from "../../assets/images/profileTemplate/banner-img.jpg";
 import ArtistTitle from "../../containers/ArtistTitle";
@@ -8,13 +9,16 @@ import ArtistEvents from "../../containers/ArtistEvents";
 
 const ArtistProfile = () => {
   return (
-    <div>
-      <PrivateNavBar />
-      <ArtistTitle title="Josh Holmes" />
-      <ArtistBanner bannerImg={bannerImg} />
-      <ArtistTracks />
-      <ArtistEvents />
-    </div>
+    <Box sx={{ display: "flex" }}>
+      <ArtistNavBar />
+
+      <Box sx={{ marginTop: "60px", maxWidth: "87vw" }}>
+        <ArtistTitle title="Josh Holmes" />
+        <ArtistBanner bannerImg={bannerImg} />
+        <ArtistTracks />
+        <ArtistEvents />
+      </Box>
+    </Box>
   );
 };
 

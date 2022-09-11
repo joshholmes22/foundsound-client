@@ -16,7 +16,7 @@ import Avatar from "@mui/material/Avatar";
 import { useAuth } from "../../context/AppProvider";
 import { useNavigate } from "react-router-dom";
 
-const drawerWidth = 240;
+const drawerWidth = "12vw";
 
 const ArtistNavBar = () => {
   const { user } = useAuth();
@@ -74,17 +74,25 @@ const ArtistNavBar = () => {
   );
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
+    <Box
+      sx={{
+        margin: 0,
+      }}
+    >
       <AppBar
         position="fixed"
         sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
           backgroundColor: "#0A0A0A",
         }}
       >
-        <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            width: { sm: "110vw" },
+          }}
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -106,7 +114,10 @@ const ArtistNavBar = () => {
       </AppBar>
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{
+          width: { sm: drawerWidth },
+          flexShrink: { sm: 0 },
+        }}
         aria-label="mailbox folders"
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
