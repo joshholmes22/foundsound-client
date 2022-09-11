@@ -26,3 +26,41 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const CREATE_EVENT = gql`
+  mutation Mutation($createEventInput: CreateEventInput!) {
+    createEvent(createEventInput: $createEventInput) {
+      id
+      name
+      description
+      address {
+        _id
+        formatted_address
+        thoroughfare
+        building_name
+        sub_building_name
+        sub_building_number
+        building_number
+        line_1
+        line_2
+        line_3
+        line_4
+        locality
+        town_or_city
+        county
+        district
+        country
+        fullAddress
+      }
+      postcode
+      startDate
+      endDate
+      startTime
+      endTime
+      imageUrl
+      tags {
+        name
+      }
+    }
+  }
+`;

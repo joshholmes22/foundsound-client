@@ -1,7 +1,7 @@
-import "./Events.css";
+import EventForm from "../../components/EventForm";
 
-const Events = () => {
-  return <h1>Events</h1>;
+const Event = () => {
+  return <EventForm />;
 };
 
-export default Events;
+export default Event;
