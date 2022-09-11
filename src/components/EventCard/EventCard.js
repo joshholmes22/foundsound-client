@@ -11,10 +11,15 @@ import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { fromUnixTime } from "date-fns";
 
 const EventCard = ({ details }) => {
+  const startDate = fromUnixTime(details.startDate / 1000)
+    .toString()
+    .split("2022")[0];
+
   return (
-    <Card sx={{ maxWidth: 345, margin: 5 }}>
+    <Card sx={{ width: 345, margin: 5 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -27,7 +32,7 @@ const EventCard = ({ details }) => {
           </IconButton>
         }
         title={details.name}
-        subheader={`${details.startDateTime} - ${details.endDateTime}`}
+        subheader={`${startDate}`}
       />
       <CardMedia
         component="img"
