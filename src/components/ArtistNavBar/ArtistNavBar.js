@@ -1,34 +1,45 @@
-import * as React from "react";
-import PropTypes from "prop-types";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import AllEvents from "../../containers/AllEvents";
 import Avatar from "@mui/material/Avatar";
 import { useAuth } from "../../context/AppProvider";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
-const ArtistNavBar = (props) => {
+const ArtistNavBar = () => {
   const { user } = useAuth();
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const pages = [
+    { label: "Home", path: "/" },
+    { label: "Find Events", path: "/signup" },
+    { label: "Upcoming Events", path: "/myEvents" },
+    { label: "Public Profile", path: "/profile" },
+    { label: "Settings", path: "/settings" },
+    { label: "Log Out", path: "/home" },
+  ];
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+    window.location.reload();
   };
 
   const drawer = (
@@ -43,26 +54,24 @@ const ArtistNavBar = (props) => {
       </Toolbar>
       <Divider />
       <List>
-        {[
-          "Home",
-          "Find Events",
-          "Upcoming Events",
-          "Public Profile",
-          "Settings",
-          "Log Out",
-        ].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemText primary={text} />
+        {pages.map((item, index) => (
+          <ListItem key={item.label} disablePadding>
+            <ListItemButton
+              onClick={() => {
+                if (item.label === "Log Out") {
+                  logout();
+                } else {
+                  navigate(item.path);
+                }
+              }}
+            >
+              <ListItemText primary={item.label} />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
     </Box>
   );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -102,7 +111,6 @@ const ArtistNavBar = (props) => {
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
-          container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
