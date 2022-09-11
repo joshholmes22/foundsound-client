@@ -27,7 +27,6 @@ import AdCard from "../../components/AdCard/AdCard";
 const steps = ["Step 1", " Step 2", "Step 3"];
 
 const GetStepContent = (step, eventData, eventStep, setEventStep) => {
-  console.log(eventData);
   const maxSteps = eventData.length;
   const handleEventNext = () => {
     if (eventStep + 1 !== maxSteps) {
