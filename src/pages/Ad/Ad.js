@@ -14,6 +14,10 @@ import { ThemeProvider } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import { useLazyQuery } from "@apollo/client";
 
+import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
+import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
+import IconButton from "@mui/material/IconButton";
+
 import theme from "../../utils/themes";
 import { GET_ALL_EVENTS } from "../../graphql/queries";
 import EventAdCard from "../../components/EventAdCard";
@@ -22,24 +26,42 @@ import AdCard from "../../components/AdCard/AdCard";
 
 const steps = ["Step 1", " Step 2", "Step 3"];
 
-const getStepContent = (step, eventData, eventStep) => {
+const GetStepContent = (step, eventData, eventStep, setEventStep) => {
+  console.log(eventData);
+  const maxSteps = eventData.length;
+  const handleEventNext = () => {
+    if (eventStep + 1 !== maxSteps) {
+      setEventStep((prevActiveStep) => prevActiveStep + 1);
+    } else {
+      setEventStep(0);
+    }
+  };
+
+  const handleEventBack = () => {
+    if (eventStep - 1 !== -1) {
+      setEventStep((prevActiveStep) => prevActiveStep - 1);
+    } else {
+      setEventStep(maxSteps - 1);
+    }
+  };
+
   switch (step) {
     case 0:
       return (
         <Box
-        sx={{
-          position: "absolute",
-          display: "flex",
-        }}
-      >
-        <IconButton aria-label="previousImage" onClick={handleBack}>
-          <ArrowCircleLeftIcon fontSize="large" />
-        </IconButton>
-<EventAdCard details={eventData[eventStep]} />
-        <IconButton aria-label="nextImage" onClick={handleNext}>
-          <ArrowCircleRightIcon fontSize="large" />
-        </IconButton>
-      </Box>
+          sx={{
+            position: "absolute",
+            display: "flex",
+          }}
+        >
+          <IconButton aria-label="previousImage" onClick={handleEventBack}>
+            <ArrowCircleLeftIcon fontSize="large" />
+          </IconButton>
+          <EventAdCard details={eventData[eventStep]} />
+          <IconButton aria-label="nextImage" onClick={handleEventNext}>
+            <ArrowCircleRightIcon fontSize="large" />
+          </IconButton>
+        </Box>
       );
     case 1:
       return <AdForm />;
@@ -54,36 +76,24 @@ const Ad = () => {
   // create an array for the events
   // use the functions to click next and back
 
-  const handleNext = () => {
-    if (eventStep + 1 !== maxSteps) {
-      setEventStep((prevActiveStep) => prevActiveStep + 1);
-    } else {
-      setEventStep(0);
-    }
-  };
-
-  const handleBack = () => {
-    if (eventStep - 1 !== -1) {
-      setEventStep((prevActiveStep) => prevActiveStep - 1);
-    } else {
-      setEventStep(maxSteps - 1);
-    }
-
   const [getAllEvents, { data, loading, error }] = useLazyQuery(GET_ALL_EVENTS);
   const [eventData, setEventData] = useState();
+  const [activeStep, setActiveStep] = useState(0);
+  const [eventStep, setEventStep] = useState(0);
 
   const getEvents = async () => {
     await getAllEvents();
-
-    setEventData(data.getAllEvents);
   };
 
   useEffect(() => {
-    console.log(loading);
     getEvents();
-  }, [data]);
+  }, []);
 
-  const [eventStep, setEventStep] = useState(0);
+  useEffect(() => {
+    if (data) {
+      setEventData(data.getAllEvents);
+    }
+  }, [data]);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -125,7 +135,13 @@ const Ad = () => {
               </Stack>
             ) : (
               <Stack>
-                {getStepContent(activeStep, eventData, eventStep)}
+                {eventData &&
+                  GetStepContent(
+                    activeStep,
+                    eventData,
+                    eventStep,
+                    setEventStep
+                  )}
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
