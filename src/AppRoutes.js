@@ -8,7 +8,7 @@ import Artists from "./pages/Artists";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import { useAuth } from "./context/AppProvider";
-import ArtistProfile from "./pages/ArtistProfile/ArtistProfile";
+import ArtistProfile from "./pages/ArtistProfile";
 
 const AppRoutes = () => {
   const { isLoggedIn, user } = useAuth();
