@@ -9,7 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import { useAuth } from "./context/AppProvider";
 import ArtistProfile from "./pages/ArtistProfile";
-import Ad from "./pages/Ad";
+import Ad from "./pages/Ad/Ad";
 
 const AppRoutes = () => {
   const { isLoggedIn, user } = useAuth();

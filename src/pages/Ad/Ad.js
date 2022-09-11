@@ -12,18 +12,29 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { ThemeProvider } from "@mui/material/styles";
 import { useEffect, useState } from "react";
+import { useLazyQuery } from "@apollo/client";
 
 import theme from "../../utils/themes";
+import { GET_ALL_EVENTS } from "../../graphql/queries";
 import EventAdCard from "../../components/EventAdCard";
 import AdForm from "../../components/AdForm/AdForm";
 import AdCard from "../../components/AdCard/AdCard";
 
 const steps = ["Step 1", " Step 2", "Step 3"];
 
-const getStepContent = (step) => {
+const getStepContent = (step, eventData) => {
   switch (step) {
     case 0:
-      return <EventAdCard />;
+      return (
+        <Box
+          sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+        >
+          {eventData &&
+            eventData.map((item) => (
+              <EventAdCard details={item} key={item.id} />
+            ))}
+        </Box>
+      );
     case 1:
       return <AdForm />;
     case 2:
@@ -34,6 +45,20 @@ const getStepContent = (step) => {
 };
 
 const Ad = () => {
+  const [getAllEvents, { data, loading, error }] = useLazyQuery(GET_ALL_EVENTS);
+  const [eventData, setEventData] = useState();
+
+  const getEvents = async () => {
+    await getAllEvents();
+
+    setEventData(data.getAllEvents);
+  };
+
+  useEffect(() => {
+    console.log(loading);
+    getEvents();
+  }, [data]);
+
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
@@ -76,7 +101,7 @@ const Ad = () => {
               </Stack>
             ) : (
               <Stack>
-                {getStepContent(activeStep)}
+                {getStepContent(activeStep, eventData)}
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
