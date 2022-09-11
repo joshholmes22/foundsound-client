@@ -81,7 +81,7 @@ const EventForm = () => {
 
   const { user } = useAuth();
 
-  const [value, setValue] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
   const [tags, setTags] = useState([commonTags[0]]);
   const [fileName, setFileName] = useState();
   const [imageUrl, setImageUrl] = useState();
@@ -131,6 +131,10 @@ const EventForm = () => {
         postcode: getValues("postcode"),
       },
     });
+  };
+
+  const onChange = (newValue) => {
+    setStartDate(newValue);
   };
 
   const handleOpenModal = () => {
@@ -441,39 +445,41 @@ const EventForm = () => {
                     Schedule Details
                   </Typography>
                   <DesktopDatePicker
-                    required
                     id="startDate"
                     label="Start Date of Event*"
                     inputFormat="MM/dd/yyyy"
-                    value={value}
+                    value={startDate}
                     {...register("startDate")}
+                    onChange={onChange}
                     renderInput={(params) => <TextField {...params} />}
                   />
-                  <DesktopDatePicker
-                    required
+                  {/* <DesktopDatePicker
                     id="endDate"
                     label="End Date of Event*"
                     inputFormat="MM/dd/yyyy"
-                    value={value}
                     {...register("endDate")}
+                    onChange={onChange}
+                    value={dateTime}
                     renderInput={(params) => <TextField {...params} />}
-                  />
-                  <TimePicker
+                  /> */}
+                  {/* <TimePicker
                     required
                     id="startTime"
                     label="Start Time of Event*"
-                    value={value}
                     {...register("startTime")}
+                    onChange={onChange}
+                    value={dateTime}
                     renderInput={(params) => <TextField {...params} />}
-                  />
-                  <TimePicker
+                  /> */}
+                  {/* <TimePicker
                     required
                     id="endTime"
                     label="End Time of Event*"
-                    value={value}
                     {...register("endTime")}
+                    onChange={onChange}
+                    value={dateTime}
                     renderInput={(params) => <TextField {...params} />}
-                  />
+                  /> */}
                 </Stack>
               </LocalizationProvider>
             </Grid>
