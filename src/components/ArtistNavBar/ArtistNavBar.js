@@ -17,10 +17,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import AllEvents from "../../containers/AllEvents";
+import Avatar from "@mui/material/Avatar";
+import { useAuth } from "../../context/AppProvider";
 
 const drawerWidth = 240;
 
 const ArtistNavBar = (props) => {
+  const { user } = useAuth();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -31,11 +34,23 @@ const ArtistNavBar = (props) => {
   const drawer = (
     <Box sx={{ backgroundColor: "#303030", color: "#fff", height: "100%" }}>
       <Toolbar>
-        <Typography>Josh Holmes</Typography>
+        <Typography>{`${user.firstName} ${user.lastName}`}</Typography>
+        <Avatar
+          alt="Remy Sharp"
+          src={user.imageUrl}
+          sx={{ marginLeft: "15px" }}
+        />
       </Toolbar>
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+        {[
+          "Home",
+          "Find Events",
+          "Upcoming Events",
+          "Public Profile",
+          "Settings",
+          "Log Out",
+        ].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemText primary={text} />
@@ -76,7 +91,7 @@ const ArtistNavBar = (props) => {
             component="div"
             sx={{ fontWeight: "500", fontSize: "25px" }}
           >
-            FOUND SOUND
+            FOUND SOUND ARTIST
           </Typography>
         </Toolbar>
       </AppBar>
