@@ -1,21 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import EventCard from "../../components/EventCard/EventCard";
 import Box from "@mui/material/Box";
 import { GET_ALL_EVENTS } from "../../graphql/queries";
 import { useLazyQuery } from "@apollo/client";
+import { Typography } from "@mui/material";
 
 const AllEvents = () => {
   const [getAllEvents, { data, loading, error }] = useLazyQuery(GET_ALL_EVENTS);
+  const [eventData, setEventData] = useState();
 
   const getEvents = async () => {
     await getAllEvents();
   };
 
   useEffect(() => {
+    console.log(loading);
     getEvents();
 
-    console.log(data);
+    setEventData(data.getAllEvents);
   }, [data]);
+
+  useEffect(() => {
+    console.log(eventData);
+  }, [eventData]);
 
   const event1 = {
     name: "Test Event",
@@ -31,6 +38,9 @@ const AllEvents = () => {
 
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+      {eventData &&
+        eventData.map((item) => <EventCard details={item} key={item.id} />)}
+
       <EventCard details={event1} />
       <EventCard details={event1} />
       <EventCard details={event1} />
