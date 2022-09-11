@@ -31,7 +31,7 @@ const ArtistNavBar = () => {
     { label: "Home", path: "/" },
     { label: "Find Events", path: "/signup" },
     { label: "Upcoming Events", path: "/myEvents" },
-    { label: "Public Profile", path: "/profile" },
+    { label: "Public Profile", path: "/artistProfile" },
     { label: "Settings", path: "/settings" },
     { label: "Log Out", path: "/home" },
   ];

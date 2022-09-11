@@ -8,6 +8,7 @@ import Artists from "./pages/Artists";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import { useAuth } from "./context/AppProvider";
+import ArtistProfile from "./pages/ArtistProfile/ArtistProfile";
 
 const AppRoutes = () => {
   const { isLoggedIn, user } = useAuth();
@@ -44,7 +45,8 @@ const AppRoutes = () => {
         <>
           <Route path="/*" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/settings" element={<Profile />} />
+          <Route path="/artistProfile" element={<ArtistProfile />} />
         </>
       )}
     </Routes>
