@@ -28,3 +28,41 @@ export const ADDRESS_LOOKUP = gql`
     }
   }
 `;
+
+export const GET_ALL_EVENTS = gql`
+  query Query {
+    getAllEvents {
+      id
+      name
+      description
+      address {
+        _id
+        fullAddress
+      }
+      postcode
+      startDate
+      endDate
+      startTime
+      endTime
+      imageUrl
+      tags {
+        name
+      }
+      adverts {
+        event
+        isPaid
+        expires
+      }
+      eventOwner {
+        id
+        firstName
+        lastName
+        email
+        imageUrl
+        imageFileName
+        socialMedia
+        userType
+      }
+    }
+  }
+`;
