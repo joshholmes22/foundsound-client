@@ -26,7 +26,6 @@ const SignupForm = ({ accountType }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(data);
     if (data?.signup?.success) {
       navigate("/login", { replace: true });
     }
@@ -64,7 +63,6 @@ const SignupForm = ({ accountType }) => {
         userType: accountType,
       };
 
-      console.log(signupInput);
       signup({
         variables: { signupInput },
       });

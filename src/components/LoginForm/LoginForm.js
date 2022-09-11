@@ -14,7 +14,6 @@ import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import LoadingButton from "@mui/lab/LoadingButton";
 
-import "./LoginForm.css";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../graphql/mutations";
 import { useAuth } from "../../context/AppProvider";
