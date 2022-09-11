@@ -22,18 +22,24 @@ import AdCard from "../../components/AdCard/AdCard";
 
 const steps = ["Step 1", " Step 2", "Step 3"];
 
-const getStepContent = (step, eventData) => {
+const getStepContent = (step, eventData, eventStep) => {
   switch (step) {
     case 0:
       return (
         <Box
-          sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
-        >
-          {eventData &&
-            eventData.map((item) => (
-              <EventAdCard details={item} key={item.id} />
-            ))}
-        </Box>
+        sx={{
+          position: "absolute",
+          display: "flex",
+        }}
+      >
+        <IconButton aria-label="previousImage" onClick={handleBack}>
+          <ArrowCircleLeftIcon fontSize="large" />
+        </IconButton>
+<EventAdCard details={eventData[eventStep]} />
+        <IconButton aria-label="nextImage" onClick={handleNext}>
+          <ArrowCircleRightIcon fontSize="large" />
+        </IconButton>
+      </Box>
       );
     case 1:
       return <AdForm />;
@@ -45,6 +51,24 @@ const getStepContent = (step, eventData) => {
 };
 
 const Ad = () => {
+  // create an array for the events
+  // use the functions to click next and back
+
+  const handleNext = () => {
+    if (eventStep + 1 !== maxSteps) {
+      setEventStep((prevActiveStep) => prevActiveStep + 1);
+    } else {
+      setEventStep(0);
+    }
+  };
+
+  const handleBack = () => {
+    if (eventStep - 1 !== -1) {
+      setEventStep((prevActiveStep) => prevActiveStep - 1);
+    } else {
+      setEventStep(maxSteps - 1);
+    }
+
   const [getAllEvents, { data, loading, error }] = useLazyQuery(GET_ALL_EVENTS);
   const [eventData, setEventData] = useState();
 
@@ -59,7 +83,7 @@ const Ad = () => {
     getEvents();
   }, [data]);
 
-  const [activeStep, setActiveStep] = useState(0);
+  const [eventStep, setEventStep] = useState(0);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -101,7 +125,7 @@ const Ad = () => {
               </Stack>
             ) : (
               <Stack>
-                {getStepContent(activeStep, eventData)}
+                {getStepContent(activeStep, eventData, eventStep)}
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
