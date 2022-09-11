@@ -1,5 +1,3 @@
-import "./AudienceDashboard.css";
-
 import PrivateNavBar from "../../components/PrivateNavBar";
 import AllEvents from "../AllEvents";
 
