@@ -77,12 +77,13 @@ const ArtistNavBar = () => {
     <Box
       sx={{
         margin: 0,
+        height: { sm: "7vh", xs: "5vh" },
       }}
     >
       <AppBar
         position="fixed"
         sx={{
-          ml: { sm: `${drawerWidth}px` },
+          ml: { md: `${drawerWidth}px` },
           backgroundColor: "#0A0A0A",
         }}
       >
@@ -90,7 +91,7 @@ const ArtistNavBar = () => {
           sx={{
             display: "flex",
             justifyContent: "center",
-            width: { sm: "110vw" },
+            width: { md: "110vw" },
           }}
         >
           <IconButton
@@ -98,7 +99,7 @@ const ArtistNavBar = () => {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{ mr: 2, display: { md: "none" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -115,8 +116,8 @@ const ArtistNavBar = () => {
       <Box
         component="nav"
         sx={{
-          width: { sm: drawerWidth },
-          flexShrink: { sm: 0 },
+          width: { md: drawerWidth },
+          flexShrink: { md: 0 },
         }}
         aria-label="mailbox folders"
       >
@@ -129,7 +130,7 @@ const ArtistNavBar = () => {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { xs: "block", md: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
@@ -141,7 +142,7 @@ const ArtistNavBar = () => {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
+            display: { xs: "none", md: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
@@ -157,7 +158,7 @@ const ArtistNavBar = () => {
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          width: { md: `calc(100% - ${drawerWidth}px)` },
         }}
       >
         <Toolbar />
