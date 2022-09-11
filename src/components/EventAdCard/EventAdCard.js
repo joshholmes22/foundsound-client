@@ -5,6 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { ThemeProvider } from "@mui/material/styles";
+import Box from "@mui/material/Box";
 
 import theme from "../../utils/themes";
 
@@ -17,23 +18,36 @@ const EventAdCard = () => {
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
           component="img"
-          alt="green iguana"
+          alt="event image"
           height="140"
           image="/static/images/cards/contemplative-reptile.jpg"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h5" component="div" align="center">
             event name goes here
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color="text.secondary" align="center">
             event description goes here
           </Typography>
+          <CardActions
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Box
+              textAlign={"center"}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Button size="small">View</Button>
+            </Box>
+          </CardActions>
         </CardContent>
-        <CardActions>
-          <Button size="small" align="center">
-            View
-          </Button>
-        </CardActions>
       </Card>
     </ThemeProvider>
   );
