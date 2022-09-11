@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
+import ArtistTags from "../../components/ArtistTags/ArtistTags";
 
 const ArtistTitle = ({ title }) => {
   const [follow, setFollow] = useState(false);
@@ -13,47 +14,48 @@ const ArtistTitle = ({ title }) => {
   };
 
   return (
-    <Box
-      sx={{
-        backgroundColor: "rgb(0, 0, 0, 0.8)",
-        padding: "15px",
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
-      <Typography
-        variant="h4"
-        component="div"
+    <Box sx={{ backgroundColor: "rgb(0, 0, 0, 0.8)", padding: "15px" }}>
+      <Box
         sx={{
-          color: "#fff",
-          fontWeight: "bold",
-          fontSize: "35px",
-          textAlign: "center",
-          marginRight: "10px",
+          display: "flex",
+          justifyContent: "center",
         }}
       >
-        {title}
-      </Typography>
-      {!follow ? (
-        <Button
-          variant="contained"
-          size="10px"
-          startIcon={<AddIcon />}
-          sx={{ backgroundColor: "#1DB954" }}
-          onClick={followToggle}
+        <Typography
+          variant="h4"
+          component="div"
+          sx={{
+            color: "#fff",
+            fontWeight: "bold",
+            fontSize: "35px",
+            textAlign: "center",
+            marginRight: "10px",
+          }}
         >
-          Follow
-        </Button>
-      ) : (
-        <Button
-          variant="contained"
-          size="10px"
-          sx={{ backgroundColor: "#1DB050" }}
-          onClick={followToggle}
-        >
-          Following
-        </Button>
-      )}
+          {title}
+        </Typography>
+        {!follow ? (
+          <Button
+            variant="contained"
+            size="10px"
+            startIcon={<AddIcon />}
+            sx={{ backgroundColor: "#1DB954" }}
+            onClick={followToggle}
+          >
+            Follow
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            size="10px"
+            sx={{ backgroundColor: "#1DB050" }}
+            onClick={followToggle}
+          >
+            Following
+          </Button>
+        )}
+      </Box>
+      <ArtistTags />
     </Box>
   );
 };
