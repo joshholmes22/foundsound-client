@@ -1,13 +1,14 @@
-import { Typography } from "@mui/material";
 import Link from "@mui/material/Link";
+import HomeNavBar from "../../components/HomeNavBar";
+import HeroBanner from "../../components/HeroBanner";
 
 import "./Home.css";
 
 const Home = () => {
   return (
-    <div>
-      <Typography>HOME</Typography>
-      <Link href="/signup">Click here to sign up</Link>
+    <div className="homePageContainer">
+      <HomeNavBar />
+      <HeroBanner />
     </div>
   );
 };
