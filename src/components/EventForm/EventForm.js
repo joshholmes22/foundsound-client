@@ -82,6 +82,7 @@ const EventForm = () => {
   const { user } = useAuth();
 
   const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [tags, setTags] = useState([commonTags[0]]);
   const [fileName, setFileName] = useState();
   const [imageUrl, setImageUrl] = useState();
@@ -133,8 +134,12 @@ const EventForm = () => {
     });
   };
 
-  const onChange = (newValue) => {
+  const onChangeStartDate = (newValue) => {
     setStartDate(newValue);
+  };
+
+  const onChangeEndDate = (newValue) => {
+    setEndDate(newValue);
   };
 
   const handleOpenModal = () => {
@@ -450,18 +455,18 @@ const EventForm = () => {
                     inputFormat="MM/dd/yyyy"
                     value={startDate}
                     {...register("startDate")}
-                    onChange={onChange}
+                    onChange={onChangeStartDate}
                     renderInput={(params) => <TextField {...params} />}
                   />
-                  {/* <DesktopDatePicker
+                  <DesktopDatePicker
                     id="endDate"
                     label="End Date of Event*"
                     inputFormat="MM/dd/yyyy"
                     {...register("endDate")}
-                    onChange={onChange}
-                    value={dateTime}
+                    onChange={onChangeEndDate}
+                    value={endDate}
                     renderInput={(params) => <TextField {...params} />}
-                  /> */}
+                  />
                   {/* <TimePicker
                     required
                     id="startTime"
