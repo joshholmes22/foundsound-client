@@ -10,8 +10,10 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { useEffect, useState } from "react";
+
+import theme from "../../utils/themes";
 import EventAdCard from "../../components/EventAdCard";
 import AdForm from "../../components/AdForm/AdForm";
 import AdCard from "../../components/AdCard/AdCard";
@@ -30,8 +32,6 @@ const getStepContent = (step) => {
       throw new Error("Unknown step");
   }
 };
-
-const theme = createTheme();
 
 const Ad = () => {
   const [activeStep, setActiveStep] = useState(0);
