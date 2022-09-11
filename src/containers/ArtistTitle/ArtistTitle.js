@@ -39,7 +39,7 @@ const ArtistTitle = ({ title }) => {
             variant="contained"
             size="10px"
             startIcon={<AddIcon />}
-            sx={{ backgroundColor: "#1DB954" }}
+            sx={{ backgroundColor: "#4A69FF" }}
             onClick={followToggle}
           >
             Follow
@@ -48,7 +48,7 @@ const ArtistTitle = ({ title }) => {
           <Button
             variant="contained"
             size="10px"
-            sx={{ backgroundColor: "#1DB050" }}
+            sx={{ backgroundColor: "#4A69FF" }}
             onClick={followToggle}
           >
             Following

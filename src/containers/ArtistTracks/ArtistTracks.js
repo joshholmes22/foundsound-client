@@ -33,7 +33,7 @@ const ArtistTracks = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#14213d",
+        backgroundColor: "#292525",
       }}
     >
       <Typography sx={{ fontSize: "40px", fontWeight: "bold", color: "#fff" }}>
