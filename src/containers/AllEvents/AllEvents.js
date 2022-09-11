@@ -15,7 +15,7 @@ const AllEvents = () => {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", flexWrap: "wrap" }}>
       <EventCard details={event1} />
       <EventCard details={event1} />
       <EventCard details={event1} />
