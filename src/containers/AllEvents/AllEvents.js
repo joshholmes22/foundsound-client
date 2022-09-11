@@ -1,7 +1,22 @@
+import { useEffect } from "react";
 import EventCard from "../../components/EventCard/EventCard";
 import Box from "@mui/material/Box";
+import { GET_ALL_EVENTS } from "../../graphql/queries";
+import { useLazyQuery } from "@apollo/client";
 
 const AllEvents = () => {
+  const [getAllEvents, { data, loading, error }] = useLazyQuery(GET_ALL_EVENTS);
+
+  const getEvents = async () => {
+    await getAllEvents();
+  };
+
+  useEffect(() => {
+    getEvents();
+
+    console.log(data);
+  }, [data]);
+
   const event1 = {
     name: "Test Event",
     description: "This is a great event to test if the card looks ok",
