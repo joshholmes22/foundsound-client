@@ -1,8 +1,8 @@
-import EventCard from "../../components/EventCard/EventCard";
+import ArtistCard from "../../components/ArtistCard/ArtistCard";
 import Box from "@mui/material/Box";
 
 const AllArtists = () => {
-  const artist1 = {
+  const artist = {
     name: "Josh Holmes",
     description: "Josh is a singer from the UK",
     imageUrl:
@@ -13,9 +13,9 @@ const AllArtists = () => {
 
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-      <EventCard details={artist1} />
-      <EventCard details={artist1} />
-      <EventCard details={artist1} />
+      <ArtistCard details={artist} />
+      <ArtistCard details={artist} />
+      <ArtistCard details={artist} />
     </Box>
   );
 };
