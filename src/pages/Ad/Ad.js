@@ -8,6 +8,12 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import Stepper from "@mui/material/Stepper";
@@ -29,20 +35,18 @@ import theme from "../../utils/themes";
 import { useAuth } from "../../context/AppProvider";
 import { useMutation } from "@apollo/client";
 import { GET_ALL_EVENTS } from "../../graphql/queries";
+// import { CREATE_ADVERT } from "../../graphql/queries";
 import EventAdCard from "../../components/EventAdCard/EventAdCard";
 
-const Ad = () => {
+const Ad = ({ details }) => {
   const [getAllEvents, { data, loading, error }] = useLazyQuery(GET_ALL_EVENTS);
+  // const [createAdvert] = useLazyQuery(CREATE_ADVERT);
 
   const getEvents = async () => {
     await getAllEvents();
 
     setEventData(data.getAllEvents);
   };
-
-  useEffect(() => {
-    getEvents();
-  }, []);
 
   useEffect(() => {
     if (data) {
@@ -55,38 +59,26 @@ const Ad = () => {
   const navigate = useNavigate();
 
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [expires, setExpiryDate] = useState(new Date());
   const [eventData, setEventData] = useState();
   const [activeStep, setActiveStep] = useState(0);
   const [eventStep, setEventStep] = useState(0);
+  const [amount, setAmount] = useState();
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    setError,
-    clearErrors,
-    getValues,
-  } = useForm();
-
-  const onSubmit = (formData) => {
-    // if (!imageUrl) {
-    //   setError("imageUrl", {
-    //     type: "manual",
-    //     message: "Please select an image for event",
-    //   });
-    // }
-
-    const createEventInput = {
-      ...formData,
-      endDate,
-    };
-  };
+  // const onSubmit = (formData) => {
+  //   const createAdvertInput = {
+  //     ...formData,
+  //   };
+  //   createAdvert({ variables: { createAdvertInput } });
+  // };
 
   const onChangeEndDate = (newValue) => {
-    setEndDate(newValue);
+    setExpiryDate(newValue);
   };
 
+  const handleChange = (event) => {
+    setAmount(event.target.value);
+  };
   const filter = createFilterOptions();
 
   const artistImages = [];
@@ -107,6 +99,39 @@ const Ad = () => {
       setActiveStep(maxSteps - 1);
     }
   };
+
+  const handleCheckedPaid = (event, paid) => {
+    console.log("hi");
+    console.log(paid);
+    if (paid) {
+      return (
+        <>
+          <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-amount"
+            value={amount}
+            onChange={handleChange}
+            startAdornment={<InputAdornment position="start">£</InputAdornment>}
+            label="Amount"
+          />
+        </>
+      );
+    }
+  };
+
+  const handleCheckedSolo = () => {
+    console.log("checked");
+  };
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    setError,
+    clearErrors,
+    getValues,
+  } = useForm();
+
   return (
     <ThemeProvider theme={theme}>
       <Typography
@@ -216,11 +241,11 @@ const Ad = () => {
                   </Typography>
                   {/* render event forms here*/}
                   <TextField
-                    id="advertDescription"
-                    name="advertDescription"
+                    id="description"
+                    name="description"
                     label="Advert Description"
                     fullWidth
-                    {...register("advertDescription", { required: true })}
+                    {...register("description", { required: true })}
                     helperText={
                       !!errors.advertDescription
                         ? "Please provide a description."
@@ -231,7 +256,7 @@ const Ad = () => {
                   />
                   <TextField
                     id="setTime"
-                    label="Length of Event"
+                    label="Time Length of Event"
                     fullWidth
                     {...register("setTime", { required: true })}
                     helperText={
@@ -241,17 +266,30 @@ const Ad = () => {
                     }
                   />
                   <DesktopDatePicker
-                    label="End Date of Event*"
+                    label="Booking Due Date*"
                     required
-                    value={endDate}
+                    value={expires}
                     minDate={startDate}
                     onChange={(newEndValue) => {
-                      setEndDate(newEndValue);
+                      setExpiryDate(newEndValue);
                     }}
                     renderInput={(params) => <TextField {...params} />}
                   />
-                  {/* add the solo checkbox here */}
-                  {/* add the is paid checkbox here */}
+                  <FormGroup>
+                    <FormControlLabel
+                      control={<Checkbox defaultUnchecked />}
+                      label="Solo Band"
+                      onChange={handleCheckedSolo}
+                    />
+                    <FormControlLabel
+                      id="isPaid"
+                      {...register("isPaid")}
+                      control={<Checkbox defaultUnchecked />}
+                      label="Paid Event"
+                      onChange={handleCheckedPaid}
+                    />
+                  </FormGroup>
+
                   {/* add the add the payment fee here */}
                 </Stack>
               </LocalizationProvider>

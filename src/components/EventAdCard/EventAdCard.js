@@ -5,7 +5,6 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { ThemeProvider } from "@mui/material/styles";
-import { useLazyQuery } from "@apollo/client";
 import Box from "@mui/material/Box";
 
 import theme from "../../utils/themes";
