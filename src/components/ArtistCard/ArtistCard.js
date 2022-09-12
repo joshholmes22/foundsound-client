@@ -66,12 +66,12 @@ const ArtistCard = ({ details }) => {
         disableSpacing
         sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
       >
-        <IconButton aria-label="add to favorites">
+        {/* <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
-        </IconButton>
+        </IconButton> */}
       </CardActions>
     </Card>
   );
