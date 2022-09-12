@@ -1,0 +1,10 @@
+.artistCardContainer {
+  background-image: url("../../assets/images/fancy-festival.png");
+  opacity: 1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
