@@ -21,14 +21,14 @@ const EventAdCard = ({ details }) => {
           component="img"
           alt="event image"
           height="140"
-          image={details.imageUrl}
+          // image={details.imageUrl}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" align="center">
-            title:{details.name}
+            {/* {details.name} */} Event card name
           </Typography>
           <Typography variant="body2" color="text.secondary" align="center">
-            title:{details.description}
+            {/* {details.description} */} Event card description
           </Typography>
           <CardActions
             sx={{
