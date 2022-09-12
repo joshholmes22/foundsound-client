@@ -7,11 +7,13 @@ import CardActions from "@mui/material/CardActions";
 // import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const ArtistCard = ({ details }) => {
+  const songName = "2knlNLtT7XdKadSzBjycVQ";
   return (
     <Card
       sx={{
@@ -51,26 +53,23 @@ const ArtistCard = ({ details }) => {
         image={details.imageUrl}
         alt={details.name}
       />
-      <CardContent>
-        <Typography
-          variant="body2"
-          color="white"
-          sx={{ textAlign: "center", fontWeight: "700" }}
-        >
-          {details.description}
-        </Typography>
-      </CardContent>
-      <Button
-        variant="contained"
-        href="#contained-buttons"
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
+
+      <div>
+        <iframe
+          title="Song"
+          src={`https://open.spotify.com/embed/track/${songName}?utm_source=generator&theme=0`}
+          width="100%"
+          height="100"
+          frameBorder="0"
+        ></iframe>
+      </div>
+      <Box
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
       >
-        View profile
-      </Button>
+        <Button variant="contained" href="#contained-buttons" sx={{}}>
+          View profile
+        </Button>
+      </Box>
       <CardActions
         disableSpacing
         sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
