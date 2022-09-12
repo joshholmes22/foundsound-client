@@ -3,6 +3,7 @@ import ArtistNavBar from "../../components/ArtistNavBar/ArtistNavBar";
 import { Box, Typography } from "@mui/material";
 
 import DemoSongUploader from "../../components/DemoSongUploader";
+import ArtistTracks from "../../containers/ArtistTracks/ArtistTracks";
 
 const ArtistDemoSongs = () => {
   const [uploadedTracks, setUploadedTracks] = useState([]);
@@ -32,9 +33,9 @@ const ArtistDemoSongs = () => {
               No Uploaded Tracks
             </Typography>
           ) : (
-            <Typography sx={{ m: 2, textAlign: "center" }}>
-              {uploadedTracks}
-            </Typography>
+            <Box sx={{ width: "100%" }}>
+              <ArtistTracks demoSongs={uploadedTracks} />
+            </Box>
           )}
         </Box>
       </Box>

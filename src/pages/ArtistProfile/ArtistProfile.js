@@ -8,6 +8,11 @@ import ArtistTracks from "../../containers/ArtistTracks";
 import ArtistEvents from "../../containers/ArtistEvents";
 
 const ArtistProfile = () => {
+  const demoSongs = [
+    "2knlNLtT7XdKadSzBjycVQ",
+    "1BRQhOPY3QtY8hcvafhvjq",
+    "24qK0O65X0l6TViKiKFbq2",
+  ];
   return (
     <Box sx={{ display: { md: "flex" } }}>
       <ArtistNavBar />
@@ -20,7 +25,7 @@ const ArtistProfile = () => {
       >
         <ArtistTitle title="Josh Holmes" />
         <ArtistBanner bannerImg={bannerImg} />
-        <ArtistTracks />
+        <ArtistTracks demoSongs={demoSongs} />
         <ArtistEvents />
       </Box>
     </Box>

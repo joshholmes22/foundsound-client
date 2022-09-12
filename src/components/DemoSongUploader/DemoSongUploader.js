@@ -22,6 +22,7 @@ const DemoSongUploader = ({ uploadedTracks, setUploadedTracks }) => {
           setTrackError(true);
         } else {
           setUploadedTracks([...uploadedTracks, trackData]);
+          setNewTrack("");
           setTrackError(false);
         }
       } else {
@@ -51,6 +52,7 @@ const DemoSongUploader = ({ uploadedTracks, setUploadedTracks }) => {
           label="Spotify URI"
           variant="outlined"
           sx={{ mb: "15px", width: "400px" }}
+          value={newTrack}
           onInput={(e) => setNewTrack(e.target.value)}
         />
         <Button
