@@ -24,7 +24,11 @@ const ArtistCard = ({ details }) => {
             <MoreVertIcon />
           </IconButton>
         }
-        title={details.name}
+        title={
+          <Typography variant="h5" color="#0A0A0A">
+            {details.name}
+          </Typography>
+        }
       />
       <CardMedia
         component="img"
@@ -33,7 +37,7 @@ const ArtistCard = ({ details }) => {
         alt={details.name}
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="#0A0A0A">
           {details.description}
         </Typography>
       </CardContent>
