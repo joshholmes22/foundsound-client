@@ -6,7 +6,12 @@ const Artists = () => {
   const { user } = useAuth();
   const userType = user.userType;
 
-  return <div>{userType === "eventOrganiser" && <ViewAllArtists />}</div>;
+  return (
+    <div>
+      {userType === "eventOrganiser" && <ViewAllArtists />}
+      {userType === "audienceMember" && <ViewAllArtists />}
+    </div>
+  );
 };
 
 export default Artists;
