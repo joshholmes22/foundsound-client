@@ -48,7 +48,7 @@ const PrivateNavBar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: "#0A0A0A80" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -58,6 +58,7 @@ const PrivateNavBar = () => {
             href="/"
             sx={{
               mr: 2,
+
               display: { xs: "none", md: "flex" },
               fontFamily: "montserrat",
               fontWeight: 700,
