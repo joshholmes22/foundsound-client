@@ -13,7 +13,16 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const ArtistCard = ({ details }) => {
   return (
-    <Card sx={{ width: 345, margin: 5, backgroundColor: "#0A0A0A" }}>
+    <Card
+      sx={{
+        backgroundColor: "#0A0A0A",
+        width: 345,
+        margin: 5,
+        "@media(minWidth: 375px)": {
+          margin: 2,
+        },
+      }}
+    >
       <CardHeader
         //DO WE NEED THIS AVATAR IF THERE IS A PICTURE OF THE ARTIST BELOW?
         // avatar={
