@@ -37,7 +37,7 @@ const ArtistNavBar = () => {
   ];
 
   const artistPages = [
-    { label: "+ Add Photos", path: "/uploadPhotos" },
+    { label: "+ Photos", path: "/uploadPhotos" },
     { label: "+ Demo Songs", path: "/uploadTracks" },
   ];
 
