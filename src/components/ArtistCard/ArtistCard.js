@@ -14,18 +14,22 @@ const ArtistCard = ({ details }) => {
   return (
     <Card sx={{ width: 345, margin: 5 }}>
       <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: "#4A69FF" }} aria-label="recipe">
-            A
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
+        // avatar={
+        //   <Avatar sx={{ bgcolor: "#4A69FF" }} aria-label="recipe">
+        //     A
+        //   </Avatar>
+        // }
+        // action={
+        //   <IconButton aria-label="settings">
+        //     <MoreVertIcon />
+        //   </IconButton>
+        // }
         title={
-          <Typography variant="h5" color="#0A0A0A">
+          <Typography
+            variant="h5"
+            color="#0A0A0A"
+            sx={{ textAlign: "center", textTransform: "uppercase" }}
+          >
             {details.name}
           </Typography>
         }
@@ -37,11 +41,18 @@ const ArtistCard = ({ details }) => {
         alt={details.name}
       />
       <CardContent>
-        <Typography variant="body2" color="#0A0A0A">
+        <Typography
+          variant="body2"
+          color="#0A0A0A"
+          sx={{ textAlign: "center", textTransform: "uppercase" }}
+        >
           {details.description}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
+      <CardActions
+        disableSpacing
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      >
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
