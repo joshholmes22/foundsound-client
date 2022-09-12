@@ -6,19 +6,17 @@ import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { fromUnixTime } from "date-fns";
 
 const ArtistCard = ({ details }) => {
   return (
     <Card sx={{ width: 345, margin: 5 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+          <Avatar sx={{ bgcolor: "#4A69FF" }} aria-label="recipe">
+            A
           </Avatar>
         }
         action={
