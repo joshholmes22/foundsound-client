@@ -36,6 +36,11 @@ const ArtistNavBar = () => {
     { label: "Log Out", path: "/home" },
   ];
 
+  const artistPages = [
+    { label: "+ Add Photos", path: "/uploadPhotos" },
+    { label: "+ Demo Songs", path: "/uploadTracks" },
+  ];
+
   const logout = () => {
     localStorage.clear();
     navigate("/");
@@ -52,6 +57,27 @@ const ArtistNavBar = () => {
           sx={{ marginLeft: "15px" }}
         />
       </Toolbar>
+      <Divider />
+      <Typography
+        sx={{ ml: "10px", mt: "10px", color: "#d1d1d1" }}
+      >{`Artist Profile`}</Typography>
+      <List sx={{ pt: "0" }}>
+        {artistPages.map((item, index) => (
+          <ListItem key={item.label} disablePadding>
+            <ListItemButton
+              onClick={() => {
+                if (item.label === "Log Out") {
+                  logout();
+                } else {
+                  navigate(item.path);
+                }
+              }}
+            >
+              <ListItemText primary={item.label} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
       <Divider />
       <List>
         {pages.map((item, index) => (

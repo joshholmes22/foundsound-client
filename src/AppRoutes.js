@@ -9,6 +9,8 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import { useAuth } from "./context/AppProvider";
 import ArtistProfile from "./pages/ArtistProfile";
+import ArtistDemoSongs from "./pages/ArtistDemoSongs";
+import ArtistPhotos from "./pages/ArtistPhotos";
 
 const AppRoutes = () => {
   const { isLoggedIn, user } = useAuth();
@@ -47,6 +49,8 @@ const AppRoutes = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/settings" element={<Profile />} />
           <Route path="/artistProfile" element={<ArtistProfile />} />
+          <Route path="/uploadPhotos" element={<ArtistPhotos />} />
+          <Route path="/uploadTracks" element={<ArtistDemoSongs />} />
         </>
       )}
     </Routes>
