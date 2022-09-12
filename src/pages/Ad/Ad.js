@@ -36,6 +36,7 @@ import { useAuth } from "../../context/AppProvider";
 import { useMutation } from "@apollo/client";
 import { GET_ALL_EVENTS_FOR_OWNER } from "../../graphql/queries";
 import { CREATE_ADVERT } from "../../graphql/mutations";
+import "./Ad.css";
 import EventAdCard from "../../components/EventAdCard/EventAdCard";
 
 const Ad = ({ details }) => {
@@ -43,72 +44,43 @@ const Ad = ({ details }) => {
   const [createAdvert, { data: advertData }] = useMutation(CREATE_ADVERT);
   console.log(advertData);
 
-  // const getEvents = async () => {
-  //   await getAllEvents();
-
-  //   setEventData(data.getAllEvents);
-  // };
-
-  useEffect(() => {
-    if (data) {
-      setEventData(data.getAllEvents);
-    }
-  }, [data]);
-
   const { user } = useAuth();
 
   const navigate = useNavigate();
 
   const [startDate, setStartDate] = useState(new Date());
   const [expires, setExpiryDate] = useState(new Date());
-  const [eventData, setEventData] = useState();
-  const [activeStep, setActiveStep] = useState(0);
-  const [eventStep, setEventStep] = useState(0);
   const [amount, setAmount] = useState();
   const [checked, setChecked] = useState(false);
   const [soloChecked, setSoloChecked] = useState(false);
   const [currentEventId, setCurrentEventId] = useState(
     data?.getAllEventsForOwner[0]?.id
   );
+  // const [eventData, setEventData] = useState();
+  // const [activeStep, setActiveStep] = useState(0);
+  // const [eventStep, setEventStep] = useState(0);
 
   const onSubmit = (formData) => {
     const createAdvertInput = {
       ...formData,
       event: currentEventId,
       expires,
+      isPaid: checked,
+      solo: soloChecked,
     };
-    createAdvert({ variables: { createAdvertInput } });
     console.log(createAdvertInput);
+    createAdvert({ variables: { createAdvertInput } });
   };
 
-  console.log(currentEventId);
   const onChangeEndDate = (newValue) => {
     setExpiryDate(newValue);
   };
 
+  // target the amount entered
   const handleChange = (event) => {
     setAmount(event.target.value);
   };
   const filter = createFilterOptions();
-
-  const artistImages = [];
-  const maxSteps = artistImages.length;
-
-  const handleNext = () => {
-    if (activeStep + 1 !== maxSteps) {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    } else {
-      setActiveStep(0);
-    }
-  };
-
-  const handleBack = () => {
-    if (activeStep - 1 !== -1) {
-      setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    } else {
-      setActiveStep(maxSteps - 1);
-    }
-  };
 
   const handleCheckedPaid = (event) => {
     event.preventDefault();
@@ -117,7 +89,11 @@ const Ad = ({ details }) => {
 
   const handleCheckedSolo = (event) => {
     event.preventDefault();
-    setChecked(!checked);
+    setSoloChecked(!soloChecked);
+  };
+
+  const handleChangeDate = (newValue) => {
+    setExpiryDate(newValue);
   };
 
   const {
@@ -202,22 +178,25 @@ const Ad = ({ details }) => {
                       display: "flex",
                     }}
                   >
-                    <IconButton aria-label="previousImage" onClick={handleBack}>
+                    {/* <IconButton aria-label="previousImage" onClick={handleBack}>
                       <ArrowCircleLeftIcon fontSize="large" />
-                    </IconButton>
-                    <Card sx={{ maxWidth: "100vw" }}>
-                      {!loading &&
-                        data.getAllEventsForOwner.map((event) => (
-                          <EventAdCard
-                            key={event.id}
-                            details={event}
-                            setCurrentEventId={setCurrentEventId}
-                          />
-                        ))}
-                    </Card>
-                    <IconButton aria-label="nextImage" onClick={handleNext}>
+                    </IconButton> */}
+                    <div className="AdCardsContainer">
+                      <Card sx={{ maxWidth: "100vw" }}>
+                        {!loading &&
+                          data.getAllEventsForOwner.map((event) => (
+                            <EventAdCard
+                              key={event.id}
+                              details={event}
+                              setCurrentEventId={setCurrentEventId}
+                            />
+                          ))}
+                      </Card>
+                    </div>
+
+                    {/* <IconButton aria-label="nextImage" onClick={handleNext}>
                       <ArrowCircleRightIcon fontSize="large" />
-                    </IconButton>
+                    </IconButton> */}
                   </Box>
                 </Box>
               </Stack>
@@ -247,7 +226,7 @@ const Ad = ({ details }) => {
                   <TextField
                     id="description"
                     name="description"
-                    label="Advert Description"
+                    label="Description"
                     fullWidth
                     {...register("description", { required: true })}
                     helperText={
@@ -273,10 +252,7 @@ const Ad = ({ details }) => {
                     label="Booking Due Date*"
                     required
                     value={expires}
-                    minDate={startDate}
-                    onChange={(newEndValue) => {
-                      setExpiryDate(newEndValue);
-                    }}
+                    onChange={handleChangeDate}
                     renderInput={(params) => <TextField {...params} />}
                   />
                   <FormGroup>
@@ -290,25 +266,19 @@ const Ad = ({ details }) => {
                       id="isPaid"
                       value={checked}
                       {...register("isPaid")}
-                      control={<Checkbox control />}
+                      control={<Checkbox />}
                       label="Paid Event"
                       onChange={handleCheckedPaid}
                     />
                     {checked && (
                       <>
-                        <InputLabel htmlFor="outlined-adornment-amount">
-                          Amount
-                        </InputLabel>
-                        <OutlinedInput
-                          id="outlined-adornment-amount"
+                        <TextField
+                          id="amount"
                           value={amount}
                           onChange={handleChange}
-                          startAdornment={
-                            <InputAdornment position="start">£</InputAdornment>
-                          }
-                          label="Amount"
-                        />
-                        <InputLabel />
+                          label="Payment Fee"
+                          {...register("fee")}
+                        ></TextField>
                       </>
                     )}
                   </FormGroup>

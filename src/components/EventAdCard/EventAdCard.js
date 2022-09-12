@@ -13,45 +13,57 @@ const EventAdCard = ({ details, setCurrentEventId }) => {
   const handleOnClick = (event) => {
     event.preventDefault();
     setCurrentEventId(event.target.getAttribute("data-id"));
+    console.log(event.target.getAttribute("data-id"));
   };
   return (
     <ThemeProvider theme={theme}>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          component="img"
-          alt="event image"
-          height="140"
-          image={details.imageUrl}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div" align="center">
-            {details.name}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" align="center">
-            {details.description}
-          </Typography>
-          <CardActions
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Box
-              textAlign={"center"}
+      <Box sx={{ display: "flex", flexDirection: "row" }}>
+        <Card sx={{ maxWidth: 345 }}>
+          <CardMedia
+            component="img"
+            alt="event image"
+            height="140"
+            image={details.imageUrl}
+          />
+          <CardContent>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              align="center"
+            >
+              {details.name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary" align="center">
+              {details.description}
+            </Typography>
+            <CardActions
               sx={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
               }}
             >
-              <Button size="small" data-id={details.id} onClick={handleOnClick}>
-                SELECT
-              </Button>
-            </Box>
-          </CardActions>
-        </CardContent>
-      </Card>
+              <Box
+                textAlign={"center"}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <Button
+                  size="small"
+                  data-id={details.id}
+                  onClick={handleOnClick}
+                >
+                  SELECT
+                </Button>
+              </Box>
+            </CardActions>
+          </CardContent>
+        </Card>
+      </Box>
     </ThemeProvider>
   );
 };

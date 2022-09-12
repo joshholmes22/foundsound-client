@@ -1,0 +1,4 @@
+.AdCardsContainer {
+  display: flex;
+  flex-direction: row;
+}
