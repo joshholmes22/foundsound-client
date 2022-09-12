@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import { Box, FormControl, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import FormHelperText from "@mui/material/FormHelperText";
+import { CREATE_ARTIST_PROFILE } from "../../graphql/mutations";
+import { useMutation } from "@apollo/client";
 
 const DemoSongUploader = ({ uploadedTracks, setUploadedTracks }) => {
   // format = spotify:track:10RUyNnakybrdAhIm65Lkx
   const [trackError, setTrackError] = useState(false);
   const [errorText, setErrorText] = useState("UNKNOWN ERROR");
+  const [createArtistProfile, { data, loading, error }] = useMutation(
+    CREATE_ARTIST_PROFILE
+  );
 
-  const [newTrack, setNewTrack] = useState();
+  const [newTrack, setNewTrack] = useState("");
 
   const handleSubmit = () => {
     if (newTrack) {
@@ -22,6 +27,11 @@ const DemoSongUploader = ({ uploadedTracks, setUploadedTracks }) => {
           setTrackError(true);
         } else {
           setUploadedTracks([...uploadedTracks, trackData]);
+          const createArtistProfileInput = {
+            demoSong: [trackData],
+          };
+          createArtistProfile({ variables: { createArtistProfileInput } });
+
           setNewTrack("");
           setTrackError(false);
         }
@@ -35,7 +45,9 @@ const DemoSongUploader = ({ uploadedTracks, setUploadedTracks }) => {
     }
   };
 
-  console.log(uploadedTracks);
+  useEffect(() => {
+    console.log(`HERE: ${error}`);
+  }, [error]);
 
   return (
     <Box
