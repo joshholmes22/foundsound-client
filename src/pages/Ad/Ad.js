@@ -37,6 +37,7 @@ import { useMutation } from "@apollo/client";
 import { GET_ALL_EVENTS } from "../../graphql/queries";
 // import { CREATE_ADVERT } from "../../graphql/queries";
 import EventAdCard from "../../components/EventAdCard/EventAdCard";
+import { render } from "react-dom";
 
 const Ad = ({ details }) => {
   const [getAllEvents, { data, loading, error }] = useLazyQuery(GET_ALL_EVENTS);
@@ -64,6 +65,7 @@ const Ad = ({ details }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [eventStep, setEventStep] = useState(0);
   const [amount, setAmount] = useState();
+  const [checked, setChecked] = useState(false);
 
   // const onSubmit = (formData) => {
   //   const createAdvertInput = {
@@ -100,24 +102,27 @@ const Ad = ({ details }) => {
     }
   };
 
-  const handleCheckedPaid = (event, paid) => {
-    console.log("hi");
-    console.log(paid);
-    if (paid) {
-      return (
-        <>
-          <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-amount"
-            value={amount}
-            onChange={handleChange}
-            startAdornment={<InputAdornment position="start">£</InputAdornment>}
-            label="Amount"
-          />
-        </>
-      );
-    }
-  };
+  // const handleCheckedPaid = (event, checked) => {
+  //   if (checked) {
+  //     setChecked((checked === true) => {
+  //       return (
+  //         <>
+  //           <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+  //           <OutlinedInput
+  //             id="outlined-adornment-amount"
+  //             value={amount}
+  //             onChange={handleChange}
+  //             startAdornment={
+  //               <InputAdornment position="start">£</InputAdornment>
+  //             }
+  //             label="Amount"
+  //           />
+  //           <InputLabel />
+  //         </>
+  //       );
+  //     });
+  //   }
+  // };
 
   const handleCheckedSolo = () => {
     console.log("checked");
@@ -277,16 +282,41 @@ const Ad = ({ details }) => {
                   />
                   <FormGroup>
                     <FormControlLabel
-                      control={<Checkbox defaultUnchecked />}
+                      control={<Checkbox control />}
                       label="Solo Band"
                       onChange={handleCheckedSolo}
                     />
                     <FormControlLabel
                       id="isPaid"
+                      value={checked}
                       {...register("isPaid")}
-                      control={<Checkbox defaultUnchecked />}
+                      control={<Checkbox control />}
                       label="Paid Event"
-                      onChange={handleCheckedPaid}
+                      onChange={(event) => {
+                        if (checked) {
+                          setChecked(
+                            render(
+                              <>
+                                <InputLabel htmlFor="outlined-adornment-amount">
+                                  Amount
+                                </InputLabel>
+                                <OutlinedInput
+                                  id="outlined-adornment-amount"
+                                  value={amount}
+                                  onChange={handleChange}
+                                  startAdornment={
+                                    <InputAdornment position="start">
+                                      £
+                                    </InputAdornment>
+                                  }
+                                  label="Amount"
+                                />
+                                <InputLabel />
+                              </>
+                            )
+                          );
+                        }
+                      }}
                     />
                   </FormGroup>
 
