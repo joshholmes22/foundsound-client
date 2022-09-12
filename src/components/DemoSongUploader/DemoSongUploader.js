@@ -5,11 +5,11 @@ import { Box, FormControl, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import FormHelperText from "@mui/material/FormHelperText";
 
-const DemoSongUploader = () => {
+const DemoSongUploader = ({ uploadedTracks, setUploadedTracks }) => {
   // format = spotify:track:10RUyNnakybrdAhIm65Lkx
   const [trackError, setTrackError] = useState(false);
   const [errorText, setErrorText] = useState("UNKNOWN ERROR");
-  const [uploadedTracks, setUploadedTracks] = useState([]);
+
   const [newTrack, setNewTrack] = useState();
 
   const handleSubmit = () => {
@@ -76,16 +76,6 @@ const DemoSongUploader = () => {
           </FormHelperText>
         )}
       </Box>
-
-      {uploadedTracks.length === 0 ? (
-        <Typography sx={{ m: 2, textAlign: "center" }}>
-          No Uploaded Tracks
-        </Typography>
-      ) : (
-        <Typography sx={{ m: 2, textAlign: "center" }}>
-          {uploadedTracks}
-        </Typography>
-      )}
     </Box>
   );
 };
