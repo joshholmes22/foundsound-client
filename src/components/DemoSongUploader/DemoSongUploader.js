@@ -46,8 +46,8 @@ const DemoSongUploader = ({ uploadedTracks, setUploadedTracks }) => {
   };
 
   useEffect(() => {
-    console.log(`HERE: ${error}`);
-  }, [error]);
+    console.log(`HERE: ${data}`);
+  }, [data]);
 
   return (
     <Box
