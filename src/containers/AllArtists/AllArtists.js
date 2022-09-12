@@ -12,7 +12,7 @@ const AllArtists = () => {
   };
 
   return (
-    <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+    <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
       <ArtistCard details={artist} />
       <ArtistCard details={artist} />
       <ArtistCard details={artist} />
