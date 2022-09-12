@@ -6,6 +6,7 @@ import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -50,6 +51,17 @@ const ArtistCard = ({ details }) => {
           {details.description}
         </Typography>
       </CardContent>
+      <Button
+        variant="contained"
+        href="#contained-buttons"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        View profile
+      </Button>
       <CardActions
         disableSpacing
         sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
