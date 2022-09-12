@@ -13,7 +13,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const ArtistCard = ({ details }) => {
   return (
-    <Card sx={{ width: 345, margin: 5 }}>
+    <Card sx={{ width: 345, margin: 5, backgroundColor: "#0A0A0A" }}>
       <CardHeader
         //DO WE NEED THIS AVATAR IF THERE IS A PICTURE OF THE ARTIST BELOW?
         // avatar={
@@ -29,7 +29,7 @@ const ArtistCard = ({ details }) => {
         title={
           <Typography
             variant="h5"
-            color="#0A0A0A"
+            color="white"
             sx={{ textAlign: "center", textTransform: "uppercase" }}
           >
             {details.name}
@@ -45,8 +45,8 @@ const ArtistCard = ({ details }) => {
       <CardContent>
         <Typography
           variant="body2"
-          color="#0A0A0A"
-          sx={{ textAlign: "center" }}
+          color="white"
+          sx={{ textAlign: "center", fontWeight: "700" }}
         >
           {details.description}
         </Typography>
