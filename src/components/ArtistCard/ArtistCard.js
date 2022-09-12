@@ -14,6 +14,7 @@ const ArtistCard = ({ details }) => {
   return (
     <Card sx={{ width: 345, margin: 5 }}>
       <CardHeader
+        //DO WE NEED THIS AVATAR IF THERE IS A PICTURE OF THE ARTIST BELOW?
         // avatar={
         //   <Avatar sx={{ bgcolor: "#4A69FF" }} aria-label="recipe">
         //     A
@@ -44,7 +45,7 @@ const ArtistCard = ({ details }) => {
         <Typography
           variant="body2"
           color="#0A0A0A"
-          sx={{ textAlign: "center", textTransform: "uppercase" }}
+          sx={{ textAlign: "center" }}
         >
           {details.description}
         </Typography>
