@@ -65,7 +65,7 @@ export const CREATE_EVENT = gql`
   }
 `;
 
-const CREATE_ADVERT = gql`
+export const CREATE_ADVERT = gql`
   mutation Mutation($createAdvertInput: CreateAdvertInput!) {
     createAdvert(createAdvertInput: $createAdvertInput) {
       id

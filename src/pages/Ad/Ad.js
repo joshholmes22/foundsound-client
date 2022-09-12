@@ -27,27 +27,27 @@ import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import IconButton from "@mui/material/IconButton";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import { useLazyQuery } from "@apollo/client";
+import { useLazyQuery, useQuery } from "@apollo/client";
 import { LoadingButton } from "@mui/lab";
 import { useNavigate } from "react-router-dom";
 
 import theme from "../../utils/themes";
 import { useAuth } from "../../context/AppProvider";
 import { useMutation } from "@apollo/client";
-import { GET_ALL_EVENTS } from "../../graphql/queries";
-// import { CREATE_ADVERT } from "../../graphql/queries";
+import { GET_ALL_EVENTS_FOR_OWNER } from "../../graphql/queries";
+import { CREATE_ADVERT } from "../../graphql/mutations";
 import EventAdCard from "../../components/EventAdCard/EventAdCard";
-import { render } from "react-dom";
 
 const Ad = ({ details }) => {
-  const [getAllEvents, { data, loading, error }] = useLazyQuery(GET_ALL_EVENTS);
-  // const [createAdvert] = useLazyQuery(CREATE_ADVERT);
+  const { data, loading, error } = useQuery(GET_ALL_EVENTS_FOR_OWNER);
+  const [createAdvert, { data: advertData }] = useMutation(CREATE_ADVERT);
+  console.log(advertData);
 
-  const getEvents = async () => {
-    await getAllEvents();
+  // const getEvents = async () => {
+  //   await getAllEvents();
 
-    setEventData(data.getAllEvents);
-  };
+  //   setEventData(data.getAllEvents);
+  // };
 
   useEffect(() => {
     if (data) {
@@ -66,14 +66,22 @@ const Ad = ({ details }) => {
   const [eventStep, setEventStep] = useState(0);
   const [amount, setAmount] = useState();
   const [checked, setChecked] = useState(false);
+  const [soloChecked, setSoloChecked] = useState(false);
+  const [currentEventId, setCurrentEventId] = useState(
+    data?.getAllEventsForOwner[0]?.id
+  );
 
-  // const onSubmit = (formData) => {
-  //   const createAdvertInput = {
-  //     ...formData,
-  //   };
-  //   createAdvert({ variables: { createAdvertInput } });
-  // };
+  const onSubmit = (formData) => {
+    const createAdvertInput = {
+      ...formData,
+      event: currentEventId,
+      expires,
+    };
+    createAdvert({ variables: { createAdvertInput } });
+    console.log(createAdvertInput);
+  };
 
+  console.log(currentEventId);
   const onChangeEndDate = (newValue) => {
     setExpiryDate(newValue);
   };
@@ -102,30 +110,14 @@ const Ad = ({ details }) => {
     }
   };
 
-  // const handleCheckedPaid = (event, checked) => {
-  //   if (checked) {
-  //     setChecked((checked === true) => {
-  //       return (
-  //         <>
-  //           <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
-  //           <OutlinedInput
-  //             id="outlined-adornment-amount"
-  //             value={amount}
-  //             onChange={handleChange}
-  //             startAdornment={
-  //               <InputAdornment position="start">£</InputAdornment>
-  //             }
-  //             label="Amount"
-  //           />
-  //           <InputLabel />
-  //         </>
-  //       );
-  //     });
-  //   }
-  // };
+  const handleCheckedPaid = (event) => {
+    event.preventDefault();
+    setChecked(!checked);
+  };
 
-  const handleCheckedSolo = () => {
-    console.log("checked");
+  const handleCheckedSolo = (event) => {
+    event.preventDefault();
+    setChecked(!checked);
   };
 
   const {
@@ -169,7 +161,7 @@ const Ad = ({ details }) => {
             alignItems: "center",
           }}
           autoComplete="off"
-          // onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onSubmit)}
           component="form"
         >
           {/* event section*/}
@@ -214,7 +206,14 @@ const Ad = ({ details }) => {
                       <ArrowCircleLeftIcon fontSize="large" />
                     </IconButton>
                     <Card sx={{ maxWidth: "100vw" }}>
-                      <EventAdCard />
+                      {!loading &&
+                        data.getAllEventsForOwner.map((event) => (
+                          <EventAdCard
+                            key={event.id}
+                            details={event}
+                            setCurrentEventId={setCurrentEventId}
+                          />
+                        ))}
                     </Card>
                     <IconButton aria-label="nextImage" onClick={handleNext}>
                       <ArrowCircleRightIcon fontSize="large" />
@@ -284,6 +283,7 @@ const Ad = ({ details }) => {
                     <FormControlLabel
                       control={<Checkbox control />}
                       label="Solo Band"
+                      value={soloChecked}
                       onChange={handleCheckedSolo}
                     />
                     <FormControlLabel
@@ -292,32 +292,25 @@ const Ad = ({ details }) => {
                       {...register("isPaid")}
                       control={<Checkbox control />}
                       label="Paid Event"
-                      onChange={(event) => {
-                        if (checked) {
-                          setChecked(
-                            render(
-                              <>
-                                <InputLabel htmlFor="outlined-adornment-amount">
-                                  Amount
-                                </InputLabel>
-                                <OutlinedInput
-                                  id="outlined-adornment-amount"
-                                  value={amount}
-                                  onChange={handleChange}
-                                  startAdornment={
-                                    <InputAdornment position="start">
-                                      £
-                                    </InputAdornment>
-                                  }
-                                  label="Amount"
-                                />
-                                <InputLabel />
-                              </>
-                            )
-                          );
-                        }
-                      }}
+                      onChange={handleCheckedPaid}
                     />
+                    {checked && (
+                      <>
+                        <InputLabel htmlFor="outlined-adornment-amount">
+                          Amount
+                        </InputLabel>
+                        <OutlinedInput
+                          id="outlined-adornment-amount"
+                          value={amount}
+                          onChange={handleChange}
+                          startAdornment={
+                            <InputAdornment position="start">£</InputAdornment>
+                          }
+                          label="Amount"
+                        />
+                        <InputLabel />
+                      </>
+                    )}
                   </FormGroup>
 
                   {/* add the add the payment fee here */}

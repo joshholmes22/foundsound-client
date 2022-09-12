@@ -9,10 +9,11 @@ import Box from "@mui/material/Box";
 
 import theme from "../../utils/themes";
 
-// use the info from event data
-// get all the events by a specific id
-
-const EventAdCard = ({ details }) => {
+const EventAdCard = ({ details, setCurrentEventId }) => {
+  const handleOnClick = (event) => {
+    event.preventDefault();
+    setCurrentEventId(event.target.getAttribute("data-id"));
+  };
   return (
     <ThemeProvider theme={theme}>
       <Card sx={{ maxWidth: 345 }}>
@@ -20,14 +21,14 @@ const EventAdCard = ({ details }) => {
           component="img"
           alt="event image"
           height="140"
-          // image={details.imageUrl}
+          image={details.imageUrl}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" align="center">
-            {/* {details.name} */} Event card name
+            {details.name}
           </Typography>
           <Typography variant="body2" color="text.secondary" align="center">
-            {/* {details.description} */} Event card description
+            {details.description}
           </Typography>
           <CardActions
             sx={{
@@ -44,7 +45,9 @@ const EventAdCard = ({ details }) => {
                 alignItems: "center",
               }}
             >
-              <Button size="small">View</Button>
+              <Button size="small" data-id={details.id} onClick={handleOnClick}>
+                SELECT
+              </Button>
             </Box>
           </CardActions>
         </CardContent>

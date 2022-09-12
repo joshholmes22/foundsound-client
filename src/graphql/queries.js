@@ -68,8 +68,8 @@ export const GET_ALL_EVENTS = gql`
 `;
 
 export const GET_ALL_EVENTS_FOR_OWNER = gql`
-  query Query($eventOwner: ID!) {
-    getAllEventsForOwner(eventOwner: $eventOwner) {
+  query Query {
+    getAllEventsForOwner {
       name
       description
       address {
