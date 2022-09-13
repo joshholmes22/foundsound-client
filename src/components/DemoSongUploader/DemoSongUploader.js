@@ -17,7 +17,8 @@ const DemoSongUploader = ({ uploadedTracks, setUploadedTracks }) => {
 
   const [newTrack, setNewTrack] = useState("");
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     if (newTrack) {
       const splitTrack = newTrack.trim().split(":");
       if (splitTrack[0] === "spotify" && splitTrack[1] === "track") {
@@ -26,9 +27,11 @@ const DemoSongUploader = ({ uploadedTracks, setUploadedTracks }) => {
           setErrorText("ERROR: This track is already added");
           setTrackError(true);
         } else {
+          console.log("uploadedTracks", uploadedTracks);
+          console.log("trackData", trackData);
           setUploadedTracks([...uploadedTracks, trackData]);
           const createArtistProfileInput = {
-            demoSong: [trackData],
+            demoSong: [...uploadedTracks, trackData],
           };
           createArtistProfile({ variables: { createArtistProfileInput } });
 
@@ -45,10 +48,6 @@ const DemoSongUploader = ({ uploadedTracks, setUploadedTracks }) => {
     }
   };
 
-  useEffect(() => {
-    console.log(`HERE: ${data}`);
-  }, [data]);
-
   return (
     <Box
       sx={{
@@ -58,7 +57,11 @@ const DemoSongUploader = ({ uploadedTracks, setUploadedTracks }) => {
         justifyContent: "center",
       }}
     >
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <Box
+        sx={{ display: "flex", flexDirection: "column" }}
+        component="form"
+        onSubmit={handleSubmit}
+      >
         <TextField
           id="outlined-basic"
           label="Spotify URI"
@@ -67,12 +70,7 @@ const DemoSongUploader = ({ uploadedTracks, setUploadedTracks }) => {
           value={newTrack}
           onInput={(e) => setNewTrack(e.target.value)}
         />
-        <Button
-          type="submit"
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={handleSubmit}
-        >
+        <Button type="submit" variant="contained" startIcon={<AddIcon />}>
           Upload
         </Button>
         <FormHelperText id="my-helper-text" sx={{ textAlign: "center" }}>
