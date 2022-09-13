@@ -38,6 +38,7 @@ import { GET_ALL_EVENTS_FOR_OWNER } from "../../graphql/queries";
 import { CREATE_ADVERT } from "../../graphql/mutations";
 import "./Ad.css";
 import EventAdCard from "../../components/EventAdCard/EventAdCard";
+import { AlignVerticalCenterOutlined } from "@mui/icons-material";
 
 const Ad = ({ details }) => {
   const { data, loading, error } = useQuery(GET_ALL_EVENTS_FOR_OWNER);
@@ -142,7 +143,7 @@ const Ad = ({ details }) => {
         >
           {/* event section*/}
           <Grid container spacing={3}>
-            <Grid item xs={12}>
+            <Grid item>
               <Stack spacing={3}>
                 <Typography
                   component="h2"
@@ -157,47 +158,21 @@ const Ad = ({ details }) => {
                 >
                   Step 1: Select An Event
                 </Typography>
-
-                {/* event box */}
-                <Box sx={{ display: "flex", justifyContent: "center" }}>
-                  <Card>
-                    <CardMedia
-                      component="box"
-                      alt="event selector"
-                      sx={{
-                        width: "100vw",
-                        height: "45vh",
-                        position: "relative",
-                        display: "table-header-group;",
-                      }}
-                    />
-                  </Card>
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      display: "flex",
-                    }}
-                  >
-                    {/* <IconButton aria-label="previousImage" onClick={handleBack}>
-                      <ArrowCircleLeftIcon fontSize="large" />
-                    </IconButton> */}
-                    <div className="AdCardsContainer">
-                      <Card sx={{ maxWidth: "100vw" }}>
-                        {!loading &&
-                          data.getAllEventsForOwner.map((event) => (
-                            <EventAdCard
-                              key={event.id}
-                              details={event}
-                              setCurrentEventId={setCurrentEventId}
-                            />
-                          ))}
-                      </Card>
-                    </div>
-
-                    {/* <IconButton aria-label="nextImage" onClick={handleNext}>
-                      <ArrowCircleRightIcon fontSize="large" />
-                    </IconButton> */}
-                  </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                  }}
+                >
+                  {!loading &&
+                    data.getAllEventsForOwner.map((event) => (
+                      <EventAdCard
+                        key={event.id}
+                        details={event}
+                        setCurrentEventId={setCurrentEventId}
+                      />
+                    ))}
                 </Box>
               </Stack>
             </Grid>
