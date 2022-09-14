@@ -7,12 +7,7 @@ import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 
-const ArtistTracks = () => {
-  const demoSongs = [
-    "2knlNLtT7XdKadSzBjycVQ",
-    "1BRQhOPY3QtY8hcvafhvjq",
-    "24qK0O65X0l6TViKiKFbq2",
-  ];
+const ArtistTracks = ({ demoSongs }) => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = demoSongs.length;

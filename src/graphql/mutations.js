@@ -64,3 +64,28 @@ export const CREATE_EVENT = gql`
     }
   }
 `;
+
+export const CREATE_ARTIST_PROFILE = gql`
+  mutation Mutation($createArtistProfileInput: CreateArtistProfileInput!) {
+    createArtistProfile(createArtistProfileInput: $createArtistProfileInput) {
+      name
+      user {
+        id
+        firstName
+        lastName
+        email
+        imageUrl
+        imageFileName
+        socialMedia
+        userType
+      }
+      demoSong
+      tags {
+        name
+      }
+      rider
+      artistImage
+      artistImageName
+    }
+  }
+`;
