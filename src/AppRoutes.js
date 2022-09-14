@@ -11,6 +11,7 @@ import { useAuth } from "./context/AppProvider";
 import ArtistProfile from "./pages/ArtistProfile";
 import ArtistDemoSongs from "./pages/ArtistDemoSongs";
 import ArtistPhotos from "./pages/ArtistPhotos";
+import ArtistInfo from "./pages/ArtistInfo/ArtistInfo";
 
 const AppRoutes = () => {
   const { isLoggedIn, user } = useAuth();
@@ -51,6 +52,7 @@ const AppRoutes = () => {
           <Route path="/artistProfile" element={<ArtistProfile />} />
           <Route path="/uploadPhotos" element={<ArtistPhotos />} />
           <Route path="/uploadTracks" element={<ArtistDemoSongs />} />
+          <Route path="/editInfo" element={<ArtistInfo />} />
         </>
       )}
     </Routes>
