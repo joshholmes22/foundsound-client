@@ -53,7 +53,7 @@ const Ad = ({ details }) => {
 
   useEffect(() => {
     if (advertData?.createAdvert?.id) {
-      navigate("/events", { replace: true });
+      navigate("/ads", { replace: true });
     }
   }, [advertData, navigate]);
 
