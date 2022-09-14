@@ -10,6 +10,8 @@ import Profile from "./pages/Profile";
 import { useAuth } from "./context/AppProvider";
 import ArtistProfile from "./pages/ArtistProfile";
 import CreateAd from "./pages/CreateAd/createAd";
+import Ads from "./pages/Ads/Ads";
+import Events from "./pages/Events/Events";
 
 const AppRoutes = () => {
   const { isLoggedIn, user } = useAuth();
@@ -41,6 +43,8 @@ const AppRoutes = () => {
           <Route path="/artists" element={<Artists />} />
           <Route path="/createAd" element={<CreateAd />} />
           <Route path="/createEvent" element={<CreateEvent />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/ads" element={<Ads />} />
         </>
       )}
 

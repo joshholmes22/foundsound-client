@@ -29,10 +29,11 @@ const EventOrganiserNavBar = () => {
 
   const pages = [
     { label: "Dashboard", path: "/dashboard" },
-    { label: "Create Event", path: "/createEvent" },
     { label: "My Events", path: "/events" },
-    { label: "Create Advert", path: "/createAd" },
     { label: "My Adverts", path: "/ads" },
+    { label: "My Responses", path: "/responses" },
+    { label: "Create Event", path: "/createEvent" },
+    { label: "Create Advert", path: "/createAd" },
     { label: "Public Profile", path: "/eventOrganiserProfile" },
     { label: "Settings", path: "/settings" },
     { label: "Log Out", path: "/home" },
