@@ -40,7 +40,7 @@ const ArtistImageUploader = ({ imageData }) => {
   }, [imageUrl]);
 
   useEffect(() => {
-    console.log("data", data);
+    // console.log(imageData);
   }, [data]);
 
   return (
@@ -62,20 +62,17 @@ const ArtistImageUploader = ({ imageData }) => {
             // Promote the list into its own layer in Chrome. This costs memory, but helps keeping high FPS.
             transform: "translateZ(0)",
           }}
-          rowHeight={200}
-          gap={1}
+          rowHeight={400}
+          gap={5}
         >
-          {itemData.map((item) => {
+          {imageData.map((item) => {
+            console.log(item);
             const cols = item.featured ? 2 : 1;
             const rows = item.featured ? 2 : 1;
 
             return (
-              <ImageListItem key={item.img} cols={cols} rows={rows}>
-                <img
-                  {...srcset(item.img, 250, 200, rows, cols)}
-                  alt={item.title}
-                  loading="lazy"
-                />
+              <ImageListItem key={item} cols={cols} rows={rows}>
+                <img {...srcset(item, 250, 200)} alt={item} loading="lazy" />
                 <ImageListItemBar
                   sx={{
                     background:
