@@ -67,6 +67,31 @@ export const GET_ALL_EVENTS = gql`
   }
 `;
 
+export const GET_ARTIST_BY_ID = gql`
+  query GetArtist($artistId: ID!) {
+    getArtist(artistId: $artistId) {
+      name
+      demoSong
+      tags {
+        name
+      }
+      rider
+      artistImage
+      artistImageName
+      user {
+        id
+        firstName
+        lastName
+        email
+        imageUrl
+        imageFileName
+        socialMedia
+        userType
+      }
+    }
+  }
+`;
+
 export const GET_ALL_EVENTS_FOR_OWNER = gql`
   query Query {
     getAllEventsForOwner {

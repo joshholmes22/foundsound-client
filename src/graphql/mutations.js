@@ -65,50 +65,11 @@ export const CREATE_EVENT = gql`
   }
 `;
 
-export const CREATE_ADVERT = gql`
-  mutation Mutation($createAdvertInput: CreateAdvertInput!) {
-    createAdvert(createAdvertInput: $createAdvertInput) {
-      id
+export const CREATE_ARTIST_PROFILE = gql`
+  mutation Mutation($createArtistProfileInput: CreateArtistProfileInput!) {
+    createArtistProfile(createArtistProfileInput: $createArtistProfileInput) {
       name
-      description
-      address {
-        _id
-        formatted_address
-        thoroughfare
-        building_name
-        sub_building_name
-        sub_building_number
-        building_number
-        line_1
-        line_2
-        line_3
-        line_4
-        locality
-        town_or_city
-        county
-        district
-        country
-        fullAddress
-      }
-      postcode
-      startDate
-      endDate
-      startTime
-      endTime
-      imageUrl
-      tags {
-        name
-      }
-      adverts {
-        event
-        description
-        setTime
-        solo
-        fee
-        isPaid
-        expires
-      }
-      eventOwner {
+      user {
         id
         firstName
         lastName
@@ -118,6 +79,13 @@ export const CREATE_ADVERT = gql`
         socialMedia
         userType
       }
+      demoSong
+      tags {
+        name
+      }
+      rider
+      artistImage
+      artistImageName
     }
   }
 `;

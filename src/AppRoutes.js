@@ -12,6 +12,9 @@ import ArtistProfile from "./pages/ArtistProfile";
 import CreateAd from "./pages/CreateAd/createAd";
 import Ads from "./pages/Ads/Ads";
 import Events from "./pages/Events/Events";
+import ArtistDemoSongs from "./pages/ArtistDemoSongs";
+import ArtistPhotos from "./pages/ArtistPhotos";
+import ArtistInfo from "./pages/ArtistInfo/ArtistInfo";
 
 const AppRoutes = () => {
   const { isLoggedIn, user } = useAuth();
@@ -54,6 +57,9 @@ const AppRoutes = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/settings" element={<Profile />} />
           <Route path="/artistProfile" element={<ArtistProfile />} />
+          <Route path="/uploadPhotos" element={<ArtistPhotos />} />
+          <Route path="/uploadTracks" element={<ArtistDemoSongs />} />
+          <Route path="/editInfo" element={<ArtistInfo />} />
         </>
       )}
     </Routes>

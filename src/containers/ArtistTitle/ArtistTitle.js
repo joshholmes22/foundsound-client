@@ -21,19 +21,36 @@ const ArtistTitle = ({ title }) => {
           justifyContent: "center",
         }}
       >
-        <Typography
-          variant="h4"
-          component="div"
-          sx={{
-            color: "#fff",
-            fontWeight: "bold",
-            fontSize: "35px",
-            textAlign: "center",
-            marginRight: "10px",
-          }}
-        >
-          {title}
-        </Typography>
+        {title ? (
+          <Typography
+            variant="h4"
+            component="div"
+            sx={{
+              color: "#fff",
+              fontWeight: "bold",
+              fontSize: "35px",
+              textAlign: "center",
+              marginRight: "10px",
+            }}
+          >
+            {title}
+          </Typography>
+        ) : (
+          <Typography
+            variant="h4"
+            component="div"
+            sx={{
+              color: "#fff",
+              fontWeight: "bold",
+              fontSize: "35px",
+              textAlign: "center",
+              marginRight: "10px",
+            }}
+          >
+            Artist Name
+          </Typography>
+        )}
+
         {!follow ? (
           <Button
             variant="contained"
