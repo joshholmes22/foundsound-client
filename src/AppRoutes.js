@@ -3,13 +3,13 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Events from "./pages/Events";
+import CreateEvent from "./pages/CreateEvent/CreateEvent";
 import Artists from "./pages/Artists";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import { useAuth } from "./context/AppProvider";
 import ArtistProfile from "./pages/ArtistProfile";
-import Ad from "./pages/Ad/Ad";
+import CreateAd from "./pages/CreateAd/createAd";
 
 const AppRoutes = () => {
   const { isLoggedIn, user } = useAuth();
@@ -21,8 +21,6 @@ const AppRoutes = () => {
           <Route path="/*" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/artists" element={<Artists />} />
-          <Route path="/ad" element={<Ad />} />
         </>
       )}
 
@@ -31,6 +29,7 @@ const AppRoutes = () => {
           <Route path="/*" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/artists" element={<Artists />} />
         </>
       )}
 
@@ -39,8 +38,9 @@ const AppRoutes = () => {
           <Route path="/*" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/ad" element={<Ad />} />
+          <Route path="/artists" element={<Artists />} />
+          <Route path="/createAd" element={<CreateAd />} />
+          <Route path="/createEvent" element={<CreateEvent />} />
         </>
       )}
 
