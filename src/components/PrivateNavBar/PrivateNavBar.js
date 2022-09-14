@@ -48,7 +48,7 @@ const PrivateNavBar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: "#0A0A0A80" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -58,15 +58,16 @@ const PrivateNavBar = () => {
             href="/"
             sx={{
               mr: 2,
+
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
+              fontFamily: "montserrat",
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            FOUND SOUND
+            FOUNDSOUND
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -127,14 +128,14 @@ const PrivateNavBar = () => {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
+              fontFamily: "montserrat",
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            FOUND SOUND
+            FOUNDSOUND
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {user.userType === "audienceMember" &&
