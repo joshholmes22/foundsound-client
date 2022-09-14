@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import { ImageUploader } from "../../components/ImageUploader";
 import { useAuth } from "../../context/AppProvider";
@@ -7,6 +7,9 @@ import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import IconButton from "@mui/material/IconButton";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import { Typography } from "@mui/material";
+import { CREATE_ARTIST_PROFILE } from "../../graphql/mutations";
+import { useMutation } from "@apollo/client";
 
 function srcset(image, width, height, rows = 1, cols = 1) {
   return {
@@ -17,10 +20,29 @@ function srcset(image, width, height, rows = 1, cols = 1) {
   };
 }
 
-const ArtistImageUploader = () => {
+const ArtistImageUploader = ({ imageData }) => {
   const { user } = useAuth();
   const [imageUrl, setImageUrl] = useState();
   const [fileName, setFileName] = useState();
+
+  const [createArtistProfile, { data, loading, error }] = useMutation(
+    CREATE_ARTIST_PROFILE
+  );
+
+  useEffect(() => {
+    console.log("here");
+    if (imageUrl) {
+      const createArtistProfileInput = {
+        artistImage: [...imageData, imageUrl],
+      };
+      createArtistProfile({ variables: { createArtistProfileInput } });
+    }
+  }, [imageUrl]);
+
+  useEffect(() => {
+    console.log("data", data);
+  }, [data]);
+
   return (
     <>
       <Box sx={{ mt: "5vh" }}>
@@ -32,48 +54,54 @@ const ArtistImageUploader = () => {
           imageUse="artistImage"
         />
       </Box>
-      <ImageList
-        sx={{
-          width: 800,
-          height: 450,
-          // Promote the list into its own layer in Chrome. This costs memory, but helps keeping high FPS.
-          transform: "translateZ(0)",
-        }}
-        rowHeight={200}
-        gap={1}
-      >
-        {itemData.map((item) => {
-          const cols = item.featured ? 2 : 1;
-          const rows = item.featured ? 2 : 1;
+      {imageData.length !== 0 ? (
+        <ImageList
+          sx={{
+            width: 800,
+            height: 450,
+            // Promote the list into its own layer in Chrome. This costs memory, but helps keeping high FPS.
+            transform: "translateZ(0)",
+          }}
+          rowHeight={200}
+          gap={1}
+        >
+          {itemData.map((item) => {
+            const cols = item.featured ? 2 : 1;
+            const rows = item.featured ? 2 : 1;
 
-          return (
-            <ImageListItem key={item.img} cols={cols} rows={rows}>
-              <img
-                {...srcset(item.img, 250, 200, rows, cols)}
-                alt={item.title}
-                loading="lazy"
-              />
-              <ImageListItemBar
-                sx={{
-                  background:
-                    "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
-                    "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
-                }}
-                position="top"
-                actionIcon={
-                  <IconButton
-                    sx={{ color: "white" }}
-                    aria-label={`star ${item.title}`}
-                  >
-                    <RemoveCircleOutlineIcon />
-                  </IconButton>
-                }
-                actionPosition="left"
-              />
-            </ImageListItem>
-          );
-        })}
-      </ImageList>
+            return (
+              <ImageListItem key={item.img} cols={cols} rows={rows}>
+                <img
+                  {...srcset(item.img, 250, 200, rows, cols)}
+                  alt={item.title}
+                  loading="lazy"
+                />
+                <ImageListItemBar
+                  sx={{
+                    background:
+                      "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
+                      "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+                  }}
+                  position="top"
+                  actionIcon={
+                    <IconButton
+                      sx={{ color: "white" }}
+                      aria-label={`star ${item.title}`}
+                    >
+                      <RemoveCircleOutlineIcon />
+                    </IconButton>
+                  }
+                  actionPosition="left"
+                />
+              </ImageListItem>
+            );
+          })}
+        </ImageList>
+      ) : (
+        <Box>
+          <Typography>No images</Typography>
+        </Box>
+      )}
     </>
   );
 };
