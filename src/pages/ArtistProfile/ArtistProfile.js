@@ -7,27 +7,42 @@ import ArtistBanner from "../../containers/ArtistBanner";
 import ArtistTracks from "../../containers/ArtistTracks";
 import ArtistEvents from "../../containers/ArtistEvents";
 
+import { useQuery } from "@apollo/client";
+import { GET_ARTIST_BY_ID } from "../../graphql/queries";
+
+import { useAuth } from "../../context/AppProvider";
+import { useEffect, useState } from "react";
+
 const ArtistProfile = () => {
-  const demoSongs = [
-    "2knlNLtT7XdKadSzBjycVQ",
-    "1BRQhOPY3QtY8hcvafhvjq",
-    "24qK0O65X0l6TViKiKFbq2",
-  ];
+  const { user } = useAuth();
+  const { data, loading, error } = useQuery(GET_ARTIST_BY_ID, {
+    variables: { artistId: user.id },
+  });
+  const [formatData, setFormatData] = useState();
+
+  useEffect(() => {
+    if (data) {
+      console.log(data.getArtist);
+      setFormatData(data.getArtist);
+    }
+  }, [data]);
   return (
     <Box sx={{ display: { md: "flex" } }}>
       <ArtistNavBar />
 
-      <Box
-        sx={{
-          marginTop: { md: "60px" },
-          maxWidth: { md: "87vw", sm: "100vw" },
-        }}
-      >
-        <ArtistTitle title="Josh Holmes" />
-        <ArtistBanner bannerImg={bannerImg} />
-        <ArtistTracks demoSongs={demoSongs} />
-        <ArtistEvents />
-      </Box>
+      {formatData && (
+        <Box
+          sx={{
+            marginTop: { md: "60px" },
+            maxWidth: { md: "87vw", sm: "100vw" },
+          }}
+        >
+          <ArtistTitle title={formatData.name} />
+          <ArtistBanner artistImages={formatData.artistImage} />
+          <ArtistTracks demoSongs={formatData.demoSong} />
+          <ArtistEvents />
+        </Box>
+      )}
     </Box>
   );
 };
