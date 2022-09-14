@@ -169,6 +169,7 @@ const Ad = ({ details }) => {
                   }}
                 >
                   {!loading &&
+                    data &&
                     data.getAllEventsForOwner.map((event) => (
                       <EventAdCard
                         sx={{

@@ -7,12 +7,16 @@ import { Typography } from "@mui/material";
 
 const AllEvents = () => {
   const [getAllEvents, { data, loading, error }] = useLazyQuery(GET_ALL_EVENTS);
+
+  console.log(error);
+
   const [eventData, setEventData] = useState();
 
   const getEvents = async () => {
     await getAllEvents();
-
-    setEventData(data.getAllEvents);
+    if (!loading && !error) {
+      setEventData(data.getAllEvents);
+    }
   };
 
   useEffect(() => {
@@ -20,9 +24,9 @@ const AllEvents = () => {
     getEvents();
   }, [data]);
 
-  useEffect(() => {
-    console.log(eventData);
-  }, [eventData]);
+  // useEffect(() => {
+  //   console.log(eventData);
+  // }, [eventData]);
 
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>

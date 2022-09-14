@@ -77,17 +77,18 @@ const EventForm = () => {
     fetchPolicy: "network-only",
   });
 
-  const [createEvent, { data, loading, error }] = useMutation(CREATE_EVENT);
+  const [createEvent, { data: eventCreated, loading, error }] =
+    useMutation(CREATE_EVENT);
 
   const { user } = useAuth();
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (data?.createEvent?.id) {
-      navigate("/dashboard", { replace: true });
-    }
-  }, [data, navigate]);
+  // useEffect(() => {
+  //   if (data?.createEvent?.id) {
+  //     navigate("/dashboard", { replace: true });
+  //   }
+  // }, [data, navigate]);
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -229,226 +230,22 @@ const EventForm = () => {
         <Typography variant="h6" gutterBottom align="center" sx={{ m: "30px" }}>
           Add Event Information
         </Typography>
-        <Box
-          sx={{
-            marginTop: 5,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-          autoComplete="off"
-          onSubmit={handleSubmit(onSubmit)}
-          component="form"
-        >
-          <Grid container spacing={3}>
-            {/* event details */}
-            <Grid item xs={12}>
-              <Stack spacing={3}>
-                <Typography
-                  component="h2"
-                  variant="button"
-                  align="left"
-                  color={theme.palette.primary.main}
-                  marginBottom={1}
-                  sx={{
-                    fontSize: 15,
-                    fontWeight: "large",
-                  }}
-                >
-                  Event Details
-                </Typography>
-                <TextField
-                  id="name"
-                  name="name"
-                  label="Event Name"
-                  fullWidth
-                  {...register("name", { required: true })}
-                  helperText={
-                    !!errors.name ? "Please provide an event name." : ""
-                  }
-                  autoComplete="given-name"
-                />
-                <TextField
-                  id="description"
-                  label="Description"
-                  fullWidth
-                  {...register("description", { required: true })}
-                  helperText={
-                    !!errors.description
-                      ? "Please provide an event description."
-                      : ""
-                  }
-                  placeholder="Description"
-                  multiline
-                />
-              </Stack>
-            </Grid>
-
-            {/* venue details */}
-            <Grid item xs={12}>
-              <Stack spacing={3}>
-                <Typography
-                  component="h2"
-                  variant="button"
-                  align="left"
-                  color={theme.palette.primary.main}
-                  marginBottom={1}
-                  sx={{
-                    fontSize: 15,
-                    fontWeight: "large",
-                  }}
-                >
-                  Venue Details
-                </Typography>
-                <FormControl sx={{ m: 1 }} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-password">
-                    Postcode
-                  </InputLabel>
-                  <OutlinedInput
-                    id="outlined-adornment-password"
-                    type="text"
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleAddressLookup}
-                          onMouseDown={handleAddressLookup}
-                          edge="end"
-                        >
-                          <SearchIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                    label="Password"
-                    {...register("postcode", {
-                      required: true,
-                    })}
-                  />
-                  {!!errors.postcode && (
-                    <FormHelperText error={!!errors.postcode}>
-                      {errors.postcode?.message}
-                    </FormHelperText>
-                  )}
-                  {selectedAddress && (
-                    <Typography component="div" variant="caption" align="left">
-                      {selectedAddress}
-                    </Typography>
-                  )}
-                </FormControl>
-                <Autocomplete
-                  multiple
-                  filterSelectedOptions
-                  filterOptions={(options, params) => {
-                    const filtered = filter(options, params);
-
-                    const { inputValue } = params;
-                    const isExisting = options.some(
-                      (option) => inputValue === option.name
-                    );
-                    if (inputValue !== "" && !isExisting) {
-                      filtered.push({
-                        inputValue,
-                        name: `${inputValue}`,
-                      });
-                    }
-
-                    return filtered;
-                  }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Tags"
-                      placeholder="Select Tags"
-                    />
-                  )}
-                  id="tags"
-                  {...register("tags")}
-                  options={commonTags}
-                  getOptionLabel={(option) => option.name}
-                  defaultValue={[commonTags[1]]}
-                  isOptionEqualToValue={(option, value) =>
-                    option.name === value.name
-                  }
-                  freeSolo
-                  onChange={(event, newValue) => {
-                    if (typeof newValue === "string") {
-                      setTags({
-                        name: newValue,
-                      });
-                    } else if (newValue && newValue.inputValue) {
-                      // Create a new value from the user input
-                      setTags({
-                        name: newValue.inputValue,
-                      });
-                    } else {
-                      setTags(newValue);
-                    }
-                  }}
-                />
-                <Autocomplete
-                  multiple
-                  filterSelectedOptions
-                  filterOptions={(options, params) => {
-                    const filtered = filter(options, params);
-
-                    const { inputValue } = params;
-                    const isExisting = options.some(
-                      (option) => inputValue === option.name
-                    );
-                    if (inputValue !== "" && !isExisting) {
-                      filtered.push({
-                        inputValue,
-                        name: `${inputValue}`,
-                      });
-                    }
-
-                    return filtered;
-                  }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      value={facilities}
-                      label="Facilities"
-                      placeholder="Select Facilities "
-                    />
-                  )}
-                  id="facilities"
-                  {...register("facilities")}
-                  options={facilityOptions}
-                  getOptionLabel={(option) => option}
-                  defaultValue={[facilityOptions[1]]}
-                  isOptionEqualToValue={(option, value) => option === value}
-                  freeSolo
-                  onChange={(event, newValue) => {
-                    if (typeof newValue === "string") {
-                      setFacilities({
-                        name: newValue,
-                      });
-                    } else if (newValue && newValue.inputValue) {
-                      // Create a new value from the user input
-                      setFacilities({
-                        name: newValue.inputValue,
-                      });
-                    } else {
-                      setFacilities(newValue);
-                    }
-                  }}
-                />
-
-                <FormControl sx={{ m: 1 }} variant="standard">
-                  <TextField
-                    label="Capacity"
-                    id="capacity"
-                    {...register("capacity")}
-                    // labelId="demo-customized-select-label"
-                  ></TextField>
-                </FormControl>
-              </Stack>
-            </Grid>
-
-            {/* schedule details */}
-            <Grid item xs={12}>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
+        {eventCreated && <h1>event created</h1>}
+        {!eventCreated && (
+          <Box
+            sx={{
+              marginTop: 5,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+            autoComplete="off"
+            onSubmit={handleSubmit(onSubmit)}
+            component="form"
+          >
+            <Grid container spacing={3}>
+              {/* event details */}
+              <Grid item xs={12}>
                 <Stack spacing={3}>
                   <Typography
                     component="h2"
@@ -461,100 +258,311 @@ const EventForm = () => {
                       fontWeight: "large",
                     }}
                   >
-                    Schedule Details
+                    Event Details
                   </Typography>
-                  <DesktopDatePicker
-                    label="Start Date of Event*"
-                    required
-                    value={startDate}
-                    minDate={new Date()}
-                    onChange={(newStartValue) => {
-                      setStartDate(newStartValue);
-                    }}
-                    renderInput={(params) => <TextField {...params} />}
+                  <TextField
+                    id="name"
+                    name="name"
+                    label="Event Name"
+                    fullWidth
+                    {...register("name", { required: true })}
+                    helperText={
+                      !!errors.name ? "Please provide an event name." : ""
+                    }
+                    autoComplete="given-name"
                   />
-                  <DesktopDatePicker
-                    label="End Date of Event*"
-                    required
-                    value={endDate}
-                    minDate={startDate}
-                    onChange={(newEndValue) => {
-                      setEndDate(newEndValue);
-                    }}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                  <TimePicker
-                    label="Start Time of Event"
-                    value={startTime}
-                    onChange={(newStartTime) => {
-                      setStartTime(newStartTime);
-                    }}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                  <TimePicker
-                    label="End Time of Event"
-                    value={endTime}
-                    onChange={(newEndTime) => {
-                      setEndTime(newEndTime);
-                    }}
-                    renderInput={(params) => <TextField {...params} />}
+                  <TextField
+                    id="description"
+                    label="Description"
+                    fullWidth
+                    {...register("description", { required: true })}
+                    helperText={
+                      !!errors.description
+                        ? "Please provide an event description."
+                        : ""
+                    }
+                    placeholder="Description"
+                    multiline
                   />
                 </Stack>
-              </LocalizationProvider>
-            </Grid>
+              </Grid>
 
-            {/* additional info */}
-            <Grid
-              item
-              xs={12}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <Stack
-                spacing={3}
+              {/* venue details */}
+              <Grid item xs={12}>
+                <Stack spacing={3}>
+                  <Typography
+                    component="h2"
+                    variant="button"
+                    align="left"
+                    color={theme.palette.primary.main}
+                    marginBottom={1}
+                    sx={{
+                      fontSize: 15,
+                      fontWeight: "large",
+                    }}
+                  >
+                    Venue Details
+                  </Typography>
+                  <FormControl sx={{ m: 1 }} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">
+                      Postcode
+                    </InputLabel>
+                    <OutlinedInput
+                      id="outlined-adornment-password"
+                      type="text"
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleAddressLookup}
+                            onMouseDown={handleAddressLookup}
+                            edge="end"
+                          >
+                            <SearchIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      label="Password"
+                      {...register("postcode", {
+                        required: true,
+                      })}
+                    />
+                    {!!errors.postcode && (
+                      <FormHelperText error={!!errors.postcode}>
+                        {errors.postcode?.message}
+                      </FormHelperText>
+                    )}
+                    {selectedAddress && (
+                      <Typography
+                        component="div"
+                        variant="caption"
+                        align="left"
+                      >
+                        {selectedAddress}
+                      </Typography>
+                    )}
+                  </FormControl>
+                  <Autocomplete
+                    multiple
+                    filterSelectedOptions
+                    filterOptions={(options, params) => {
+                      const filtered = filter(options, params);
+
+                      const { inputValue } = params;
+                      const isExisting = options.some(
+                        (option) => inputValue === option.name
+                      );
+                      if (inputValue !== "" && !isExisting) {
+                        filtered.push({
+                          inputValue,
+                          name: `${inputValue}`,
+                        });
+                      }
+
+                      return filtered;
+                    }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Tags"
+                        placeholder="Select Tags"
+                      />
+                    )}
+                    id="tags"
+                    {...register("tags")}
+                    options={commonTags}
+                    getOptionLabel={(option) => option.name}
+                    defaultValue={[commonTags[1]]}
+                    isOptionEqualToValue={(option, value) =>
+                      option.name === value.name
+                    }
+                    freeSolo
+                    onChange={(event, newValue) => {
+                      if (typeof newValue === "string") {
+                        setTags({
+                          name: newValue,
+                        });
+                      } else if (newValue && newValue.inputValue) {
+                        // Create a new value from the user input
+                        setTags({
+                          name: newValue.inputValue,
+                        });
+                      } else {
+                        setTags(newValue);
+                      }
+                    }}
+                  />
+                  <Autocomplete
+                    multiple
+                    filterSelectedOptions
+                    filterOptions={(options, params) => {
+                      const filtered = filter(options, params);
+
+                      const { inputValue } = params;
+                      const isExisting = options.some(
+                        (option) => inputValue === option.name
+                      );
+                      if (inputValue !== "" && !isExisting) {
+                        filtered.push({
+                          inputValue,
+                          name: `${inputValue}`,
+                        });
+                      }
+
+                      return filtered;
+                    }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        value={facilities}
+                        label="Facilities"
+                        placeholder="Select Facilities "
+                      />
+                    )}
+                    id="facilities"
+                    {...register("facilities")}
+                    options={facilityOptions}
+                    getOptionLabel={(option) => option}
+                    defaultValue={[facilityOptions[1]]}
+                    isOptionEqualToValue={(option, value) => option === value}
+                    freeSolo
+                    onChange={(event, newValue) => {
+                      if (typeof newValue === "string") {
+                        setFacilities({
+                          name: newValue,
+                        });
+                      } else if (newValue && newValue.inputValue) {
+                        // Create a new value from the user input
+                        setFacilities({
+                          name: newValue.inputValue,
+                        });
+                      } else {
+                        setFacilities(newValue);
+                      }
+                    }}
+                  />
+
+                  <FormControl sx={{ m: 1 }} variant="standard">
+                    <TextField
+                      label="Capacity"
+                      id="capacity"
+                      {...register("capacity")}
+                      // labelId="demo-customized-select-label"
+                    ></TextField>
+                  </FormControl>
+                </Stack>
+              </Grid>
+
+              {/* schedule details */}
+              <Grid item xs={12}>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <Stack spacing={3}>
+                    <Typography
+                      component="h2"
+                      variant="button"
+                      align="left"
+                      color={theme.palette.primary.main}
+                      marginBottom={1}
+                      sx={{
+                        fontSize: 15,
+                        fontWeight: "large",
+                      }}
+                    >
+                      Schedule Details
+                    </Typography>
+                    <DesktopDatePicker
+                      label="Start Date of Event*"
+                      required
+                      value={startDate}
+                      minDate={new Date()}
+                      onChange={(newStartValue) => {
+                        setStartDate(newStartValue);
+                      }}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                    <DesktopDatePicker
+                      label="End Date of Event*"
+                      required
+                      value={endDate}
+                      minDate={startDate}
+                      onChange={(newEndValue) => {
+                        setEndDate(newEndValue);
+                      }}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                    <TimePicker
+                      label="Start Time of Event"
+                      value={startTime}
+                      onChange={(newStartTime) => {
+                        setStartTime(newStartTime);
+                      }}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                    <TimePicker
+                      label="End Time of Event"
+                      value={endTime}
+                      onChange={(newEndTime) => {
+                        setEndTime(newEndTime);
+                      }}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </Stack>
+                </LocalizationProvider>
+              </Grid>
+
+              {/* additional info */}
+              <Grid
+                item
+                xs={12}
                 sx={{
-                  width: "100%",
                   display: "flex",
                   justifyContent: "center",
-                  alignItems: "center",
                 }}
               >
-                <Typography
-                  component="h2"
-                  variant="button"
-                  align="left"
-                  color={theme.palette.primary.main}
-                  marginBottom={1}
+                <Stack
+                  spacing={3}
                   sx={{
-                    fontSize: 15,
-                    fontWeight: "large",
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                 >
-                  Additional Information
-                </Typography>
-                <ImageUploader
-                  imageUrl={imageUrl}
-                  setImageUrl={setImageUrl}
-                  setFileName={setFileName}
-                  dirName={`users/${user.email}/events`}
-                  imageUse="eventsImage"
-                />
-              </Stack>
+                  <Typography
+                    component="h2"
+                    variant="button"
+                    align="left"
+                    color={theme.palette.primary.main}
+                    marginBottom={1}
+                    sx={{
+                      fontSize: 15,
+                      fontWeight: "large",
+                    }}
+                  >
+                    Additional Information
+                  </Typography>
+                  <ImageUploader
+                    imageUrl={imageUrl}
+                    setImageUrl={setImageUrl}
+                    setFileName={setFileName}
+                    dirName={`users/${user.email}/events`}
+                    imageUse="eventsImage"
+                  />
+                </Stack>
+              </Grid>
             </Grid>
-          </Grid>
 
-          <LoadingButton
-            type="submit"
-            fullWidth
-            variant="contained"
-            loading={loading}
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Create Event
-          </LoadingButton>
-        </Box>
+            <LoadingButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              loading={loading}
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Create Event
+            </LoadingButton>
+          </Box>
+        )}
       </Container>
     </ThemeProvider>
   );
