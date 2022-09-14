@@ -51,6 +51,12 @@ const Ad = ({ details }) => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (advertData?.createAdvert?.id) {
+      navigate("/events", { replace: true });
+    }
+  }, [advertData, navigate]);
+
   const [startDate, setStartDate] = useState(new Date());
   const [expires, setExpiryDate] = useState(new Date());
   const [amount, setAmount] = useState();
@@ -59,9 +65,6 @@ const Ad = ({ details }) => {
   const [currentEventId, setCurrentEventId] = useState(
     data?.getAllEventsForOwner[0]?.id
   );
-  // const [eventData, setEventData] = useState();
-  // const [activeStep, setActiveStep] = useState(0);
-  // const [eventStep, setEventStep] = useState(0);
 
   const onSubmit = (formData) => {
     const createAdvertInput = {
@@ -123,7 +126,7 @@ const Ad = ({ details }) => {
       <Divider />
       <Container
         component="main"
-        maxWidth="sm"
+        maxWidth="md"
         sx={{
           backgroundColor: "#F7F7F7",
           boxShadow: "#A4A3A2",
@@ -136,17 +139,14 @@ const Ad = ({ details }) => {
         <Box
           sx={{
             marginTop: 5,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
           }}
           autoComplete="off"
           onSubmit={handleSubmit(onSubmit)}
           component="form"
         >
           {/* event section*/}
-          <Grid container spacing={3}>
-            <Grid item>
+          <Grid container spacing={12}>
+            <Grid item xs={12}>
               <Stack spacing={3}>
                 <Typography
                   component="h2"
@@ -171,6 +171,11 @@ const Ad = ({ details }) => {
                   {!loading &&
                     data.getAllEventsForOwner.map((event) => (
                       <EventAdCard
+                        sx={{
+                          display: "flex",
+                          flexWrap: "wrap",
+                          justifyContent: "center",
+                        }}
                         key={event.id}
                         details={event}
                         setCurrentEventId={setCurrentEventId}
@@ -200,7 +205,6 @@ const Ad = ({ details }) => {
                   >
                     Step 2: Fill In Advert Information
                   </Typography>
-                  {/* render event forms here*/}
                   <TextField
                     id="description"
                     name="description"
@@ -260,8 +264,6 @@ const Ad = ({ details }) => {
                       </>
                     )}
                   </FormGroup>
-
-                  {/* add the add the payment fee here */}
                 </Stack>
               </LocalizationProvider>
             </Grid>

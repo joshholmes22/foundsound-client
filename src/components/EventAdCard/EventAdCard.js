@@ -16,35 +16,43 @@ const EventAdCard = ({ details, setCurrentEventId }) => {
     console.log(event.target.getAttribute("data-id"));
   };
   return (
-    <Card sx={{ height: "140hv", width: "250px", margin: 1 }}>
-      <CardMedia
-        component="img"
-        alt="event image"
-        height="140hv"
-        image={details.imageUrl}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div" align="center">
-          {details.name}
-        </Typography>
-        <Typography variant="body2" color="text.secondary" align="center">
-          {details.description}
-        </Typography>
+    <Box
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+      }}
+    >
+      <Card sx={{ height: "140hv", width: "250px", margin: 1 }}>
+        <CardMedia
+          component="img"
+          alt="event image"
+          height="140hv"
+          image={details.imageUrl}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div" align="center">
+            {details.name}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" align="center">
+            {details.description}
+          </Typography>
 
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-          }}
-        >
-          <Button size="small" data-id={details.id} onClick={handleOnClick}>
-            SELECT
-          </Button>
-        </Box>
-      </CardContent>
-    </Card>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
+            <Button size="small" data-id={details.id} onClick={handleOnClick}>
+              SELECT
+            </Button>
+          </Box>
+        </CardContent>
+      </Card>
+    </Box>
   );
 };
 
