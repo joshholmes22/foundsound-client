@@ -1,7 +1,18 @@
-import EventForm from "../../components/EventForm";
+import { Box } from "@mui/material";
+import EventOrganiserNavBar from "../../components/EventOrganiserNavBar";
+import AllEvents from "../../containers/AllEvents";
 
-const Event = () => {
-  return <EventForm />;
+const Events = () => {
+  return (
+    <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Box sx={{ display: "flex" }}>
+        <EventOrganiserNavBar />
+        <Box sx={{ marginTop: "50px" }}>
+          <AllEvents />
+        </Box>
+      </Box>
+    </Box>
+  );
 };
 
-export default Event;
+export default Events;

@@ -1,0 +1,13 @@
+.AdCardsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+@media screen {
+  .AdCardsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
