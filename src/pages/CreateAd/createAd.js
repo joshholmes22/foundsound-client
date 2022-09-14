@@ -39,6 +39,8 @@ import { CREATE_ADVERT } from "../../graphql/mutations";
 import "./Ad.css";
 import EventAdCard from "../../components/EventAdCard/EventAdCard";
 import { AlignVerticalCenterOutlined } from "@mui/icons-material";
+import EventOrganiserDashboard from "../../containers/EventOrganiserDashboard";
+import EventOrganiserNavBar from "../../components/EventOrganiserNavBar";
 
 const Ad = ({ details }) => {
   const { data, loading, error } = useQuery(GET_ALL_EVENTS_FOR_OWNER);
@@ -108,6 +110,7 @@ const Ad = ({ details }) => {
 
   return (
     <ThemeProvider theme={theme}>
+      <EventOrganiserNavBar />
       <Typography
         variant="h4"
         gutterBottom

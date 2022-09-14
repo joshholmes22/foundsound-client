@@ -1,11 +1,14 @@
+import Typography from "@mui/material/Typography";
+
 import "./EventOrganiserDashboard.css";
-import PrivateNavBar from "../../components/PrivateNavBar";
+import EventOrganiserNavBar from "../../components/EventOrganiserNavBar";
+// import PrivateNavBar from "../../components/PrivateNavBar";
 
 const EventOrganiserDashboard = () => {
   return (
     <div>
-      <PrivateNavBar />
-      <h1>Event Organiser Dashboard</h1>
+      {/* <PrivateNavBar /> */}
+      <EventOrganiserNavBar />
     </div>
   );
 };
