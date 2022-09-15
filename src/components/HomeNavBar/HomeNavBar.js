@@ -19,6 +19,7 @@ const pages = [
   { label: "Home", path: "/home" },
   { label: "Sign Up", path: "/signup" },
   { label: "Login", path: "/login" },
+  { label: "About Us", path: "/aboutMe" },
 ];
 
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];

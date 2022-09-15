@@ -15,6 +15,7 @@ import Events from "./pages/Events/Events";
 import ArtistDemoSongs from "./pages/ArtistDemoSongs";
 import ArtistPhotos from "./pages/ArtistPhotos";
 import ArtistInfo from "./pages/ArtistInfo/ArtistInfo";
+import AboutMe from "./pages/AboutMe";
 
 const AppRoutes = () => {
   const { isLoggedIn, user } = useAuth();
@@ -26,7 +27,7 @@ const AppRoutes = () => {
           <Route path="/*" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/about-me" element
+          <Route path="/aboutMe" element={<AboutMe />} />
         </>
       )}
 
