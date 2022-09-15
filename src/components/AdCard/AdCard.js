@@ -9,39 +9,73 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
+import Button from "@mui/material/Button";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-const AdCard = () => {
+import { useState } from "react";
+
+const AdCard = ({ details }) => {
   return (
-    <Card sx={{ width: 345, margin: 5 }}>
+    <Card
+      sx={{
+        backgroundColor: "#F7F7F7",
+        boxShadow: "#A4A3A2",
+        borderRadius: "15px",
+        width: 345,
+        margin: 5,
+      }}
+    >
       <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
+        avatar={<Avatar sx={{ bgcolor: red[500] }}>R</Avatar>}
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
           </IconButton>
         }
-        title="title"
-        subheader="title"
+        title={details.name}
+        // EVENT TITLE WILL HAVE TO GO HERE
       />
-      <CardMedia component="img" height="194" image="test" alt="test" />
+      <CardMedia
+        component="img"
+        height="194"
+        image={details.imageUrl}
+        alt={details.name}
+      />
+      {/* //IMAGE TO COME FROM THE EVENT */}
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          "test"
+        <Typography
+          variant="body2"
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {details.description}
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Payment:
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+      <CardActions
+        disableSpacing
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Button variant="contained">View Responses</Button>
       </CardActions>
     </Card>
   );
