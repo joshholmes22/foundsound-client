@@ -24,11 +24,11 @@ mpn i
 
 ### Signup Page
 
-![Signup Page](../foundsound-client/src/assets/images/signup-page.png)
+![Signup Page]("../foundsound-client/src/assets/images/signup-page.png")
 
 ### Login Page
 
-![Login Page](../foundsound-client/src/assets/images/login-page.png)
+![Login Page]("../foundsound-client/src/assets/images/login-page.png")
 
 ### Mobile View
 
