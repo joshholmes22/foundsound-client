@@ -24,15 +24,15 @@ mpn i
 
 ### Signup Page
 
-![Signup Page](./foundsound-client/src/assets/images/signup-page.png)
+![Signup Page](./src/assets/images/signup-page.png)
 
 ### Login Page
 
-![Login Page]("../foundsound-client/src/assets/images/login-page.png")
+![Login Page](./src/assets/images/login-page.png)
 
 ### Mobile View
 
-![Mobile View](../foundsound-client/src/assets/images/homepage-mobile.png)
+![Mobile View](./src/assets/images/homepage-mobile.png)
 
 # Contributors
 
