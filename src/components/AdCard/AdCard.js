@@ -12,11 +12,9 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import Button from "@mui/material/Button";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-const AdCard = () => {
-  const { data, loading, error } = useQuery(GET_ALL_EVENTS_FOR_OWNER);
-  const [createAdvert, { data: advertData }] = useMutation(CREATE_ADVERT);
-  console.log(advertData);
+import { useState } from "react";
 
+const AdCard = () => {
   return (
     <Card
       sx={{

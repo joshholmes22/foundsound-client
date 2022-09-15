@@ -140,7 +140,7 @@ export const GET_ALL_EVENTS_FOR_OWNER = gql`
   }
 `;
 
-const GET_ALL_ADS_FOR_OWNER = gql`
+export const GET_ALL_ADS_FOR_OWNER = gql`
   query Query {
     getAllAdsForEventOwner {
       event {
