@@ -2,6 +2,12 @@
 
 # About FoundSound
 
+The FoundSound app gives artists, event organisers and audience members the ability to interact with one another in a way that hasn't been done before!
+
+FoundSound gives artists the ability to respond to ads posted by event organisers.
+
+Event organisers can post ads where artists can respond to get them to play a gig at their event.
+
 Keep reading to find out more about our application.
 
 # Project Link
@@ -10,11 +16,21 @@ Keep reading to find out more about our application.
 
 ## Getting Started
 
+To run the application locally you will first need to clone both the client and server repositories.
+
+To access the server repository click [here](https://github.com/glowingmanagement/foundsound-server) and follow the steps to get started with the server.
+
 ```
 git@github.com:glowingmanagement/foundsound-client.git
 cd foundsound-client
 mpn i
 ```
+
+## About The Project
+
+FoundSound is a React.js application, using GraphQL queries and mutations to connect with our Apollo server and MongoDB database.
+
+## Key Features
 
 ## Screenshots
 
