@@ -187,7 +187,7 @@ const Ad = ({ details }) => {
                         justifyContent: "center",
                       }}
                     >
-                      {!!data?.getAllEventsForOwner && (
+                      {!data?.getAllEventsForOwner && (
                         <Alert severity="info">
                           No events to select. Please create an event
                         </Alert>
