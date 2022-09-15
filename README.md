@@ -1,5 +1,9 @@
 # FoundSound
 
+# About FoundSound
+
+Keep reading to find out more about our application.
+
 # Project Link
 
 [Heroku Link](https://shielded-springs-74302.herokuapp.com/)
@@ -11,6 +15,24 @@ git@github.com:glowingmanagement/foundsound-client.git
 cd foundsound-client
 mpn i
 ```
+
+## Screenshots
+
+### Desktop View
+
+![Desktop View](../foundsound-client/src/assets/images/homepage-desktop.png)
+
+### Signup Page
+
+![Signup Page](../foundsound-client/src/assets/images/signup-page.png)
+
+### Login Page
+
+![Login Page](../foundsound-client/src/assets/images/login-page.png)
+
+### Mobile View
+
+![Mobile View](../foundsound-client/src/assets/images/homepage-mobile.png)
 
 # Contributors
 
