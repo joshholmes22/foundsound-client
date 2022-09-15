@@ -13,6 +13,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const ArtistCard = ({ details }) => {
+  console.log(details);
   const songName = "2knlNLtT7XdKadSzBjycVQ";
   return (
     <Card
@@ -50,14 +51,14 @@ const ArtistCard = ({ details }) => {
       <CardMedia
         component="img"
         height="194"
-        image={details.imageUrl}
+        image={details.artistImage[0]}
         alt={details.name}
       />
 
       <div>
         <iframe
           title="Song"
-          src={`https://open.spotify.com/embed/track/${songName}?utm_source=generator&theme=0`}
+          src={`https://open.spotify.com/embed/track/${details.demoSong[0]}?utm_source=generator&theme=0`}
           width="100%"
           height="100"
           frameBorder="0"

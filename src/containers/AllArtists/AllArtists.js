@@ -7,9 +7,6 @@ import { Typography } from "@mui/material";
 
 const AllArtists = () => {
   const { data, loading, error } = useQuery(GET_ALL_ARTISTS);
-  const [artistsData, setArtistsData] = useState([]);
-
-  console.log(data);
 
   const artist = {
     name: "Josh Holmes",
@@ -22,7 +19,11 @@ const AllArtists = () => {
 
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-      {/* {data && <ArtistCard details={artistsData[0]} key={"item.id"} />} */}
+      {data &&
+        data?.getAllArtists.length !== 0 &&
+        data.getAllArtists.map((item) => (
+          <ArtistCard details={item} key={item.name} />
+        ))}
     </Box>
   );
 };
