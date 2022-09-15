@@ -43,7 +43,15 @@ const AdCard = () => {
           "test"
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
+      <CardActions
+        disableSpacing
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Button variant="contained">View Responses</Button>
       </CardActions>
     </Card>
