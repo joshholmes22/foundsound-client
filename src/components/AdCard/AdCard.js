@@ -29,15 +29,16 @@ const AdCard = ({ details }) => {
         borderRadius: "15px",
         width: 345,
         margin: 5,
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        alignItems: "center",
+        fontWeight: "900",
+        fontSize: "1.5vw",
+        alignText: "center",
       }}
     >
       <CardHeader
-        avatar={<Avatar sx={{ bgcolor: red[500] }}>R</Avatar>}
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
         title={details.event.name}
         // EVENT TITLE WILL HAVE TO GO HERE
       />
@@ -56,10 +57,14 @@ const AdCard = ({ details }) => {
             flexWrap: "wrap",
             justifyContent: "center",
             alignItems: "center",
+            fontWeight: "400",
+            fontSize: "1.5vw",
+            marginBottom: "1vh",
           }}
         >
           {details.description}
         </Typography>
+
         <Typography
           variant="body2"
           sx={{
@@ -69,8 +74,9 @@ const AdCard = ({ details }) => {
             alignItems: "center",
           }}
         >
-          Payment: {details.fee}
+          {details.fee ? `Payment: ${details.fee}` : "Free"}
         </Typography>
+
         <Typography
           variant="body2"
           sx={{
