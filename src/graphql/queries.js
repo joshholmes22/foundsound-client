@@ -59,7 +59,6 @@ export const GET_ALL_EVENTS = gql`
         lastName
         email
         imageUrl
-        imageFileName
         socialMedia
         userType
       }
@@ -84,7 +83,6 @@ export const GET_ARTIST_BY_ID = gql`
         lastName
         email
         imageUrl
-        imageFileName
         socialMedia
         userType
       }
@@ -131,7 +129,6 @@ export const GET_ALL_EVENTS_FOR_OWNER = gql`
         lastName
         email
         imageUrl
-        imageFileName
         socialMedia
         userType
       }
@@ -191,7 +188,6 @@ export const GET_ALL_ADS_FOR_OWNER = gql`
           lastName
           email
           imageUrl
-          imageFileName
           socialMedia
           userType
         }
@@ -217,7 +213,6 @@ export const GET_ALL_ARTISTS = gql`
         lastName
         email
         imageUrl
-        imageFileName
         socialMedia
         userType
       }

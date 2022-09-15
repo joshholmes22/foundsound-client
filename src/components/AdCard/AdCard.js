@@ -15,6 +15,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
 
 const AdCard = ({ details }) => {
+  console.log(details);
   return (
     <Card
       sx={{
