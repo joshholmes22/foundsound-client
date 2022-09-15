@@ -11,10 +11,15 @@ import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Button from "@mui/material/Button";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { fromUnixTime } from "date-fns";
 
 import { useState } from "react";
 
 const AdCard = ({ details }) => {
+  const expiresDate = fromUnixTime(details.expires / 1000)
+    .toString()
+    .split("2022")[0];
+
   console.log(details);
   return (
     <Card
@@ -64,7 +69,7 @@ const AdCard = ({ details }) => {
             alignItems: "center",
           }}
         >
-          Payment:{details.fee}
+          Payment: {details.fee}
         </Typography>
         <Typography
           variant="body2"
@@ -75,7 +80,7 @@ const AdCard = ({ details }) => {
             alignItems: "center",
           }}
         >
-          Please respond by:{details.expires}
+          Please respond by: {`${expiresDate}`}
         </Typography>
       </CardContent>
       <CardActions
