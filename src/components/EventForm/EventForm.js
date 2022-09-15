@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -32,7 +34,7 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { ThemeProvider } from "@mui/material/styles";
 import { useLazyQuery } from "@apollo/client";
 import { LoadingButton } from "@mui/lab";
-import { useNavigate } from "react-router-dom";
+import Alert from "@mui/material/Alert";
 
 import theme from "../../utils/themes";
 import { useAuth } from "../../context/AppProvider";
@@ -227,10 +229,16 @@ const EventForm = () => {
             <Button onClick={handleCloseModal}>Cancel</Button>
           </DialogActions>
         </Dialog>
-        <Typography variant="h6" gutterBottom align="center" sx={{ m: "30px" }}>
-          Add Event Information
-        </Typography>
-        {eventCreated && <h1>event created</h1>}
+
+        {eventCreated && (
+          <>
+            <Stack sx={{ width: "100%" }} spacing={2}>
+              <Alert sx={{ marginTop: "10px" }} severity="success">
+                Successfully Created An Event
+              </Alert>
+            </Stack>
+          </>
+        )}
         {!eventCreated && (
           <Box
             sx={{
@@ -278,7 +286,7 @@ const EventForm = () => {
                     {...register("description", { required: true })}
                     helperText={
                       !!errors.description
-                        ? "Please provide an event description."
+                        ? "Please provide an event description over 10 letters."
                         : ""
                     }
                     placeholder="Description"
@@ -447,7 +455,6 @@ const EventForm = () => {
                       label="Capacity"
                       id="capacity"
                       {...register("capacity")}
-                      // labelId="demo-customized-select-label"
                     ></TextField>
                   </FormControl>
                 </Stack>
