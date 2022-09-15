@@ -20,11 +20,11 @@ mpn i
 
 ### Desktop View
 
-![Desktop View](../foundsound-client/src/assets/images/homepage-desktop.png)
+![Desktop View](./src/assets/images/homepage-desktop.png)
 
 ### Signup Page
 
-![Signup Page]("../foundsound-client/src/assets/images/signup-page.png")
+![Signup Page](./foundsound-client/src/assets/images/signup-page.png)
 
 ### Login Page
 
