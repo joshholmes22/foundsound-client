@@ -46,6 +46,10 @@ FoundSound is a React.js application, using GraphQL queries and mutations to con
 
 ![Login Page](./src/assets/images/login-page.png)
 
+### Artist Dashboard
+
+![Login Page](./src/assets/images/profile-page.png)
+
 ### Mobile View
 
 ![Mobile View](./src/assets/images/homepage-mobile.png)
