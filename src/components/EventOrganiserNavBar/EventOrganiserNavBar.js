@@ -16,7 +16,7 @@ import Avatar from "@mui/material/Avatar";
 import { useAuth } from "../../context/AppProvider";
 import { useNavigate } from "react-router-dom";
 
-const drawerWidth = "150px";
+const drawerWidth = "160px";
 
 const EventOrganiserNavBar = () => {
   const { user } = useAuth();

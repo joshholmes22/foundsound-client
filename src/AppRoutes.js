@@ -60,6 +60,7 @@ const AppRoutes = () => {
           <Route path="/uploadPhotos" element={<ArtistPhotos />} />
           <Route path="/uploadTracks" element={<ArtistDemoSongs />} />
           <Route path="/editInfo" element={<ArtistInfo />} />
+          <Route path="/viewAds" element={<AllAds />} />
         </>
       )}
     </Routes>

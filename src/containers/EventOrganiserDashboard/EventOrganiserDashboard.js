@@ -3,15 +3,22 @@ import Typography from "@mui/material/Typography";
 import "./EventOrganiserDashboard.css";
 import EventOrganiserNavBar from "../../components/EventOrganiserNavBar";
 import Banner from "../../components/Banner";
-// import PrivateNavBar from "../../components/PrivateNavBar";
+import { Box } from "@mui/material";
 
 const EventOrganiserDashboard = () => {
   return (
     <div>
-      {/* <PrivateNavBar /> */}
-      <EventOrganiserNavBar />
+      <Box
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      >
+        <Box>
+          <EventOrganiserNavBar />
 
-      <Banner />
+          <Box sx={{ marginTop: "50px" }}>
+            <Banner />
+          </Box>
+        </Box>
+      </Box>
     </div>
   );
 };
