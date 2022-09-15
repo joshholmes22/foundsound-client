@@ -14,7 +14,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 import { useState } from "react";
 
-const AdCard = () => {
+const AdCard = ({ details }) => {
   return (
     <Card
       sx={{
@@ -32,10 +32,15 @@ const AdCard = () => {
             <MoreVertIcon />
           </IconButton>
         }
-        title="My Wedding"
+        title={details.name}
         // EVENT TITLE WILL HAVE TO GO HERE
       />
-      <CardMedia component="img" height="194" image="test" alt="test" />
+      <CardMedia
+        component="img"
+        height="194"
+        image={details.imageUrl}
+        alt={details.name}
+      />
       {/* //IMAGE TO COME FROM THE EVENT */}
       <CardContent>
         <Typography
@@ -47,7 +52,7 @@ const AdCard = () => {
             alignItems: "center",
           }}
         >
-          The description will go here
+          {details.description}
         </Typography>
         <Typography
           variant="body2"

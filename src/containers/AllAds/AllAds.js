@@ -3,20 +3,25 @@ import AdCard from "../../components/AdCard/AdCard";
 import Typography from "@mui/material/Typography";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../utils/themes";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GET_ALL_ADS_FOR_OWNER } from "../../graphql/queries";
 import { useLazyQuery, useQuery } from "@apollo/client";
 
 const AllAds = () => {
   const { data, loading, error } = useQuery(GET_ALL_ADS_FOR_OWNER);
   console.log(data);
-  const [getAllAdverts, advertData, setAdvertData] = useState();
+  const [advertData, setAdvertData] = useState();
 
+  useEffect(() => {
+    if (!data) {
+      getAdverts();
+    }
+  }, [data]);
   const getAdverts = async () => {
-    await getAllAdverts();
     if (!loading && !error) {
       setAdvertData(data.getAllAdverts);
     }
+
     return (
       <ThemeProvider theme={theme}>
         <Box>
