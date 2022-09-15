@@ -131,7 +131,6 @@ export const GET_ALL_EVENTS_FOR_OWNER = gql`
         lastName
         email
         imageUrl
-        imageFileName
         socialMedia
         userType
       }

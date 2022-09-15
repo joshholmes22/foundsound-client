@@ -48,8 +48,6 @@ const Ad = ({ details }) => {
   const [createAdvert, { data: advertData }] = useMutation(CREATE_ADVERT);
   console.log(advertData);
 
-  console.log(data);
-
   const { user } = useAuth();
 
   const navigate = useNavigate();
@@ -187,25 +185,23 @@ const Ad = ({ details }) => {
                         justifyContent: "center",
                       }}
                     >
-                      {!data?.getAllEventsForOwner && (
+                      {data?.getAllEventsForOwner.length === 0 && (
                         <Alert severity="info">
                           No events to select. Please create an event
                         </Alert>
                       )}
-                      {!loading &&
-                        data &&
-                        data.getAllEventsForOwner.map((event) => (
-                          <EventAdCard
-                            sx={{
-                              display: "flex",
-                              flexWrap: "wrap",
-                              justifyContent: "center",
-                            }}
-                            key={event.id}
-                            details={event}
-                            setCurrentEventId={setCurrentEventId}
-                          />
-                        ))}
+                      {data?.getAllEventsForOwner.map((event) => (
+                        <EventAdCard
+                          sx={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            justifyContent: "center",
+                          }}
+                          key={event.id}
+                          details={event}
+                          setCurrentEventId={setCurrentEventId}
+                        />
+                      ))}
                     </Box>
                   </Stack>
                 </Grid>
