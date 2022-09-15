@@ -1,5 +1,6 @@
+import AboutMeContainer from "../../components/AboutMe";
 const AboutMe = () => {
-  return <h1>Hello</h1>;
+  return <AboutMeContainer />;
 };
 
 export default AboutMe;
