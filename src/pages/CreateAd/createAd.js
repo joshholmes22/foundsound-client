@@ -54,11 +54,11 @@ const Ad = ({ details }) => {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (advertData?.createAdvert?.id) {
-  //     navigate("/ads", { replace: true });
-  //   }
-  // }, [advertData, navigate]);
+  useEffect(() => {
+    if (advertData?.createAdvert?.id) {
+      navigate("/ads", { replace: true });
+    }
+  }, [advertData, navigate]);
 
   const [startDate, setStartDate] = useState(new Date());
   const [expires, setExpiryDate] = useState(new Date());
@@ -140,7 +140,7 @@ const Ad = ({ details }) => {
           <Divider />
           <Container
             component="main"
-            maxWidth="md"
+            maxWidth="sm"
             sx={{
               backgroundColor: "#F7F7F7",
               boxShadow: "#A4A3A2",
