@@ -79,12 +79,6 @@ export const GET_ARTIST_BY_ID = gql`
       artistImageName
       user {
         id
-        firstName
-        lastName
-        email
-        imageUrl
-        socialMedia
-        userType
       }
     }
   }
@@ -209,12 +203,6 @@ export const GET_ALL_ARTISTS = gql`
       name
       user {
         id
-        firstName
-        lastName
-        email
-        imageUrl
-        socialMedia
-        userType
       }
       demoSong
       tags {

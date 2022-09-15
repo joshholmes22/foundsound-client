@@ -15,6 +15,7 @@ import Events from "./pages/Events/Events";
 import ArtistDemoSongs from "./pages/ArtistDemoSongs";
 import ArtistPhotos from "./pages/ArtistPhotos";
 import ArtistInfo from "./pages/ArtistInfo/ArtistInfo";
+import PublicArtistProfile from "./pages/PublicArtistProfile/ArtistProfile";
 
 const AppRoutes = () => {
   const { isLoggedIn, user } = useAuth();
@@ -35,6 +36,7 @@ const AppRoutes = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/artists" element={<Artists />} />
+          <Route path="/artistProfile/:id" element={<PublicArtistProfile />} />
         </>
       )}
 

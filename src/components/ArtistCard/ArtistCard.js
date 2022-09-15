@@ -11,10 +11,11 @@ import Box from "@mui/material/Box";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { useNavigate } from "react-router-dom";
 
 const ArtistCard = ({ details }) => {
+  const navigate = useNavigate();
   console.log(details);
-  const songName = "2knlNLtT7XdKadSzBjycVQ";
   return (
     <Card
       sx={{
@@ -67,7 +68,13 @@ const ArtistCard = ({ details }) => {
       <Box
         sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
       >
-        <Button variant="contained" href="#contained-buttons" sx={{}}>
+        <Button
+          variant="contained"
+          onClick={() => {
+            navigate(`/artistProfile/${details.user.id}`);
+          }}
+          sx={{}}
+        >
           View profile
         </Button>
       </Box>
