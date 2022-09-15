@@ -13,6 +13,10 @@ import Button from "@mui/material/Button";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const AdCard = () => {
+  const { data, loading, error } = useQuery(GET_ALL_EVENTS_FOR_OWNER);
+  const [createAdvert, { data: advertData }] = useMutation(CREATE_ADVERT);
+  console.log(advertData);
+
   return (
     <Card
       sx={{
@@ -24,23 +28,39 @@ const AdCard = () => {
       }}
     >
       <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
+        avatar={<Avatar sx={{ bgcolor: red[500] }}>R</Avatar>}
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
           </IconButton>
         }
-        title="title"
-        subheader="title"
+        title="My Wedding"
+        // EVENT TITLE WILL HAVE TO GO HERE
       />
       <CardMedia component="img" height="194" image="test" alt="test" />
+      {/* //IMAGE TO COME FROM THE EVENT */}
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          "test"
+        <Typography
+          variant="body2"
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          The description will go here
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Payment:
         </Typography>
       </CardContent>
       <CardActions
