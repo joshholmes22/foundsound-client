@@ -33,13 +33,13 @@ const AdCard = ({ details }) => {
             <MoreVertIcon />
           </IconButton>
         }
-        title={details.name}
+        title={details.event.name}
         // EVENT TITLE WILL HAVE TO GO HERE
       />
       <CardMedia
         component="img"
         height="194"
-        image={details.imageUrl}
+        image={details.event.imageUrl}
         alt={details.name}
       />
       {/* //IMAGE TO COME FROM THE EVENT */}
@@ -64,7 +64,18 @@ const AdCard = ({ details }) => {
             alignItems: "center",
           }}
         >
-          Payment:
+          Payment:{details.fee}
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Please respond by:{details.expires}
         </Typography>
       </CardContent>
       <CardActions
