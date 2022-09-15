@@ -15,6 +15,7 @@ import Events from "./pages/Events/Events";
 import ArtistDemoSongs from "./pages/ArtistDemoSongs";
 import ArtistPhotos from "./pages/ArtistPhotos";
 import ArtistInfo from "./pages/ArtistInfo/ArtistInfo";
+import ViewAds from "./containers/ViewAds/ViewAds";
 
 const AppRoutes = () => {
   const { isLoggedIn, user } = useAuth();
@@ -60,7 +61,7 @@ const AppRoutes = () => {
           <Route path="/uploadPhotos" element={<ArtistPhotos />} />
           <Route path="/uploadTracks" element={<ArtistDemoSongs />} />
           <Route path="/editInfo" element={<ArtistInfo />} />
-          <Route path="/viewAds" element={<AllAds />} />
+          <Route path="/viewAds" element={<ViewAds />} />
         </>
       )}
     </Routes>
