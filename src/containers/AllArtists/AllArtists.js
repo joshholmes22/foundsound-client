@@ -1,7 +1,16 @@
 import ArtistCard from "../../components/ArtistCard/ArtistCard";
 import Box from "@mui/material/Box";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_ARTISTS } from "../../graphql/queries";
+import { useState, useEffect } from "react";
+import { Typography } from "@mui/material";
 
 const AllArtists = () => {
+  const { data, loading, error } = useQuery(GET_ALL_ARTISTS);
+  const [artistsData, setArtistsData] = useState([]);
+
+  console.log(data);
+
   const artist = {
     name: "Josh Holmes",
     description: "Josh is a singer from the UK",
@@ -13,11 +22,15 @@ const AllArtists = () => {
 
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-      <ArtistCard details={artist} />
-      <ArtistCard details={artist} />
-      <ArtistCard details={artist} />
+      {/* {data && <ArtistCard details={artistsData[0]} key={"item.id"} />} */}
     </Box>
   );
 };
 
 export default AllArtists;
+
+{
+  /* artistsData.map((item) => (
+          <ArtistCard details={artist} key={item.id} />
+        )) */
+}

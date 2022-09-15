@@ -139,3 +139,28 @@ export const GET_ALL_EVENTS_FOR_OWNER = gql`
     }
   }
 `;
+
+export const GET_ALL_ARTISTS = gql`
+  query GetAllArtists {
+    getAllArtists {
+      name
+      user {
+        id
+        firstName
+        lastName
+        email
+        imageUrl
+        imageFileName
+        socialMedia
+        userType
+      }
+      demoSong
+      tags {
+        name
+      }
+      rider
+      artistImage
+      artistImageName
+    }
+  }
+`;
