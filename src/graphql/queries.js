@@ -216,15 +216,8 @@ export const GET_ALL_ARTISTS = gql`
 `;
 
 export const GET_ALL_ADS = gql`
-  query GetAllAds {
+  query Query {
     getAllAds {
-      description
-      setTime
-      solo
-      fee
-      isPaid
-      expires
-      allResponses
       event {
         id
         name
@@ -258,6 +251,7 @@ export const GET_ALL_ADS = gql`
           name
         }
         adverts {
+          _id
           event
           description
           setTime
@@ -277,6 +271,14 @@ export const GET_ALL_ADS = gql`
           userType
         }
       }
+      _id
+      description
+      setTime
+      solo
+      fee
+      isPaid
+      expires
+      allResponses
     }
   }
 `;

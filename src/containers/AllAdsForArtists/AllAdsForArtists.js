@@ -11,7 +11,7 @@ import { CircularProgress } from "@mui/material";
 const AllAdsForArtists = () => {
   const { data, loading, error } = useQuery(GET_ALL_ADS);
 
-  console.log(data?.getAllAds);
+  console.log(error);
 
   return (
     <ThemeProvider theme={theme}>
