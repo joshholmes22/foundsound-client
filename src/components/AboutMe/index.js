@@ -1,3 +1,3 @@
-import AboutMe from "./AboutMe";
+import AboutMeCard from "./AboutMeCard";
 
-export default AboutMe;
+export default AboutMeCard;
