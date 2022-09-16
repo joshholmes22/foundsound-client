@@ -1,4 +1,4 @@
-import AllEvents from "../AllEvents";
+import AllAds from "../AllAds";
 import ArtistNavBar from "../../components/ArtistNavBar/ArtistNavBar";
 import { Box } from "@mui/material";
 
@@ -8,7 +8,7 @@ const ArtistDashboard = () => {
       <Box sx={{ display: "flex" }}>
         <ArtistNavBar />
         <Box sx={{ marginTop: "50px" }}>
-          <AllEvents />
+          <AllAds />
         </Box>
       </Box>
     </Box>
