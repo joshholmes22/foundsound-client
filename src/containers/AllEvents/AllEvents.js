@@ -7,8 +7,6 @@ import { useLazyQuery } from "@apollo/client";
 const AllEvents = () => {
   const [getAllEvents, { data, loading, error }] = useLazyQuery(GET_ALL_EVENTS);
 
-  console.log(error);
-
   const [eventData, setEventData] = useState();
 
   const getEvents = async () => {
@@ -19,7 +17,6 @@ const AllEvents = () => {
   };
 
   useEffect(() => {
-    console.log(loading);
     getEvents();
   }, [data]);
 

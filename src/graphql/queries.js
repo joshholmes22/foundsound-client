@@ -59,7 +59,6 @@ export const GET_ALL_EVENTS = gql`
         lastName
         email
         imageUrl
-        imageFileName
         socialMedia
         userType
       }
@@ -80,13 +79,6 @@ export const GET_ARTIST_BY_ID = gql`
       artistImageName
       user {
         id
-        firstName
-        lastName
-        email
-        imageUrl
-        imageFileName
-        socialMedia
-        userType
       }
     }
   }
@@ -190,7 +182,10 @@ export const GET_ALL_ADS_FOR_OWNER = gql`
           lastName
           email
           imageUrl
+<<<<<<< HEAD
           imageFileName
+=======
+>>>>>>> a73ac8a57ac75e7b6c621ffc2930d53426a42a3c
           socialMedia
           userType
         }
@@ -205,3 +200,24 @@ export const GET_ALL_ADS_FOR_OWNER = gql`
     }
   }
 `;
+<<<<<<< HEAD
+=======
+
+export const GET_ALL_ARTISTS = gql`
+  query GetAllArtists {
+    getAllArtists {
+      name
+      user {
+        id
+      }
+      demoSong
+      tags {
+        name
+      }
+      rider
+      artistImage
+      artistImageName
+    }
+  }
+`;
+>>>>>>> a73ac8a57ac75e7b6c621ffc2930d53426a42a3c
