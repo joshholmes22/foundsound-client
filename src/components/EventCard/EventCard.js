@@ -23,7 +23,7 @@ const EventCard = ({ details }) => {
   return (
     <Card
       sx={{
-        backgroundColor: "#0A0A0A80",
+        backgroundColor: "#343A40",
         width: 345,
         margin: 5,
         "@media(minWidth: 375px)": {

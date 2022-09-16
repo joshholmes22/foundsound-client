@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 
 const drawerWidth = "160px";
 
-const EventOrganiserNavBar = () => {
+const AudienceMemberNavBar = () => {
   const { user } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
@@ -29,13 +29,9 @@ const EventOrganiserNavBar = () => {
 
   const pages = [
     { label: "Dashboard", path: "/dashboard" },
-    { label: "Create Event", path: "/createEvent" },
-    { label: "Create Advert", path: "/createAd" },
-    { label: "My Events", path: "/events" },
-    { label: "My Adverts", path: "/ads" },
-    { label: "My Responses", path: "/responses" },
-    { label: "Public Profile", path: "/eventOrganiserProfile" },
-    { label: "Settings", path: "/settings" },
+    { label: "Artists", path: "/viewAllArtists" },
+    { label: "Events", path: "/viewEvents" },
+    { label: "Profile", path: "/profile" },
     { label: "Log Out", path: "/home" },
   ];
 
@@ -112,7 +108,7 @@ const EventOrganiserNavBar = () => {
             component="div"
             sx={{ fontWeight: "500", fontSize: "25px" }}
           >
-            FOUNDSOUND EVENT ORGANISER
+            FOUNDSOUND AUDIENCE MEMBER
           </Typography>
         </Toolbar>
       </AppBar>
@@ -170,4 +166,4 @@ const EventOrganiserNavBar = () => {
   );
 };
 
-export default EventOrganiserNavBar;
+export default AudienceMemberNavBar;
