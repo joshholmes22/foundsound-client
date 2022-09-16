@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 import ImageWithBackground from "../../components/ImageWithBackground";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useState } from "react";
+import HomeNavBar from "../../components/HomeNavBar";
 
 import "./Signup.css";
 import { Typography } from "@mui/material";
