@@ -1,12 +1,17 @@
-import PrivateNavBar from "../../components/PrivateNavBar";
+import { ThemeProvider } from "@mui/material/styles";
+
+import AudienceMemberNavBar from "../../components/AudienceMemberNavBar";
 import AllEvents from "../AllEvents";
+import theme from "../../utils/themes";
 
 const AudienceDashboard = () => {
   return (
-    <div>
-      <PrivateNavBar />
-      <AllEvents />
-    </div>
+    <>
+      <ThemeProvider theme={theme}>
+        <AudienceMemberNavBar />
+        <AllEvents />
+      </ThemeProvider>
+    </>
   );
 };
 
