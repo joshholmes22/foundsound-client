@@ -12,6 +12,7 @@ import Stack from "@mui/material/Stack";
 import DoneIcon from "@mui/icons-material/Done";
 import DeleteIcon from "@mui/icons-material/Delete";
 const AboutMeCard = ({ info }) => {
+  console.log(info);
   return (
     <Card sx={{ width: "30vw", margin: "2rem" }}>
       <CardMedia component="img" height="140"></CardMedia>

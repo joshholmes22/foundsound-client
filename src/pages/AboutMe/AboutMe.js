@@ -1,6 +1,20 @@
 import AboutMeContainer from "../../components/AboutMe";
+import * as React from "react";
+import { Box, Container, margin } from "@mui/system";
+import { Typography } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Chip from "@mui/material/Chip";
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+import DoneIcon from "@mui/icons-material/Done";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 const AboutMe = () => {
-  const info = {[{name: "Josh Holmes", imageURL: "https://avatars.githubusercontent.com/u/69100584?v=4", description: ""}, {name: "Josh Holmes", imageURL: "https://avatars.githubusercontent.com/u/69100584?v=4", description: ""}, {name: "Josh Holmes", imageURL: "https://avatars.githubusercontent.com/u/69100584?v=4", description: ""}, {name: "Josh Holmes", imageURL: "https://avatars.githubusercontent.com/u/69100584?v=4", description: ""}]};
+  const info = {[{name: "Josh Holmes", imageURL: "https://avatars.githubusercontent.com/u/69100584?v=4", description: ""}, {name: "Josh Holmes", imageURL: "https://avatars.githubusercontent.com/u/69100584?v=4", description: ""}, {name: "Josh Holmes", imageURL: "https://avatars.githubusercontent.com/u/69100584?v=4", description: ""}, {name: "Josh Holmes", imageURL: "https://avatars.githubusercontent.com/u/69100584?v=4", description: ""}]}
   return (
     <Box backgroundColor="#000000">
       <Box
