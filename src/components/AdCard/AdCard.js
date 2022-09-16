@@ -14,8 +14,11 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import Button from "@mui/material/Button";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { fromUnixTime } from "date-fns";
+import { useAuth } from "../../context/AppProvider";
+import AcceptAdButton from "../AcceptAdButton/AcceptAdButton";
 
 const AdCard = ({ details }) => {
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const onClick = () => {
@@ -26,7 +29,7 @@ const AdCard = ({ details }) => {
     .toString()
     .split("2022")[0];
 
-  console.log(details.event.id);
+  console.log(details);
   return (
     <Card
       sx={{
@@ -105,9 +108,18 @@ const AdCard = ({ details }) => {
         }}
       >
         {/* add a onClick fn to navigate to the ads/id page showing that id only  */}
-        <Button variant="contained" onClick={onClick}>
-          View Responses
-        </Button>
+        {user.userType === "artist" ? (
+          <AcceptAdButton
+            userID={user.id}
+            adID={details._id}
+            responses={details.allResponses}
+            eventId={details.event.id}
+          />
+        ) : (
+          <Button variant="contained" onClick={onClick}>
+            View Responses
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
