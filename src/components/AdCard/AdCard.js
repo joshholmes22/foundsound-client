@@ -31,18 +31,22 @@ const AdCard = ({ details }) => {
     <>
       <Card
         sx={{
-          backgroundColor: "#F7F7F7",
+          backgroundColor: "#303030",
           boxShadow: "#A4A3A2",
-          borderRadius: "15px",
+          borderRadius: "10px",
           width: 300,
           margin: 5,
           alignItems: "center",
           fontWeight: "900",
           fontSize: "1.5vw",
           alignText: "center",
+          "@media(minWidth: 375px)": {
+            margin: 2,
+          },
         }}
       >
         <CardHeader
+          sx={{ color: "white" }}
           title={details.event.name}
           // EVENT TITLE WILL HAVE TO GO HERE
         />
@@ -57,12 +61,13 @@ const AdCard = ({ details }) => {
           <Typography
             variant="body2"
             sx={{
+              color: "white",
               display: "flex",
               flexWrap: "wrap",
               justifyContent: "center",
               alignItems: "center",
               fontWeight: "400",
-              fontSize: "1.5vw",
+              textAlign: "center",
               marginBottom: "1vh",
             }}
           >
@@ -72,6 +77,7 @@ const AdCard = ({ details }) => {
           <Typography
             variant="body2"
             sx={{
+              color: "white",
               display: "flex",
               flexWrap: "wrap",
               justifyContent: "center",
@@ -84,13 +90,14 @@ const AdCard = ({ details }) => {
           <Typography
             variant="body2"
             sx={{
+              color: "white",
               display: "flex",
               flexWrap: "wrap",
               justifyContent: "center",
               alignItems: "center",
             }}
           >
-            Date to respond by: {`${expiresDate}`}
+            Respond Deadline: {`${expiresDate}`}
           </Typography>
         </CardContent>
         <CardActions

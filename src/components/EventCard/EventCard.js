@@ -26,7 +26,12 @@ const EventCard = ({ details }) => {
     <Card
       sx={{
         backgroundColor: "#303030",
+        borderRadius: "15px",
         width: 300,
+        alignItems: "center",
+        fontWeight: "900",
+        fontSize: "1.5vw",
+        alignText: "center",
         margin: 5,
         "@media(minWidth: 375px)": {
           margin: 2,
@@ -35,11 +40,7 @@ const EventCard = ({ details }) => {
     >
       <CardHeader
         title={
-          <Typography
-            variant="h5"
-            color="white"
-            sx={{ textAlign: "center", textTransform: "uppercase" }}
-          >
+          <Typography variant="h5" color="white" sx={{ textAlign: "center" }}>
             {details.name}
           </Typography>
         }
@@ -49,7 +50,6 @@ const EventCard = ({ details }) => {
             color="white"
             sx={{
               textAlign: "center",
-              textTransform: "uppercase",
               fontSize: "16px",
             }}
           >
@@ -79,20 +79,8 @@ const EventCard = ({ details }) => {
             justifyContent: "center",
             marginTop: "10px",
           }}
-        >
-          <Button variant="contained" onClick={() => {}} sx={{}}>
-            Get Tickets
-          </Button>
-        </Box>
+        ></Box>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-      </CardActions>
     </Card>
   );
 };

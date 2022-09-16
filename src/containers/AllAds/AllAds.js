@@ -7,6 +7,9 @@ import { useState, useEffect } from "react";
 import { GET_ALL_ADS_FOR_OWNER } from "../../graphql/queries";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { CircularProgress } from "@mui/material";
+import Alert from "@mui/material/Alert";
+
+import Stack from "@mui/material/Stack";
 
 const AllAds = () => {
   const { data, loading, error } = useQuery(GET_ALL_ADS_FOR_OWNER);
@@ -25,7 +28,13 @@ const AllAds = () => {
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           {loading && <CircularProgress />}
-          {error && <Typography>Error</Typography>}
+          {error && (
+            <Stack sx={{ width: "100%" }} spacing={2}>
+              <Alert sx={{ marginTop: "10px" }} severity="warning">
+                Loading Error
+              </Alert>
+            </Stack>
+          )}
         </Box>
 
         {data && data?.getAllAdsForEventOwner?.length !== 0 && (
