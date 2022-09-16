@@ -12,23 +12,12 @@ import Stack from "@mui/material/Stack";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import InputAdornment from "@mui/material/InputAdornment";
-import Button from "@mui/material/Button";
-import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
+import { createFilterOptions } from "@mui/material/Autocomplete";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { ThemeProvider } from "@mui/material/styles";
-import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
-import IconButton from "@mui/material/IconButton";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { LoadingButton } from "@mui/lab";
 import { useNavigate } from "react-router-dom";
 
@@ -39,8 +28,6 @@ import { GET_ALL_EVENTS_FOR_OWNER } from "../../graphql/queries";
 import { CREATE_ADVERT } from "../../graphql/mutations";
 import "./Ad.css";
 import EventAdCard from "../../components/EventAdCard/EventAdCard";
-import { AlignVerticalCenterOutlined } from "@mui/icons-material";
-import EventOrganiserDashboard from "../../containers/EventOrganiserDashboard";
 import EventOrganiserNavBar from "../../components/EventOrganiserNavBar";
 
 const Ad = ({ details }) => {
@@ -114,195 +101,199 @@ const Ad = ({ details }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <EventOrganiserNavBar />
-      {advertData && (
-        <>
-          <Stack sx={{ width: "100%" }} spacing={2}>
-            <Alert sx={{ marginTop: "10px" }} severity="success">
-              Successfully Created An Event
-            </Alert>
-          </Stack>
-        </>
-      )}
-      {!advertData && (
-        <>
-          <Typography
-            variant="h4"
-            gutterBottom
-            align="center"
-            sx={{ m: "30px" }}
-            font="bold"
-          >
-            Create An Advert
-          </Typography>
-          <Divider />
-          <Container
-            component="main"
-            maxWidth="sm"
-            sx={{
-              backgroundColor: "#F7F7F7",
-              boxShadow: "#A4A3A2",
-              borderRadius: "15px",
-            }}
-          >
-            <Typography
-              variant="h6"
-              gutterBottom
-              align="center"
-              sx={{ m: "20px" }}
-            >
-              Fill in the information to publish an advert
-            </Typography>
-            <Box
-              sx={{
-                marginTop: 5,
-              }}
-              autoComplete="off"
-              onSubmit={handleSubmit(onSubmit)}
-              component="form"
-            >
-              {/* event section*/}
-              <Grid container spacing={12}>
-                <Grid item xs={12}>
-                  <Stack spacing={3}>
-                    <Typography
-                      component="h2"
-                      variant="button"
-                      align="left"
-                      color={theme.palette.primary.main}
-                      marginBottom={1}
-                      sx={{
-                        fontSize: 15,
-                        fontWeight: "large",
-                      }}
-                    >
-                      Step 1: Select An Event
-                    </Typography>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexWrap: "wrap",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {data?.getAllEventsForOwner.length === 0 && (
-                        <Alert severity="info">
-                          No events to select. Please create an event
-                        </Alert>
-                      )}
-                      {data?.getAllEventsForOwner.map((event) => (
-                        <EventAdCard
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <EventOrganiserNavBar />
+        <Box sx={{ marginTop: "50px" }}>
+          {advertData && (
+            <>
+              <Stack sx={{ width: "100%" }} spacing={2}>
+                <Alert sx={{ marginTop: "10px" }} severity="success">
+                  Successfully Created An Event
+                </Alert>
+              </Stack>
+            </>
+          )}
+          {!advertData && (
+            <>
+              <Typography
+                variant="h4"
+                gutterBottom
+                align="center"
+                sx={{ marginTop: "30px" }}
+                font="bold"
+              >
+                Create An Advert
+              </Typography>
+              <Divider />
+              <Container
+                component="main"
+                maxWidth="sm"
+                sx={{
+                  backgroundColor: "#F7F7F7",
+                  boxShadow: "#A4A3A2",
+                  borderRadius: "15px",
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  gutterBottom
+                  align="center"
+                  sx={{ m: "20px" }}
+                >
+                  Fill in the information to publish an advert
+                </Typography>
+                <Box
+                  sx={{
+                    marginTop: 5,
+                  }}
+                  autoComplete="off"
+                  onSubmit={handleSubmit(onSubmit)}
+                  component="form"
+                >
+                  {/* event section*/}
+                  <Grid container spacing={12}>
+                    <Grid item xs={12}>
+                      <Stack spacing={3}>
+                        <Typography
+                          component="h2"
+                          variant="button"
+                          align="left"
+                          color={theme.palette.primary.main}
+                          marginBottom={1}
+                          sx={{
+                            fontSize: 15,
+                            fontWeight: "large",
+                          }}
+                        >
+                          Step 1: Select An Event
+                        </Typography>
+                        <Box
                           sx={{
                             display: "flex",
                             flexWrap: "wrap",
                             justifyContent: "center",
                           }}
-                          key={event.id}
-                          details={event}
-                          setCurrentEventId={setCurrentEventId}
-                        />
-                      ))}
-                    </Box>
-                  </Stack>
-                </Grid>
-              </Grid>
+                        >
+                          {data?.getAllEventsForOwner.length === 0 && (
+                            <Alert severity="info">
+                              No events to select. Please create an event
+                            </Alert>
+                          )}
+                          {data?.getAllEventsForOwner.map((event) => (
+                            <EventAdCard
+                              sx={{
+                                display: "flex",
+                                flexWrap: "wrap",
+                                justifyContent: "center",
+                              }}
+                              key={event.id}
+                              details={event}
+                              setCurrentEventId={setCurrentEventId}
+                            />
+                          ))}
+                        </Box>
+                      </Stack>
+                    </Grid>
+                  </Grid>
 
-              {/* advert form section */}
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <Stack spacing={3}>
-                      <Typography
-                        component="h2"
-                        variant="button"
-                        align="left"
-                        color={theme.palette.primary.main}
-                        marginBottom={1}
-                        sx={{
-                          fontSize: 15,
-                          fontWeight: "large",
-                          marginTop: "30px",
-                        }}
-                      >
-                        Step 2: Fill In Advert Information
-                      </Typography>
-                      <TextField
-                        id="description"
-                        name="description"
-                        label="Description"
-                        fullWidth
-                        {...register("description", { required: true })}
-                        helperText={
-                          !!errors.advertDescription
-                            ? "Please provide a description."
-                            : ""
-                        }
-                        autoComplete="given-name"
-                        multiline
-                      />
-                      <TextField
-                        id="setTime"
-                        label="Time Length of Event"
-                        fullWidth
-                        {...register("setTime", { required: true })}
-                        helperText={
-                          !!errors.setTime
-                            ? "Please provide the total length of event."
-                            : ""
-                        }
-                      />
-                      <DesktopDatePicker
-                        label="Booking Due Date*"
-                        required
-                        value={expires}
-                        onChange={handleChangeDate}
-                        renderInput={(params) => <TextField {...params} />}
-                      />
-                      <FormGroup>
-                        <FormControlLabel
-                          control={<Checkbox />}
-                          label="Solo Band"
-                          value={soloChecked}
-                          onChange={handleCheckedSolo}
-                        />
-                        <FormControlLabel
-                          id="isPaid"
-                          value={checked}
-                          {...register("isPaid")}
-                          control={<Checkbox />}
-                          label="Paid Event"
-                          onChange={handleCheckedPaid}
-                        />
-                        {checked && (
-                          <>
-                            <TextField
-                              id="amount"
-                              value={amount}
-                              onChange={handleChange}
-                              label="Payment Fee"
-                              {...register("fee")}
-                            ></TextField>
-                          </>
-                        )}
-                      </FormGroup>
-                    </Stack>
-                  </LocalizationProvider>
-                </Grid>
-              </Grid>
+                  {/* advert form section */}
+                  <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <Stack spacing={3}>
+                          <Typography
+                            component="h2"
+                            variant="button"
+                            align="left"
+                            color={theme.palette.primary.main}
+                            marginBottom={1}
+                            sx={{
+                              fontSize: 15,
+                              fontWeight: "large",
+                              marginTop: "30px",
+                            }}
+                          >
+                            Step 2: Fill In Advert Information
+                          </Typography>
+                          <TextField
+                            id="description"
+                            name="description"
+                            label="Description"
+                            fullWidth
+                            {...register("description", { required: true })}
+                            helperText={
+                              !!errors.advertDescription
+                                ? "Please provide a description."
+                                : ""
+                            }
+                            autoComplete="given-name"
+                            multiline
+                          />
+                          <TextField
+                            id="setTime"
+                            label="Time Length of Event"
+                            fullWidth
+                            {...register("setTime", { required: true })}
+                            helperText={
+                              !!errors.setTime
+                                ? "Please provide the total length of event."
+                                : ""
+                            }
+                          />
+                          <DesktopDatePicker
+                            label="Booking Due Date*"
+                            required
+                            value={expires}
+                            onChange={handleChangeDate}
+                            renderInput={(params) => <TextField {...params} />}
+                          />
+                          <FormGroup>
+                            <FormControlLabel
+                              control={<Checkbox />}
+                              label="Solo Band"
+                              value={soloChecked}
+                              onChange={handleCheckedSolo}
+                            />
+                            <FormControlLabel
+                              id="isPaid"
+                              value={checked}
+                              {...register("isPaid")}
+                              control={<Checkbox />}
+                              label="Paid Event"
+                              onChange={handleCheckedPaid}
+                            />
+                            {checked && (
+                              <>
+                                <TextField
+                                  id="amount"
+                                  value={amount}
+                                  onChange={handleChange}
+                                  label="Payment Fee"
+                                  {...register("fee")}
+                                ></TextField>
+                              </>
+                            )}
+                          </FormGroup>
+                        </Stack>
+                      </LocalizationProvider>
+                    </Grid>
+                  </Grid>
 
-              <LoadingButton
-                type="submit"
-                fullWidth
-                variant="contained"
-                loading={loading}
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Create Advert
-              </LoadingButton>
-            </Box>
-          </Container>
-        </>
-      )}
+                  <LoadingButton
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    loading={loading}
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Create Advert
+                  </LoadingButton>
+                </Box>
+              </Container>
+            </>
+          )}
+        </Box>
+      </Box>
     </ThemeProvider>
   );
 };

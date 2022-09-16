@@ -189,7 +189,7 @@ const EventForm = () => {
         variant="h4"
         gutterBottom
         align="center"
-        sx={{ m: "30px" }}
+        sx={{ m: "10px" }}
         font="bold"
       >
         Create An Event
