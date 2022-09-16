@@ -273,7 +273,6 @@ export const GET_ALL_ADS = gql`
           lastName
           email
           imageUrl
-          imageFileName
           socialMedia
           userType
         }

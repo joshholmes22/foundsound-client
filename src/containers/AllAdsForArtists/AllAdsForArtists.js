@@ -4,12 +4,14 @@ import Typography from "@mui/material/Typography";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../utils/themes";
 import { useState, useEffect } from "react";
-import { GET_ALL_ADS_FOR_OWNER } from "../../graphql/queries";
+import { GET_ALL_ADS } from "../../graphql/queries";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { CircularProgress } from "@mui/material";
 
 const AllAdsForArtists = () => {
-  const { data, loading, error } = useQuery(GET_ALL_ADS_FOR_OWNER);
+  const { data, loading, error } = useQuery(GET_ALL_ADS);
+
+  console.log(data?.getAllAds);
 
   return (
     <ThemeProvider theme={theme}>
@@ -28,7 +30,7 @@ const AllAdsForArtists = () => {
           {error && <Typography>Error</Typography>}
         </Box>
 
-        {data && data?.getAllAdsForEventOwner?.length !== 0 && (
+        {data && data?.getAllAds?.length !== 0 && (
           <Box
             sx={{
               display: "flex",
@@ -37,7 +39,7 @@ const AllAdsForArtists = () => {
               alignItems: "center",
             }}
           >
-            {data.getAllAdsForEventOwner.map((item) => (
+            {data.getAllAds.map((item) => (
               <AdCard details={item} key={item.id} />
             ))}
           </Box>
