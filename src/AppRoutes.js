@@ -16,6 +16,7 @@ import ArtistDemoSongs from "./pages/ArtistDemoSongs";
 import ArtistPhotos from "./pages/ArtistPhotos";
 import ArtistInfo from "./pages/ArtistInfo/ArtistInfo";
 import ViewAds from "./containers/ViewAds/ViewAds";
+import ViewAnAd from "./pages/ViewAnAd";
 import ViewEvents from "./pages/ViewEvents/ViewEvents";
 import PublicArtistProfile from "./pages/PublicArtistProfile/ArtistProfile";
 
@@ -66,6 +67,7 @@ const AppRoutes = () => {
           <Route path="/uploadTracks" element={<ArtistDemoSongs />} />
           <Route path="/editInfo" element={<ArtistInfo />} />
           <Route path="/viewAds" element={<ViewAds />} />
+          <Route path="/ads/:id" element={<ViewAds />} />
         </>
       )}
     </Routes>

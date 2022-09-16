@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -7,20 +10,23 @@ import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Button from "@mui/material/Button";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { fromUnixTime } from "date-fns";
 
-import { useState } from "react";
-
 const AdCard = ({ details }) => {
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    navigate(`/ads/${details.event.id}`);
+  };
+
   const expiresDate = fromUnixTime(details.expires / 1000)
     .toString()
     .split("2022")[0];
 
-  console.log(details);
+  console.log(details.event.id);
   return (
     <Card
       sx={{
@@ -86,7 +92,7 @@ const AdCard = ({ details }) => {
             alignItems: "center",
           }}
         >
-          Please respond by: {`${expiresDate}`}
+          Date to respond by: {`${expiresDate}`}
         </Typography>
       </CardContent>
       <CardActions
@@ -98,7 +104,10 @@ const AdCard = ({ details }) => {
           alignItems: "center",
         }}
       >
-        <Button variant="contained">View Responses</Button>
+        {/* add a onClick fn to navigate to the ads/id page showing that id only  */}
+        <Button variant="contained" onClick={onClick}>
+          View Responses
+        </Button>
       </CardActions>
     </Card>
   );
