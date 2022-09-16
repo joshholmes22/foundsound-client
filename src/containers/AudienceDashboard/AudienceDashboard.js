@@ -5,6 +5,7 @@ const AudienceDashboard = () => {
   return (
     <div>
       <PrivateNavBar />
+      <h1 sx={{ textAlign: "center" }}>View all Events </h1>
       <AllEvents />
     </div>
   );
