@@ -92,12 +92,12 @@ const HomeNavBar = () => {
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: "bottom",
-                horizontal: "right",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
                 vertical: "top",
-                horizontal: "right",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
@@ -105,6 +105,7 @@ const HomeNavBar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
+              {/* NAV IN MOBILE */}
               {pages.map((item) => (
                 <MenuItem
                   key={item.label}
@@ -112,7 +113,7 @@ const HomeNavBar = () => {
                     navigate(item.path);
                   }}
                 >
-                  <Typography textAlign="center"></Typography>
+                  <Typography textAlign="center">{item.label}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -128,6 +129,7 @@ const HomeNavBar = () => {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
+              fontFamily: "montserrat",
               fontWeight: 600,
               letterSpacing: ".3rem",
               color: "inherit",
