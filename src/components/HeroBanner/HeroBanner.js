@@ -1,9 +1,11 @@
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import "./HeroBanner.css";
 
 const HeroBanner = () => {
+  const isMobile = useMediaQuery("(font-size:20px)");
   return (
     <>
       <Box
@@ -22,8 +24,9 @@ const HeroBanner = () => {
           FOUNDSOUND
         </Typography>
         <Typography
+          isMobile={isMobile}
           className="home-para"
-          sx={{ color: "#ffffff", fontSize: "2vw", fontWeight: "600" }}
+          sx={{ color: "#ffffff", fontSize: "3vw", fontWeight: "600" }}
         >
           Discover underground artists and upcoming events
         </Typography>
