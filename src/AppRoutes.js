@@ -19,6 +19,7 @@ import ViewAds from "./containers/ViewAds/ViewAds";
 import ViewAnAd from "./pages/ViewAnAd";
 import ViewEvents from "./pages/ViewEvents/ViewEvents";
 import PublicArtistProfile from "./pages/PublicArtistProfile/ArtistProfile";
+import Response from "./pages/Response/Response";
 
 const AppRoutes = () => {
   const { isLoggedIn, user } = useAuth();
@@ -54,7 +55,8 @@ const AppRoutes = () => {
           <Route path="/createEvent" element={<CreateEvent />} />
           <Route path="/events" element={<Events />} />
           <Route path="/ads" element={<Ads />} />
-          <Route path="/ads/:id" element={<ViewAnAd />} />
+          <Route path="/responses" element={<Response />} />
+          <Route path="/ads/response/:id" element={<ViewAnAd />} />
         </>
       )}
 

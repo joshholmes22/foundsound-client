@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
 import { GET_AN_EVENT } from "../../graphql/queries";
@@ -15,8 +15,12 @@ const ViewAnAd = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <EventOrganiserNavBar />
-        <Typography> View an ad</Typography>;
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <EventOrganiserNavBar />
+          <Box sx={{ display: "flex", marginTop: "50px" }}>
+            {/* render ad card here  */}
+          </Box>
+        </Box>
       </ThemeProvider>
     </>
   );
