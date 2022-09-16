@@ -20,7 +20,6 @@ export const LOGIN = gql`
         email
         socialMedia
         imageUrl
-        imageFileName
         userType
       }
     }
@@ -75,7 +74,6 @@ export const CREATE_ARTIST_PROFILE = gql`
         lastName
         email
         imageUrl
-        imageFileName
         socialMedia
         userType
       }
@@ -139,7 +137,6 @@ export const CREATE_ADVERT = gql`
         lastName
         email
         imageUrl
-        imageFileName
         socialMedia
         userType
       }

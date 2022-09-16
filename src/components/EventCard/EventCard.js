@@ -12,6 +12,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { fromUnixTime } from "date-fns";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
 const EventCard = ({ details }) => {
   const startDate = fromUnixTime(details.startDate / 1000)
@@ -19,20 +21,40 @@ const EventCard = ({ details }) => {
     .split("2022")[0];
 
   return (
-    <Card sx={{ width: 345, margin: 5 }}>
+    <Card
+      sx={{
+        backgroundColor: "#0A0A0A80",
+        width: 345,
+        margin: 5,
+        "@media(minWidth: 375px)": {
+          margin: 2,
+        },
+      }}
+    >
       <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
+        title={
+          <Typography
+            variant="h5"
+            color="white"
+            sx={{ textAlign: "center", textTransform: "uppercase" }}
+          >
+            {details.name}
+          </Typography>
         }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+        subheader={
+          <Typography
+            variant="h5"
+            color="white"
+            sx={{
+              textAlign: "center",
+              textTransform: "uppercase",
+              fontSize: "16px",
+            }}
+          >
+            {`Date: ${startDate}`}
+          </Typography>
+          // subheader={`Date: ${startDate}`}
         }
-        title={details.name}
-        subheader={`${startDate}`}
       />
       <CardMedia
         component="img"
@@ -41,9 +63,25 @@ const EventCard = ({ details }) => {
         alt={details.name}
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          variant="body2"
+          color="white"
+          sx={{ textAlign: "center", fontSize: "20px" }}
+        >
           {details.description}
         </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "10px",
+          }}
+        >
+          <Button variant="contained" onClick={() => {}} sx={{}}>
+            Get Tickets
+          </Button>
+        </Box>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">

@@ -39,9 +39,16 @@ const Signup = () => {
         <Typography
           variant="h3"
           gutterBottom
-          sx={{ fontSize: "30px", fontWeight: "600", marginTop: 2 }}
+          sx={{
+            fontSize: "22px",
+            fontWeight: "600",
+            marginTop: 2,
+            textTransform: "uppercase",
+            textAlign: "center",
+            color: "#0A0A0A",
+          }}
         >
-          Select an account type to signup
+          Select an account type to sign up
         </Typography>
         <AccountTypeContainer
           setAccountType={setAccountType}
