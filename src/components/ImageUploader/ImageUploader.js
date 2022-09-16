@@ -28,7 +28,6 @@ export const ImageUploader = ({
     accessKeyId: process.env.REACT_APP_ACCESS_KEY,
     secretAccessKey: process.env.REACT_APP_ACCESS_ID,
   };
-
   const onChange = (imageList) => {
     setImages(imageList);
   };
