@@ -131,7 +131,7 @@ const Ad = ({ details }) => {
                 sx={{
                   backgroundColor: "#F7F7F7",
                   boxShadow: "#A4A3A2",
-                  borderRadius: "15px",
+                  borderRadius: "10px",
                 }}
               >
                 <Typography

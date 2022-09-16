@@ -40,7 +40,7 @@ const AdCard = ({ details }) => {
         }}
       >
         <CardHeader
-          sx={{ color: "white" }}
+          sx={{ color: "white", textAlign: "center" }}
           title={details.event.name}
           // EVENT TITLE WILL HAVE TO GO HERE
         />
