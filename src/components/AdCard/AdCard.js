@@ -27,7 +27,7 @@ const AdCard = ({ details }) => {
   return (
     <Card
       sx={{
-        backgroundColor: "#F7F7F7",
+        backgroundColor: "#303030",
         boxShadow: "#A4A3A2",
         borderRadius: "15px",
         width: 345,
