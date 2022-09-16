@@ -29,7 +29,7 @@ const AudienceMemberNavBar = () => {
 
   const pages = [
     { label: "Dashboard", path: "/dashboard" },
-    { label: "Artists", path: "/viewArtists" },
+    { label: "Artists", path: "/viewAllArtists" },
     { label: "Events", path: "/viewEvents" },
     { label: "Profile", path: "/profile" },
     { label: "Log Out", path: "/home" },
