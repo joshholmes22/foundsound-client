@@ -54,6 +54,7 @@ const AppRoutes = () => {
           <Route path="/createEvent" element={<CreateEvent />} />
           <Route path="/events" element={<Events />} />
           <Route path="/ads" element={<Ads />} />
+          <Route path="/ads/:id" element={<ViewAnAd />} />
         </>
       )}
 
@@ -67,7 +68,6 @@ const AppRoutes = () => {
           <Route path="/uploadTracks" element={<ArtistDemoSongs />} />
           <Route path="/editInfo" element={<ArtistInfo />} />
           <Route path="/viewAds" element={<ViewAds />} />
-          <Route path="/ads/:id" element={<ViewAds />} />
         </>
       )}
     </Routes>

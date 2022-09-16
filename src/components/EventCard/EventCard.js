@@ -15,6 +15,8 @@ import { fromUnixTime } from "date-fns";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
+import theme from "../../utils/themes";
+
 const EventCard = ({ details }) => {
   const startDate = fromUnixTime(details.startDate / 1000)
     .toString()
@@ -23,8 +25,8 @@ const EventCard = ({ details }) => {
   return (
     <Card
       sx={{
-        backgroundColor: "#343A40",
-        width: 345,
+        backgroundColor: "#303030",
+        width: 300,
         margin: 5,
         "@media(minWidth: 375px)": {
           margin: 2,

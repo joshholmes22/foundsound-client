@@ -21,7 +21,7 @@ const AllAds = () => {
           sx={{ m: "30px" }}
           font="bold"
         >
-          View Your Adverts
+          View All Your Adverts
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           {loading && <CircularProgress />}

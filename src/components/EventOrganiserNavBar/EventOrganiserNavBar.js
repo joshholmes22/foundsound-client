@@ -35,7 +35,6 @@ const EventOrganiserNavBar = () => {
     { label: "My Adverts", path: "/ads" },
     { label: "My Responses", path: "/responses" },
     { label: "Public Profile", path: "/eventOrganiserProfile" },
-    { label: "Settings", path: "/settings" },
     { label: "Log Out", path: "/home" },
   ];
 

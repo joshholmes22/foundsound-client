@@ -214,3 +214,61 @@ export const GET_ALL_ARTISTS = gql`
     }
   }
 `;
+
+export const GET_AN_EVENT = gql`
+  query GetAnEvent($eventId: ID!) {
+    getAnEvent(eventId: $eventId) {
+      id
+      name
+      description
+      address {
+        _id
+        formatted_address
+        thoroughfare
+        building_name
+        sub_building_name
+        sub_building_number
+        building_number
+        line_1
+        line_2
+        line_3
+        line_4
+        locality
+        town_or_city
+        county
+        district
+        country
+        fullAddress
+      }
+      postcode
+      startDate
+      endDate
+      startTime
+      endTime
+      imageUrl
+      tags {
+        name
+      }
+      adverts {
+        event
+        description
+        setTime
+        solo
+        fee
+        isPaid
+        expires
+        allResponses
+      }
+      eventOwner {
+        id
+        firstName
+        lastName
+        email
+        imageUrl
+        imageFileName
+        socialMedia
+        userType
+      }
+    }
+  }
+`;
