@@ -182,10 +182,6 @@ export const GET_ALL_ADS_FOR_OWNER = gql`
           lastName
           email
           imageUrl
-<<<<<<< HEAD
-          imageFileName
-=======
->>>>>>> a73ac8a57ac75e7b6c621ffc2930d53426a42a3c
           socialMedia
           userType
         }
@@ -200,8 +196,6 @@ export const GET_ALL_ADS_FOR_OWNER = gql`
     }
   }
 `;
-<<<<<<< HEAD
-=======
 
 export const GET_ALL_ARTISTS = gql`
   query GetAllArtists {
@@ -220,4 +214,3 @@ export const GET_ALL_ARTISTS = gql`
     }
   }
 `;
->>>>>>> a73ac8a57ac75e7b6c621ffc2930d53426a42a3c
