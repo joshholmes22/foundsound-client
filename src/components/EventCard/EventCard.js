@@ -2,17 +2,8 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { fromUnixTime } from "date-fns";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
 const EventCard = ({ details }) => {
@@ -23,8 +14,13 @@ const EventCard = ({ details }) => {
   return (
     <Card
       sx={{
-        backgroundColor: "#343A40",
-        width: 345,
+        backgroundColor: "#303030",
+        borderRadius: "15px",
+        width: 300,
+        alignItems: "center",
+        fontWeight: "900",
+        fontSize: "1.5vw",
+        alignText: "center",
         margin: 5,
         "@media(minWidth: 375px)": {
           margin: 2,
@@ -32,12 +28,9 @@ const EventCard = ({ details }) => {
       }}
     >
       <CardHeader
+        sx={{ textAlign: "center" }}
         title={
-          <Typography
-            variant="h5"
-            color="white"
-            sx={{ textAlign: "center", textTransform: "uppercase" }}
-          >
+          <Typography variant="h5" color="white" sx={{ textAlign: "center" }}>
             {details.name}
           </Typography>
         }
@@ -47,7 +40,6 @@ const EventCard = ({ details }) => {
             color="white"
             sx={{
               textAlign: "center",
-              textTransform: "uppercase",
               fontSize: "16px",
             }}
           >
@@ -77,20 +69,8 @@ const EventCard = ({ details }) => {
             justifyContent: "center",
             marginTop: "10px",
           }}
-        >
-          <Button variant="contained" onClick={() => {}} sx={{}}>
-            Get Tickets
-          </Button>
-        </Box>
+        ></Box>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-      </CardActions>
     </Card>
   );
 };

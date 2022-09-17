@@ -1,18 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import Button from "@mui/material/Button";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { fromUnixTime } from "date-fns";
 import { useAuth } from "../../context/AppProvider";
 import AcceptAdButton from "../AcceptAdButton/AcceptAdButton";
@@ -32,7 +26,7 @@ const AdCard = ({ details }) => {
   return (
     <Card
       sx={{
-        backgroundColor: "#F7F7F7",
+        backgroundColor: "#303030",
         boxShadow: "#A4A3A2",
         borderRadius: "15px",
         width: 345,
@@ -47,6 +41,7 @@ const AdCard = ({ details }) => {
       }}
     >
       <CardHeader
+        sx={{ color: "white" }}
         title={details.event.name}
         // EVENT TITLE WILL HAVE TO GO HERE
       />
@@ -61,6 +56,7 @@ const AdCard = ({ details }) => {
         <Typography
           variant="body2"
           sx={{
+            color: "white",
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
@@ -76,6 +72,7 @@ const AdCard = ({ details }) => {
         <Typography
           variant="body2"
           sx={{
+            color: "white",
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
@@ -88,13 +85,14 @@ const AdCard = ({ details }) => {
         <Typography
           variant="body2"
           sx={{
+            color: "white",
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          Date to respond by: {`${expiresDate}`}
+          Respond Deadline: {`${expiresDate}`}
         </Typography>
       </CardContent>
       <CardActions
