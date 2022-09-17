@@ -13,9 +13,7 @@ const EventOrganiserDashboard = () => {
       >
         <Box>
           <EventOrganiserNavBar />
-          <Box sx={{ marginTop: "50px" }}>
-            <Banner />
-          </Box>
+          <Box sx={{ marginTop: "50px" }}>{/* <Banner /> */}</Box>
         </Box>
       </Box>
     </div>

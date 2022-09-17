@@ -1,12 +1,15 @@
+import { Box } from "@mui/material";
 import EventForm from "../../components/EventForm";
 import EventOrganiserNavBar from "../../components/EventOrganiserNavBar";
 
 const CreateEvent = () => {
   return (
-    <div>
+    <Box sx={{ display: "flex", justifyContent: "center" }}>
       <EventOrganiserNavBar />
-      <EventForm />
-    </div>
+      <Box sx={{ marginTop: "30px" }}>
+        <EventForm />
+      </Box>
+    </Box>
   );
 };
 
