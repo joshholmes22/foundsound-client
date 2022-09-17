@@ -13,7 +13,6 @@ const EventAdCard = ({ details, setCurrentEventId }) => {
   const handleOnClick = (event) => {
     event.preventDefault();
     setCurrentEventId(event.target.getAttribute("data-id"));
-    console.log(event.target.getAttribute("data-id"));
   };
   return (
     <Box

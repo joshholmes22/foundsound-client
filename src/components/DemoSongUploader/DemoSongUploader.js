@@ -27,8 +27,6 @@ const DemoSongUploader = ({ uploadedTracks, setUploadedTracks }) => {
           setErrorText("ERROR: This track is already added");
           setTrackError(true);
         } else {
-          console.log("uploadedTracks", uploadedTracks);
-          console.log("trackData", trackData);
           setUploadedTracks([...uploadedTracks, trackData]);
           const createArtistProfileInput = {
             demoSong: [...uploadedTracks, trackData],

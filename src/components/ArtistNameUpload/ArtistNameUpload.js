@@ -16,10 +16,6 @@ const ArtistNameUpload = ({ setArtistName }) => {
   const [trackError, setTrackError] = useState(false);
   const [newName, setNewName] = useState("");
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     if (newName.trim()) {

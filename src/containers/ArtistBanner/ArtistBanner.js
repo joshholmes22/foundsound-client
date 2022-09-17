@@ -12,7 +12,6 @@ import artistImage1 from "../../assets/images/profileTemplate/6J7A5171.jpg";
 import artistImage2 from "../../assets/images/profileTemplate/6J7A5173.jpg";
 
 const ArtistBanner = ({ artistImages }) => {
-  console.log(artistImages);
   const maxSteps = artistImages.length;
   const [activeStep, setActiveStep] = useState(0);
   const imageUrl =
