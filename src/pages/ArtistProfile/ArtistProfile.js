@@ -22,7 +22,6 @@ const ArtistProfile = () => {
 
   useEffect(() => {
     if (data) {
-      console.log(data.getArtist);
       setFormatData(data.getArtist);
     }
   }, [data]);

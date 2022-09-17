@@ -9,7 +9,6 @@ const ArtistTitle = ({ title }) => {
   const [follow, setFollow] = useState(false);
 
   const followToggle = () => {
-    console.log(follow);
     setFollow(!follow);
   };
 

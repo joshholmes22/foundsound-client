@@ -46,7 +46,6 @@ import EventOrganiserNavBar from "../../components/EventOrganiserNavBar";
 const Ad = ({ details }) => {
   const { data, loading, error } = useQuery(GET_ALL_EVENTS_FOR_OWNER);
   const [createAdvert, { data: advertData }] = useMutation(CREATE_ADVERT);
-  console.log(advertData);
 
   const { user } = useAuth();
 
@@ -75,7 +74,6 @@ const Ad = ({ details }) => {
       isPaid: checked,
       solo: soloChecked,
     };
-    console.log(createAdvertInput);
     createAdvert({ variables: { createAdvertInput } });
   };
 

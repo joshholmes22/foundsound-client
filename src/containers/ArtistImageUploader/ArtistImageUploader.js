@@ -30,7 +30,6 @@ const ArtistImageUploader = ({ imageData }) => {
   );
 
   useEffect(() => {
-    console.log("here");
     if (imageUrl) {
       const createArtistProfileInput = {
         artistImage: [...imageData, imageUrl],
@@ -38,10 +37,6 @@ const ArtistImageUploader = ({ imageData }) => {
       createArtistProfile({ variables: { createArtistProfileInput } });
     }
   }, [imageUrl]);
-
-  useEffect(() => {
-    // console.log(imageData);
-  }, [data]);
 
   return (
     <>
@@ -66,7 +61,6 @@ const ArtistImageUploader = ({ imageData }) => {
           gap={5}
         >
           {imageData.map((item) => {
-            console.log(item);
             const cols = item.featured ? 2 : 1;
             const rows = item.featured ? 2 : 1;
 

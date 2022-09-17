@@ -15,7 +15,6 @@ import { useNavigate } from "react-router-dom";
 
 const ArtistCard = ({ details }) => {
   const navigate = useNavigate();
-  console.log(details);
   return (
     <Card
       sx={{

@@ -29,7 +29,6 @@ const AdCard = ({ details }) => {
     .toString()
     .split("2022")[0];
 
-  console.log(details);
   return (
     <Card
       sx={{

@@ -15,7 +15,6 @@ const AcceptAdButton = ({ userID, adID, responses, eventId }) => {
   }, []);
 
   useEffect(() => {
-    console.log(responses);
     if (responses.includes(userID)) {
       setDoesExist(true);
     }
