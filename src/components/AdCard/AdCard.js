@@ -42,6 +42,7 @@ const AdCard = ({ details }) => {
       }}
     >
       <CardHeader
+        sx={{ color: "white" }}
         title={details.event.name}
         // EVENT TITLE WILL HAVE TO GO HERE
       />
@@ -56,6 +57,7 @@ const AdCard = ({ details }) => {
         <Typography
           variant="body2"
           sx={{
+            color: "white",
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
